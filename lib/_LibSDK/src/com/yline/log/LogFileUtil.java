@@ -123,6 +123,23 @@ public final class LogFileUtil
     }
     
     /**
+     * 设置默认的标签
+     * @param tag       标签
+     */
+    public static void v(String content)
+    {
+        if (isLog)
+        {
+            android.util.Log.v(generateTag(LOG_LOCATION_NOW), String.format(MSG_DEFAULT, "tag", content));
+        }
+        
+        if (isToFile)
+        {
+            writeLogToFile(String.format(MSG_FILE_DEFAULT, generateFileTag(V, LOG_LOCATION_NOW), "tag", content));
+        }
+    }
+    
+    /**
      * @param tag       标签
      * @param content   内容
      */
