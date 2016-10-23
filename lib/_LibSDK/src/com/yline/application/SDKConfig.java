@@ -26,6 +26,19 @@ public class SDKConfig
     /** 日志文件是否定位 */
     private boolean isLogLocation = true;
     
+    /** 正常的LogCat失效时，使用sysOut */
+    private boolean isLogSystem = false;
+    
+    public boolean isLogSystem()
+    {
+        return isLogSystem;
+    }
+    
+    public void setLogSystem(boolean isLogSystem)
+    {
+        this.isLogSystem = isLogSystem;
+    }
+    
     public String getFileParentPath()
     {
         return fileParentPath;
