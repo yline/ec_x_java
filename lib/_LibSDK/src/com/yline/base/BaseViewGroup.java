@@ -1,6 +1,7 @@
 package com.yline.base;
 
 import com.yline.application.BaseApplication;
+import com.yline.log.LogFileUtil;
 
 import android.content.Context;
 import android.util.AttributeSet;
@@ -29,6 +30,13 @@ public class BaseViewGroup extends ViewGroup
     {
         // TODO Auto-generated method stub
         super.layout(l, t, r, b);
+    }
+    
+    @Override
+    protected void onFinishInflate()
+    {
+        super.onFinishInflate();
+        LogFileUtil.m("finishInflate:" + getClass().getSimpleName());
     }
     
     @Override

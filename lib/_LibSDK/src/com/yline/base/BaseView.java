@@ -1,6 +1,7 @@
 package com.yline.base;
 
 import com.yline.application.BaseApplication;
+import com.yline.log.LogFileUtil;
 
 import android.content.Context;
 import android.util.AttributeSet;
@@ -22,6 +23,13 @@ public class BaseView extends View
     {
         super(context, attrs, defStyleAttr);
         BaseApplication.addViewForRecord(this);
+    }
+    
+    @Override
+    protected void onFinishInflate()
+    {
+        super.onFinishInflate();
+        LogFileUtil.m("finishInflate:" + getClass().getSimpleName());
     }
     
     @Override
