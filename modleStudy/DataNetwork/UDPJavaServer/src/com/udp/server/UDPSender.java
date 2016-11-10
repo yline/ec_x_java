@@ -39,7 +39,7 @@ public class UDPSender extends JFrame
         con.add(topPanel);
         this.validate();
         this.repaint();
-        // setDefaultCloseOperation(EXIT_ON_CLOSE); 设置这一句,关闭对话框就是关闭程序
+        setDefaultCloseOperation(EXIT_ON_CLOSE); // 设置这一句,关闭对话框就是关闭程序
     }
     
     private JButton sendButton;
@@ -66,9 +66,7 @@ public class UDPSender extends JFrame
         {
             public void actionPerformed(ActionEvent e)
             {
-                System.out.println(TAG_JAVA_SEND + "serverIp = " + serverIp + ",serverPort = " + serverPort);
-                
-                new UDPHelper().send(msg.getBytes(), serverIp, serverPort);
+                UDPHelper.getInstance().sendMessage(msg, serverIp, serverPort);
             }
         });
     }
