@@ -1,7 +1,10 @@
 package com.test;
 
+import java.util.HashSet;
+import java.util.Set;
+
 /**
- * 假设有唯一解(冒泡排序法)
+ * (冒泡排序法)
  * @author YLine
  *
  * 2016年12月15日 下午6:48:27
@@ -14,21 +17,47 @@ public class Solution
         
         for (int i = 0; i < s.length(); i++)
         {
-            do
+            for (int j = i; j < s.length(); j++)
             {
+                max = Math.max(max, j + 1 - i);
                 
-            } while (false);
-            
-            String temp;
-            for (int j = i + 1; j < s.length(); j++)
-            {
-                temp = s.substring(i, j);
-                if (!temp.contains(s.charAt(j) + ""))
+                if (j == (s.length() - 1))
                 {
-                    break;
+                    return max; // 退出 两个for循环
+                }
+                
+                if (s.substring(i, j + 1).contains(s.charAt(j + 1) + ""))
+                {
+                    break; // 退出当前for循环
                 }
             }
         }
         return max;
+    }
+    
+    /**
+     * 官方给定的answer, 比较人性化的一个方案,而且效率高
+     * @param s
+     * @return
+     */
+    public int lengthOfLongestSubstring2(String s)
+    {
+        int n = s.length();
+        Set<Character> set = new HashSet<>();
+        int ans = 0, i = 0, j = 0;
+        while (i < n && j < n)
+        {
+            // try to extend the range [i, j]
+            if (!set.contains(s.charAt(j)))
+            {
+                set.add(s.charAt(j++));
+                ans = Math.max(ans, j - i);
+            }
+            else
+            {
+                set.remove(s.charAt(i++));
+            }
+        }
+        return ans;
     }
 }
