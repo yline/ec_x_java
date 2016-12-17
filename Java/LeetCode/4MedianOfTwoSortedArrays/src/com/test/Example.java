@@ -16,17 +16,10 @@ public class Example extends TestCase
     
     public void testSolution()
     {
-        //        assertEquals(0, solution.lengthOfLongestSubstring(""));
-        //        
-        //        assertEquals(1, solution.lengthOfLongestSubstring("c"));
-        //        
-        //        assertEquals(2, solution.lengthOfLongestSubstring("cv"));
-        //        
-        //        assertEquals(3, solution.lengthOfLongestSubstring("abcabcbb"));
-        //        
-        //        assertEquals(1, solution.lengthOfLongestSubstring("bbbbb"));
-        //        
-        //        assertEquals(3, solution.lengthOfLongestSubstring("pwwkew"));
+        int[] nums2 = new int[] {1, 7, 9, 10};
+        int[] nums1 = new int[] {2, 8};
+        
+        assertEquals(7.5, solution.findMedianSortedArrays(nums1, nums2));
     }
     
     @Override
