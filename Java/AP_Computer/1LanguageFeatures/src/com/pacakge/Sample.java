@@ -2,7 +2,6 @@ package com.pacakge;
 
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.Scanner;
 
 /**
  * 类名的诠释
@@ -12,20 +11,37 @@ import java.util.Scanner;
  */
 public class Sample
 {
+    
     public static void main(String[] args)
     {
+        /*
         int i1 = 0;
         int i2 = 0;
         int i3 = 0;
         int i4 = 0;
+        int i5 = 0;
+        
+        int j5 = 0;
         
         System.out.println(i1++);
         System.out.println(++i2);
         System.out.println(i3--);
         System.out.println(--i4);
         
-        Scanner scanner = new Scanner(System.in);
-        System.out.println(scanner.next());
+        j5 = i1++;
+        System.out.println(j5);
+        
+        
+        boolean A = false, B = false, C = true;
+        boolean result = !A && !(B && !C);
+        System.out.println("result = " + result);
+        */
+        Solution solution = new Solution();
+        
+        solution.testIf();
+        solution.testFor1();
+        solution.testFor2();
+        solution.testWhile();
     }
     
     /**
