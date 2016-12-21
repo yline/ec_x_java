@@ -1,7 +1,9 @@
 package com.test;
 
 /**
- * 假设有唯一解(冒泡排序法)
+ * Given an array of integers, return indices of the two numbers such that they add up to a specific target.
+ * You may assume that each input would have exactly one solution.
+ * 
  * @author YLine
  *
  * 2016年12月15日 下午6:48:27
