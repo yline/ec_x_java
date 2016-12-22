@@ -36,16 +36,40 @@ public class OrderSolution
         }
         
         stringBuffer.append(node.getData());
-        
-        if (null != node.getLeftNode())
+        preOrder(node.getLeftNode());
+        preOrder(node.getRightNode());
+    }
+    
+    /**
+     * 中序遍历;递归
+     * @param node
+     */
+    public void middleOrder(TreeNode<String> node)
+    {
+        if (null == node)
         {
-            preOrder(node.getLeftNode());
+            return;
         }
         
-        if (null != node.getRightNode())
+        middleOrder(node.getLeftNode());
+        stringBuffer.append(node.getData());
+        middleOrder(node.getRightNode());
+    }
+    
+    /**
+     * 后序遍历;递归
+     * @param node
+     */
+    public void afterOrder(TreeNode<String> node)
+    {
+        if (null == node)
         {
-            preOrder(node.getRightNode());
+            return;
         }
+        
+        afterOrder(node.getLeftNode());
+        afterOrder(node.getRightNode());
+        stringBuffer.append(node.getData());
     }
     
     /**
@@ -113,30 +137,6 @@ public class OrderSolution
     }
     
     /**
-     * 中序遍历;递归
-     * @param node
-     */
-    public void middleOrder(TreeNode<String> node)
-    {
-        if (null == node)
-        {
-            return;
-        }
-        
-        if (null != node.getLeftNode())
-        {
-            middleOrder(node.getLeftNode());
-        }
-        
-        stringBuffer.append(node.getData());
-        
-        if (null != node.getRightNode())
-        {
-            middleOrder(node.getRightNode());
-        }
-    }
-    
-    /**
      * 中序遍历，非递归
      * 栈 ==> 先进后出
      * @param node
@@ -166,30 +166,6 @@ public class OrderSolution
             
             root = root.getRightNode();
         }
-    }
-    
-    /**
-     * 后序遍历;递归
-     * @param node
-     */
-    public void afterOrder(TreeNode<String> node)
-    {
-        if (null == node)
-        {
-            return;
-        }
-        
-        if (null != node.getLeftNode())
-        {
-            afterOrder(node.getLeftNode());
-        }
-        
-        if (null != node.getRightNode())
-        {
-            afterOrder(node.getRightNode());
-        }
-        
-        stringBuffer.append(node.getData());
     }
     
     public void afterOrderNonRecursive(TreeNode<String> node)

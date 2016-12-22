@@ -18,7 +18,7 @@ public class OrderExample extends TestCase
     }
     
     // 初始化二叉树  
-    public TreeNode<String> init()
+    private TreeNode<String> init()
     {
         TreeNode<String> A = new TreeNode<String>("A");
         
