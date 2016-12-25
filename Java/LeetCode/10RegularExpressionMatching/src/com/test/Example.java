@@ -3,7 +3,15 @@ package com.test;
 import junit.framework.TestCase;
 
 /**
- * 严重怀疑正确answer
+ * 
+'.' Matches any single character. // 单独匹配任何一个字符
+'*' Matches zero or more of the preceding element. // 选择匹配 之前的单词,零个或多个
+
+The matching should cover the entire input string (not partial).
+
+ * @author YLine
+ *
+ * 2016年12月25日 下午4:52:40
  */
 public class Example extends TestCase
 {
@@ -25,7 +33,14 @@ public class Example extends TestCase
         assertEquals(true, solution.isMatch("aa", "a*"));
         assertEquals(true, solution.isMatch("aa", ".*"));
         assertEquals(true, solution.isMatch("ab", ".*"));
+        assertEquals(true, solution.isMatch("aab", "aab"));
+        assertEquals(true, solution.isMatch("aab", "*.*"));
+        assertEquals(true, solution.isMatch("aaaaaaaaaaaaaaaaaccdb", ".*"));
+        assertEquals(true, solution.isMatch("aaaaaaaaaaaaaaaaaccdb", "c*a.*db"));
+        assertEquals(true, solution.isMatch("aa", "aa"));
+        
         assertEquals(true, solution.isMatch("aab", "c*a*b"));
+        assertEquals(false, solution.isMatch("aa", "aaa"));
     }
     
     @Override
