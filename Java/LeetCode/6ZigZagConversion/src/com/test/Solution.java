@@ -1,5 +1,21 @@
 package com.test;
 
+/**
+ * The string "PAYPALISHIRING" is written in a zigzag pattern on a given number of rows like this: 
+ * (you may want to display this pattern in a fixed font for better legibility)
+ * 
+ * Example
+P   A   H   N
+A P L S I I G
+Y   I   R
+
+Input:  PAYPALISHIRING
+Output: PAHNAPLSIIGYIR
+
+ * @author YLine
+ *
+ * 2016年12月25日 下午2:30:35
+ */
 public class Solution
 {
     public String convert(String s, int numRows)

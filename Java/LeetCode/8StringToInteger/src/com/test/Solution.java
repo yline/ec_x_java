@@ -3,6 +3,13 @@ package com.test;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Implement atoi to convert a string to an integer.
+ * 
+ * @author YLine
+ *
+ * 2016年12月25日 下午2:34:00
+ */
 public class Solution
 {
     public int myAtoi(String str)

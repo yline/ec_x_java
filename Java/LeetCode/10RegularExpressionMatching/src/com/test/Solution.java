@@ -1,5 +1,12 @@
 package com.test;
 
+/**
+ * Implement regular expression matching with support for '.' and '*'.
+ * 
+ * @author YLine
+ *
+ * 2016年12月25日 下午2:35:03
+ */
 public class Solution
 {
     public boolean isMatch(String s, String p)
