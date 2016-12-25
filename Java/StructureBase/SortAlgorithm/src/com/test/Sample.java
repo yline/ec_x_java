@@ -20,6 +20,8 @@ public class Sample extends TestCase
     {
         System.out.println(Arrays.toString(solution.sortQuick()));
         System.out.println(Arrays.toString(solution.sortBubble()));
+        System.out.println(Arrays.toString(solution.sortHeap()));
+        System.out.println(Arrays.toString(solution.sortMerge()));
     }
     
     @Override
