@@ -5,6 +5,12 @@ import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Stack;
 
+/**
+ * http://blog.csdn.net/ochangwen/article/details/50729993
+ * @author YLine
+ *
+ * 2016年12月25日 下午11:33:27
+ */
 public class GraphByMatrix
 {
     public static final boolean UNDIRECTED_GRAPH = false;//无向图标志  

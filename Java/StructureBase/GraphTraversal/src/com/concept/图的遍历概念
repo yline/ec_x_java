@@ -1,3 +1,5 @@
+// http://blog.csdn.net/ochangwen/article/details/50729993
+
 BFS:广度优先搜索算法
 （1）顶点v入队列。
 （2）当队列非空时则继续执行，否则算法结束。
