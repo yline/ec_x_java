@@ -1,17 +1,13 @@
 package com.test;
 
 /**
- * 两个队列相加(假设其中一条为结果,另一条往这个上面填上)
- * @author YLine
- *
- * 2016年12月15日 下午6:48:27
- */
-/**
  * You are given two linked lists representing two non-negative numbers. 
  * The digits are stored in reverse order and each of their nodes contain a single digit. Add the two numbers and return it as a linked list.
  * 
- * Input: (2 -> 4 -> 3) + (5 -> 6 -> 4)
- * Output: 7 -> 0 -> 8
+ * Example:
+Input: (2 -> 4 -> 3) + (5 -> 6 -> 4)
+Output: 7 -> 0 -> 8
+
  * @author YLine
  *
  * 2016年12月22日 下午1:21:36
