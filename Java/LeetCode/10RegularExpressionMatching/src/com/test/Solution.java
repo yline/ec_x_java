@@ -28,11 +28,30 @@ isMatch("aab", "c*a*b") → true  // ? 感觉像是不匹配的,不懂
  */
 public class Solution
 {
+    public boolean isMatch3(String s, String p)
+    {
+        if (null == s && null == p)
+        {
+            return true;
+        }
+        
+        if (null == s || null == p)
+        {
+            return false;
+        }
+        
+        String[] pList = p.split(p);
+        
+        return false;
+    }
+    
     public boolean isMatch(String s, String p)
     {
         boolean[] match = new boolean[s.length() + 1];
         Arrays.fill(match, false);
         match[s.length()] = true;
+        
+        // 从末尾开始遍历
         for (int i = p.length() - 1; i >= 0; i--)
         {
             if (p.charAt(i) == '*')
@@ -124,39 +143,4 @@ public class Solution
         return false;
     }
     
-    private boolean isEqual(String a, String b)
-    {
-        
-        boolean result = false;
-        
-        if (null == a && null == b)
-        {
-            return true;
-        }
-        
-        if ("".equals(a) && "".equals(b))
-        {
-            return true;
-        }
-        
-        if (null != a && null != b && a.length() == b.length())
-        {
-            for (int i = 0; i < a.length(); i++)
-            {
-                
-            }
-        }
-        
-        if (null == a || null == b)
-        {
-            return false;
-        }
-        
-        if (a.length() != b.length())
-        {
-            return false;
-        }
-        
-        return result;
-    }
 }
