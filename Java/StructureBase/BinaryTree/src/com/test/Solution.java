@@ -3,6 +3,16 @@ package com.test;
 import java.util.LinkedList;
 import java.util.Queue;
 
+import com.test.bean.TreeNode;
+
+/**
+ * 获取节点个数、等； 需要加上 新建二叉树、二叉树查找
+ * 二叉树大全
+ * https://github.com/yuzhangcmu/LeetCode/blob/master/tree/TreeDemo.java
+ * @author YLine
+ *
+ * 2017年1月11日 上午11:51:56
+ */
 public class Solution
 {
     private StringBuffer stringBuffer = new StringBuffer();

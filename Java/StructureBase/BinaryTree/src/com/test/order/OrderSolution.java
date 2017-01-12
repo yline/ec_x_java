@@ -1,10 +1,12 @@
-package com.test;
+package com.test.order;
 
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
 import java.util.Queue;
 import java.util.Stack;
+
+import com.test.bean.TreeNode;
 
 /**
  * 二叉树大全

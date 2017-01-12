@@ -1,5 +1,7 @@
 package com.test;
 
+import com.test.bean.TreeNode;
+
 import junit.framework.TestCase;
 
 public class Example extends TestCase

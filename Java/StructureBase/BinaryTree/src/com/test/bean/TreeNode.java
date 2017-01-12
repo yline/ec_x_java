@@ -1,4 +1,4 @@
-package com.test;
+package com.test.bean;
 
 public class TreeNode<T>
 {

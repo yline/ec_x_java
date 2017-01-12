@@ -1,4 +1,6 @@
-package com.test;
+package com.test.order;
+
+import com.test.bean.TreeNode;
 
 import junit.framework.TestCase;
 
