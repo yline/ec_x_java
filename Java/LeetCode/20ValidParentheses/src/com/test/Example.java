@@ -16,6 +16,8 @@ public class Example extends TestCase
     
     public void testSolution()
     {
+        assertEquals(true, solution.isValid("{}"));
+        assertEquals(true, solution.isValid("()"));
     }
     
     @Override
