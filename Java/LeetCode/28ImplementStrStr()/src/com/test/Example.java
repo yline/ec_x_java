@@ -16,8 +16,6 @@ public class Example extends TestCase
     
     public void testSolution()
     {
-        int[] array1 = new int[] {3, 2, 2, 3};
-        assertEquals(2, solution.removeElement(array1, 3));
     }
     
     @Override
