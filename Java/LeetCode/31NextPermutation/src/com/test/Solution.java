@@ -1,7 +1,109 @@
 package com.test;
 
+import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class Solution
 {
+    public void cacluate(String str)
+    {
+        String reg = "(\\(\\))+";
+        String answer = null;
+        
+        Pattern pattern = Pattern.compile(reg);
+        Matcher matcher = pattern.matcher(str);
+        
+        while (matcher.find())
+        {
+            answer = matcher.group(0);
+            System.out.print(answer + "\n");
+        }
+    }
+    
+    public void test()
+    {
+        ArrayList<Bean> aimList = new ArrayList();
+        aimList.add(new Bean("1"));
+        aimList.add(new Bean("2"));
+        aimList.add(new Bean("3"));
+        aimList.add(new Bean("4"));
+        aimList.add(new Bean("1"));
+        
+        ArrayList<Bean> tempList = new ArrayList<>();
+        tempList.add(new Bean("1"));
+        tempList.add(new Bean("3"));
+        tempList.add(new Bean("123456"));
+        
+        /*boolean firstBoolean = false;
+        System.out.println("firstBoolean = " + firstBoolean + ", aimList = " + aimList);
+        firstBoolean = aimList.removeAll(tempList);
+        System.out.println("firstBoolean = " + firstBoolean + ", aimList = " + aimList);*/
+        
+        boolean firstBoolean = false;
+        StringBuffer temp = new StringBuffer();
+        for (Bean bean : aimList)
+        {
+            temp.append(bean.getTemp() + ",");
+        }
+        System.out.println("firstBoolean = " + firstBoolean + ", aimList = " + temp);
+        
+        firstBoolean = aimList.removeAll(tempList);
+        temp = new StringBuffer();
+        for (Bean bean : aimList)
+        {
+            temp.append(bean.getTemp() + ",");
+        }
+        System.out.println("firstBoolean = " + firstBoolean + ", aimList = " + temp);
+    }
+    
+    public class Bean
+    {
+        public Bean(String temp)
+        {
+            super();
+            this.temp = temp;
+        }
+        
+        private String temp;
+        
+        public String getTemp()
+        {
+            return temp;
+        }
+        
+        public void setTemp(String temp)
+        {
+            this.temp = temp;
+        }
+        
+        @Override
+        public boolean equals(Object o)
+        {
+            if (o instanceof Bean)
+            {
+                return this.getTemp().equals(((Bean)o).getTemp());
+            }
+            
+            return super.equals(o);
+        }
+    }
+    
+    public void cacluate1(String str)
+    {
+        String reg = "\\((((?'Open'\\())+((?'-Open'\\)))+)*(?(Open)(?!))\\)";
+        String answer = null;
+        
+        Pattern pattern = Pattern.compile(reg);
+        Matcher matcher = pattern.matcher(str);
+        
+        while (matcher.find())
+        {
+            answer = matcher.group(0);
+            System.out.print(answer + "\n");
+        }
+    }
+    
     /**
      * 全排列 ~ 字典排序法(相当于找出下一个较大数)
      * Implement next permutation, which rearranges numbers into the lexicographically next greater permutation of numbers.

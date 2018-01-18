@@ -29,7 +29,8 @@ public class Example extends TestCase
         int numsB[] = {5, 2, 3, 4, 1};
         solution.pernutation(numsB);
         */
-        System.out.println("非递归全排列 All");
+        
+        /*     System.out.println("非递归全排列 All");
         int numsC[] = {1, 1};
         solution.nextPermutation(numsC);
         for (int i = 0; i < numsC.length; i++)
@@ -37,6 +38,11 @@ public class Example extends TestCase
             System.out.print(numsC[i] + "  ");
         }
         System.out.println();
+        */
+        
+        // solution.cacluate1("()()(((((()))))))))))((((((((((((((((((((((())))()()()()()");
+        
+        solution.test();
     }
     
     @Override
