@@ -5,5 +5,5 @@
 
 
 
-1，TwoSum - 暴力遍历
-
+1，Two Sum - 暴力遍历
+2，Add Two Numbers - 遍历链表
