@@ -1,6 +1,6 @@
-package com.test;
+package com.test.base;
 
-import java.util.Arrays;
+import com.test.SolutionB;
 
 import junit.framework.TestCase;
 
@@ -13,7 +13,7 @@ public class Example extends TestCase
         throws Exception
     {
         super.setUp();
-        solution = new Solution();
+        solution = new SolutionB();
     }
     
     public void testSolution()
@@ -50,18 +50,21 @@ public class Example extends TestCase
             156, 362, 4, 705, 164, 465, 543, 806, 282, 827, 448, 670, 950, 458, 388, 239, 744, 507, 516, 414, 459, 934,
             130, 924, 440, 166, 788, 343, 379, 884, 758, 808, 912, 187, 706, 419, 88, 355, 996, 331, 777, 500, 863, 796,
             627, 124, 535, 561, 466, 370, 101, 383, 813, 44};
-        
         int target = 929;
         
-        int[] rightResult = {412, 583};
+        assertArray(nums, new int[] {412, 583}, solution.twoSum(nums, target));
+    }
+    
+    private void assertArray(int[] nums, int[] expected, int[] result)
+    {
+        System.out.println("0 expected index = " + expected[0] + ", result = " + result[0]);
+        System.out.println("1 expected index = " + expected[1] + ", result = " + result[1]);
         
-        int[] caculResult = solution.twoSum(nums, target);
+        System.out.println("0 expected value = " + nums[expected[0]] + ", result = " + nums[result[0]]);
+        System.out.println("1 expected value = " + nums[expected[1]] + ", result = " + nums[result[1]]);
         
-        System.out.println("caculResult = " + Arrays.toString(caculResult));
-        System.out.println("caculResult num[0] = " + nums[caculResult[0]] + ",num[1] = " + nums[caculResult[1]]);
-        
-        assertEquals(rightResult[0], caculResult[0]);
-        assertEquals(rightResult[1], caculResult[1]);
+        assertEquals(expected[0], result[0]);
+        assertEquals(expected[1], result[1]);
     }
     
     @Override
