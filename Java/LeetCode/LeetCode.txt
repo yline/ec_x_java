@@ -7,3 +7,6 @@
 
 1，Two Sum - 暴力遍历
 2，Add Two Numbers - 遍历链表
+3，Longest Substring Without Repeating  - 逐个遍历
+
+4，Median Of Two Sorted Arrays -  二分法
