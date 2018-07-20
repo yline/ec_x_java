@@ -1,4 +1,7 @@
-package com.test;
+package com.test.base;
+
+import com.test.SolutionA;
+import com.test.SolutionB;
 
 import junit.framework.TestCase;
 
@@ -11,23 +14,34 @@ public class Example extends TestCase
         throws Exception
     {
         super.setUp();
-        solution = new Solution();
+        
     }
     
     public void testSolution()
     {
-        assertEquals("bab", solution.longestPalindrome("babad"));
+        solution = new SolutionA();
+        assertEqual();
+    }
+    
+    public void testSolutionB()
+    {
+        solution = new SolutionB();
+        assertEqual();
+    }
+    
+    private void assertEqual()
+    {
+        assertEquals("bab", solution.longestPalindrome("babd"));
+        
         assertEquals("bb", solution.longestPalindrome("cbbd"));
-        assertEquals("bab", solution.longestPalindrome("babad"));
+        assertEquals("ebabe", solution.longestPalindrome("ebabefdcd"));
         assertEquals("bb", solution.longestPalindrome("bb"));
         assertEquals("a", solution.longestPalindrome("abcda"));
-        // assertEquals(true, solution.isPalindromeString("abddbae"));
-        // assertEquals(true, "eeabddba".equals("abddbaee"));
+        assertEquals("adada", solution.longestPalindrome("babadada"));
         
         String result =
             "ibvjkmpyzsifuxcabqqpahjdeuzaybqsrsmbfplxycsafogotliyvhxjtkrbzqxlyfwujzhkdafhebvsdhkkdbhlhmaoxmbkqiwiusngkbdhlvxdyvnjrzvxmukvdfobzlmvnbnilnsyrgoygfdzjlymhprcpxsnxpcafctikxxybcusgjwmfklkffehbvlhvxfiddznwumxosomfbgxoruoqrhezgsgidgcfzbtdftjxeahriirqgxbhicoxavquhbkaomrroghdnfkknyigsluqebaqrtcwgmlnvmxoagisdmsokeznjsnwpxygjjptvyjjkbmkxvlivinmpnpxgmmorkasebngirckqcawgevljplkkgextudqaodwqmfljljhrujoerycoojwwgtklypicgkyaboqjfivbeqdlonxeidgxsyzugkntoevwfuxovazcyayvwbcqswzhytlmtmrtwpikgacnpkbwgfmpavzyjoxughwhvlsxsgttbcyrlkaarngeoaldsdtjncivhcfsaohmdhgbwkuemcembmlwbwquxfaiukoqvzmgoeppieztdacvwngbkcxknbytvztodbfnjhbtwpjlzuajnlzfmmujhcggpdcwdquutdiubgcvnxvgspmfumeqrofewynizvynavjzkbpkuxxvkjujectdyfwygnfsukvzflcuxxzvxzravzznpxttduajhbsyiywpqunnarabcroljwcbdydagachbobkcvudkoddldaucwruobfylfhyvjuynjrosxczgjwudpxaqwnboxgxybnngxxhibesiaxkicinikzzmonftqkcudlzfzutplbycejmkpxcygsafzkgudy";
         System.out.println("content = " + solution.longestPalindrome(result));
-        System.out.println("content right = " + solution.longestPalindrome2(result));
     }
     
     @Override
