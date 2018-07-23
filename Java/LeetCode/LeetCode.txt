@@ -6,7 +6,12 @@
 
 
 1，Two Sum - 暴力遍历
-2，Add Two Numbers - 遍历链表
-3，Longest Substring Without Repeating  - 逐个遍历
+2，Add Two Numbers - 链表遍历
+3，Longest Substring Without Repeating  - 桶概念，记录已存在
 
-4，Median Of Two Sorted Arrays -  二分法
+4，Median Of Two Sorted Arrays - 二分法
+5, Longest Palindromic Substring - 以中心点，向两边扩展
+6，Zig Zag Conversion - 寻找数学规律，依照规律实现递增
+
+43，MultiplyStrings - 寻找数学规律，依照规律实现叠加
+

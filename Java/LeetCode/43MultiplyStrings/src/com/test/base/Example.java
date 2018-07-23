@@ -18,14 +18,8 @@ public class Example extends TestCase
     
     public void testSolution()
     {
-        assertEquals("", solution.convert("", 1));
-        assertEquals("", solution.convert("", 2));
-        assertEquals("", solution.convert("", 3));
-        
-        assertEquals("ABCDEFGHIJKLMN", solution.convert("ABCDEFGHIJKLMN", 1));
-        assertEquals("ACEGIKMBDFHJLN", solution.convert("ABCDEFGHIJKLMN", 2));
-        assertEquals("AEIMBDFHJLNCGK", solution.convert("ABCDEFGHIJKLMN", 3));
-        assertEquals("AGMBFHLNCEIKDJ", solution.convert("ABCDEFGHIJKLMN", 4));
+        assertEquals("6", solution.multiply("2", "3"));
+        assertEquals("56088", solution.multiply("123", "456"));
     }
     
     @Override

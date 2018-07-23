@@ -13,7 +13,7 @@ import com.test.base.Solution;
  *
  * 2018年7月23日 下午4:25:13
  */
-public class SolutionB implements Solution
+public class SolutionA implements Solution
 {
     
     @Override
