@@ -1,10 +1,9 @@
-package com.test;
+package com.test.base;
+
+import com.test.SolutionB;
 
 import junit.framework.TestCase;
 
-/**
- * 严重怀疑正确answer
- */
 public class Example extends TestCase
 {
     private Solution solution;
@@ -14,7 +13,7 @@ public class Example extends TestCase
         throws Exception
     {
         super.setUp();
-        solution = new Solution();
+        solution = new SolutionB();
     }
     
     public void testSolution()
