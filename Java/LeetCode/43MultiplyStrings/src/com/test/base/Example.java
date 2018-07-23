@@ -20,6 +20,8 @@ public class Example extends TestCase
     {
         assertEquals("6", solution.multiply("2", "3"));
         assertEquals("56088", solution.multiply("123", "456"));
+        assertEquals("121", solution.multiply("11", "11"));
+        assertEquals("625", solution.multiply("25", "25"));
     }
     
     @Override
