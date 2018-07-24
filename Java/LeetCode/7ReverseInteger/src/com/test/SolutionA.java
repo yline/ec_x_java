@@ -3,6 +3,8 @@ package com.test;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.test.base.Solution;
+
 /**
  * Reverse digits of an integer.
  * 
@@ -13,8 +15,9 @@ import java.util.List;
  *
  * 2016年12月25日 下午2:32:21
  */
-public class Solution
+public class SolutionA implements Solution
 {
+    @Override
     public int reverse(int x)
     {
         // 防止溢出
