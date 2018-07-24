@@ -19,3 +19,6 @@
 43，MultiplyStrings - 寻找数学规律，依照规律实现叠加
 190，Reverse Bits - 颠倒一下数字，考位移
 191，Number of 1 Bits - 考虑n & (n-1)妙用
+
+
+234，运行结果和自己运行结果不一致
