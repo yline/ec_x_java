@@ -1,10 +1,9 @@
-package com.test;
+package com.test.base;
+
+import com.test.SolutionA;
 
 import junit.framework.TestCase;
 
-/**
- * 严重怀疑正确answer
- */
 public class Example extends TestCase
 {
     private Solution solution;
@@ -14,7 +13,7 @@ public class Example extends TestCase
         throws Exception
     {
         super.setUp();
-        solution = new Solution();
+        solution = new SolutionA();
     }
     
     public void testSolution()
@@ -30,6 +29,9 @@ public class Example extends TestCase
         assertEquals(0, solution.myAtoi("   +-010"));
         assertEquals(-2147483648, solution.myAtoi("-2147483648"));
         assertEquals(2147483647, solution.myAtoi("123456789098765431"));
+        assertEquals(2147483647,
+            solution.myAtoi(
+                "10000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000522545459"));
     }
     
     @Override
