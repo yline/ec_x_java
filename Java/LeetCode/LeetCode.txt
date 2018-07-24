@@ -5,13 +5,14 @@
 
 
 
-1£¬Two Sum - ±©Á¦±éÀú
-2£¬Add Two Numbers - Á´±í±éÀú
-3£¬Longest Substring Without Repeating  - Í°¸ÅÄî£¬¼ÇÂ¼ÒÑ´æÔÚ
+1ï¼ŒTwo Sum - æš´åŠ›éå†
+2ï¼ŒAdd Two Numbers - é“¾è¡¨éå†
+3ï¼ŒLongest Substring Without Repeating  - æ¡¶æ¦‚å¿µï¼Œè®°å½•å·²å­˜åœ¨
 
-4£¬Median Of Two Sorted Arrays - ¶ş·Ö·¨
-5, Longest Palindromic Substring - ÒÔÖĞĞÄµã£¬ÏòÁ½±ßÀ©Õ¹
-6£¬Zig Zag Conversion - Ñ°ÕÒÊıÑ§¹æÂÉ£¬ÒÀÕÕ¹æÂÉÊµÏÖµİÔö
+4ï¼ŒMedian Of Two Sorted Arrays - äºŒåˆ†æ³•
+5, Longest Palindromic Substring - ä»¥ä¸­å¿ƒç‚¹ï¼Œå‘ä¸¤è¾¹æ‰©å±•
+6ï¼ŒZig Zag Conversion - å¯»æ‰¾æ•°å­¦è§„å¾‹ï¼Œä¾ç…§è§„å¾‹å®ç°é€’å¢
+7ï¼ŒReverse Integer - é¢ å€’ä¸€ä¸‹æ•°å­—
 
-43£¬MultiplyStrings - Ñ°ÕÒÊıÑ§¹æÂÉ£¬ÒÀÕÕ¹æÂÉÊµÏÖµş¼Ó
+43ï¼ŒMultiplyStrings - å¯»æ‰¾æ•°å­¦è§„å¾‹ï¼Œä¾ç…§è§„å¾‹å®ç°å åŠ 
 
