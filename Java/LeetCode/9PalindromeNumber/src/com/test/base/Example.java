@@ -1,4 +1,6 @@
-package com.test;
+package com.test.base;
+
+import com.test.SolutionA;
 
 import junit.framework.TestCase;
 
@@ -14,7 +16,7 @@ public class Example extends TestCase
         throws Exception
     {
         super.setUp();
-        solution = new Solution();
+        solution = new SolutionA();
     }
     
     public void testSolution()

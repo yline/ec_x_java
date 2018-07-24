@@ -14,6 +14,7 @@
 6，Zig Zag Conversion - 寻找数学规律，依照规律实现递增
 7，Reverse Integer - 颠倒一下数字，考求余10位
 8，String To Integer - 字符串转整数，排除计算
+9，PalindromeNumber - 判断是否是回文（类似第5题）
 
 43，MultiplyStrings - 寻找数学规律，依照规律实现叠加
 190，Reverse Bits - 颠倒一下数字，考位移
