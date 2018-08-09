@@ -31,10 +31,10 @@ public class Example extends TestCase
     {
         solution = new SolutionC();
         
-        boolean isMatch = solution.isMatch("123456789", "1********.*");
+        boolean isMatch = solution.isMatch("112233", "1*.*");
         System.out.println(isMatch);
         
-        assertSolution();
+        //        assertSolution();
     }
     
     private void assertSolution()
