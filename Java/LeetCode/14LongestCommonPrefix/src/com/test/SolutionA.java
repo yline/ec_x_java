@@ -1,14 +1,14 @@
 package com.test;
 
-/**
- * Write a function to find the longest common prefix string amongst an array of strings.
- * 写一个函数找出一个字串所数组中的最长的公共前缀。
- * @author YLine
- *
- * 2017年1月12日 下午8:22:24
- */
-public class Solution
+import com.test.base.Solution;
+
+public class SolutionA implements Solution
 {
+    /**
+     *   两两匹配，最终找到相同的
+     * @param strs
+     * @return
+     */
     public String longestCommonPrefix(String[] strs)
     {
         int length = strs.length;
@@ -38,6 +38,12 @@ public class Solution
         return strs[0];
     }
     
+    /**
+     *  获取两个字符串，相同的前缀
+     * @param s 字符串s
+     * @param p 字符串p
+     * @return 相同的前缀
+     */
     private String getCommonPrefix(String s, String p)
     {
         StringBuffer result = new StringBuffer();

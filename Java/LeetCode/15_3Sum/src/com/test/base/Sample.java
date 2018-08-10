@@ -1,7 +1,11 @@
-package com.test;
+package com.test.base;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import com.test.SolutionA;
+import com.test.SolutionB;
+import com.test.SolutionC;
 
 import junit.framework.TestCase;
 
@@ -14,26 +18,43 @@ public class Sample extends TestCase
         throws Exception
     {
         super.setUp();
-        solution = new Solution();
     }
     
-    public void testSolution()
+    public void testSolutionA()
+    {
+        solution = new SolutionA();
+        asserSolution();
+    }
+    
+    public void testSolutionB()
+    {
+        solution = new SolutionB();
+        asserSolution();
+    }
+    
+    public void testSolutionC()
+    {
+        solution = new SolutionC();
+        asserSolution();
+    }
+    
+    private void asserSolution()
     {
         int[] array1 = {-1, 0, 1, 2, -1, -4};
         List<List<Integer>> result1 = new ArrayList<>();
-        result1.add(solution.getList(-1, -1, 2));
-        result1.add(solution.getList(-1, 0, 1));
+        result1.add(createList(-1, -1, 2));
+        result1.add(createList(-1, 0, 1));
         assertEquals(result1, solution.threeSum(array1));
         
         int[] array2 = {0, 0, 0, 0, 0, 0, 0, 0, 0};
         List<List<Integer>> result2 = new ArrayList<>();
-        result2.add(solution.getList(0, 0, 0));
+        result2.add(createList(0, 0, 0));
         assertEquals(result2, solution.threeSum(array2));
         
         int[] array3 = {-2, 0, 1, 1, 2};
         List<List<Integer>> result3 = new ArrayList<>();
-        result3.add(solution.getList(-2, 0, 2));
-        result3.add(solution.getList(-2, 1, 1));
+        result3.add(createList(-2, 0, 2));
+        result3.add(createList(-2, 1, 1));
         assertEquals(result3, solution.threeSum(array3));
         
         int[] array4 = {-1, 1, -1, 1};
@@ -56,7 +77,15 @@ public class Sample extends TestCase
         List<List<Integer>> result7 = new ArrayList<>();
         // assertEquals(result6, solution.threeSum(array6));
         System.out.println(solution.threeSum(array7).toString());
-        
+    }
+    
+    public List<Integer> createList(int one, int two, int three)
+    {
+        List<Integer> tempResult = new ArrayList<>();
+        tempResult.add(one);
+        tempResult.add(two);
+        tempResult.add(three);
+        return tempResult;
     }
     
     @Override
