@@ -1,7 +1,10 @@
-package com.test;
+package com.test.base;
 
 import java.util.Arrays;
 import java.util.List;
+
+import com.test.SolutionA;
+import com.test.SolutionB;
 
 import junit.framework.TestCase;
 
@@ -14,10 +17,24 @@ public class Sample extends TestCase
         throws Exception
     {
         super.setUp();
-        solution = new Solution();
+        
     }
     
-    public void testSolution()
+    public void testSolutionA()
+    {
+        solution = new SolutionA();
+        
+        assertSolution();
+    }
+    
+    public void testSolutionB()
+    {
+        solution = new SolutionB();
+        
+        assertSolution();
+    }
+    
+    private void assertSolution()
     {
         String param0 = "2";
         String[] result0 = {"a", "b", "c"};
