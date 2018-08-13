@@ -7,6 +7,15 @@ import java.util.List;
 
 import com.test.base.Solution;
 
+/**
+ * 第一层遍历，剩下两层通过夹逼原则，变为n
+ * 
+ * 算法复杂度：n*log(n) + n*n = n*n
+ * 
+ * @author YLine
+ *
+ * 2018年8月13日 下午2:33:01
+ */
 public class SolutionB implements Solution
 {
     @Override

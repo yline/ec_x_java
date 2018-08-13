@@ -6,6 +6,15 @@ import java.util.List;
 
 import com.test.base.Solution;
 
+/**
+ * 三层遍历
+ * 
+ * 算法复杂度：n*log(n) + n*n*n = n*n*n
+ * 
+ * @author YLine
+ *
+ * 2018年8月13日 下午2:31:37
+ */
 public class SolutionA implements Solution
 {
     /**

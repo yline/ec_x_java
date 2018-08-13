@@ -5,7 +5,6 @@ import java.util.List;
 
 import com.test.SolutionA;
 import com.test.SolutionB;
-import com.test.SolutionC;
 
 import junit.framework.TestCase;
 
@@ -29,12 +28,6 @@ public class Sample extends TestCase
     public void testSolutionB()
     {
         solution = new SolutionB();
-        asserSolution();
-    }
-    
-    public void testSolutionC()
-    {
-        solution = new SolutionC();
         asserSolution();
     }
     

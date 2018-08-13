@@ -2,20 +2,20 @@ package com.test;
 
 import java.util.Arrays;
 
+import com.test.base.Solution;
+
 /**
- * Given an array S of n integers, find three integers in S such that the sum is closest to a given number, target. Return the sum of the three integers. 
- * You may assume that each input would have exactly one solution.
+ * 第一层n遍历，第二次夹逼原则，将两级遍历变成一级
  * 
- * Such as:
- * For example, given array S = {-1 2 1 -4}, and target = 1.
- * The sum that is closest to the target is 2. (-1 + 2 + 1 = 2).
+ * 算法复杂度：n*log(n) + n*n = n*n
  * 
  * @author YLine
  *
- * 2017年1月12日 下午9:01:36
+ * 2018年8月13日 下午3:01:08
  */
-public class Solution
+public class SolutionA implements Solution
 {
+    @Override
     public int threeSumClosest(int[] nums, int target)
     {
         int result = Integer.MAX_VALUE, minDiff = Integer.MAX_VALUE;
