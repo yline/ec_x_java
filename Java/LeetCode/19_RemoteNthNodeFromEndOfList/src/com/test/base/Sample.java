@@ -1,6 +1,7 @@
-package com.test;
+package com.test.base;
 
-import com.test.bean.ListNode;
+import com.test.SolutionA;
+import com.test.SolutionB;
 
 import junit.framework.TestCase;
 
@@ -13,16 +14,27 @@ public class Sample extends TestCase
         throws Exception
     {
         super.setUp();
-        solution = new Solution();
     }
     
-    public void testSolution()
+    public void testSolutionA()
+    {
+        solution = new SolutionA();
+        assertSolution();
+    }
+    
+    public void testSolutionB()
+    {
+        solution = new SolutionB();
+        assertSolution();
+    }
+    
+    private void assertSolution()
     {
         ListNode node0 = newListNode(new int[] {1, 2, 3, 4, 5});
         ListNode result0 = newListNode(new int[] {1, 2, 3, 5});
-        System.out.println(solution.logListNode(node0));
-        System.out.println(solution.logListNode(result0));
-        assertEquals(solution.logListNode(result0), solution.logListNode(solution.removeNthFromEnd(node0, 2)));
+        System.out.println(logListNode(node0));
+        System.out.println(logListNode(result0));
+        assertEquals(logListNode(result0), logListNode(solution.removeNthFromEnd(node0, 2)));
     }
     
     private ListNode newListNode(int[] nums)
@@ -37,6 +49,18 @@ public class Sample extends TestCase
         }
         
         return parentNode.next;
+    }
+    
+    private String logListNode(ListNode node)
+    {
+        StringBuffer stringBuffer = new StringBuffer();
+        while (null != node)
+        {
+            stringBuffer.append(node.val);
+            node = node.next;
+        }
+        
+        return stringBuffer.toString();
     }
     
     @Override

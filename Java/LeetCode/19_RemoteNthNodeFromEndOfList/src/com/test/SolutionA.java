@@ -1,8 +1,21 @@
 package com.test;
 
-import com.test.bean.ListNode;
+import com.test.base.ListNode;
+import com.test.base.Solution;
 
-public class Solution
+/**
+ * Two pass algorithm
+ * 暴力破解：
+ * 1，先计算链表长度
+ * 2，再次遍历，然后将链表连接中断一次
+ * 
+ * 时间复杂度：2*n
+ * 
+ * @author YLine
+ *
+ * 2018年8月13日 下午6:05:21
+ */
+public class SolutionA implements Solution
 {
     public ListNode removeNthFromEnd(ListNode head, int n)
     {
@@ -38,17 +51,5 @@ public class Solution
         // logListNode(parentResult.next);
         
         return parentResult.next;
-    }
-    
-    public String logListNode(ListNode node)
-    {
-        StringBuffer stringBuffer = new StringBuffer();
-        while (null != node)
-        {
-            stringBuffer.append(node.val);
-            node = node.next;
-        }
-        
-        return stringBuffer.toString();
     }
 }

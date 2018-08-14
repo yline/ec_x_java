@@ -1,123 +1,12 @@
 package com.test;
 
-import java.util.ArrayList;
 import java.util.Deque;
 import java.util.LinkedList;
-import java.util.List;
 
-public class Solution
+import com.test.base.Solution;
+
+public class SolutionB implements Solution
 {
-    /**
-     *  ()() // 1,2,3,4 【相减为奇数】
-     * @param s
-     * @return
-     */
-    public boolean isValid(String s)
-    {
-        List<DataBean> list = new ArrayList<>();
-        
-        for (int i = 0; i < s.length(); i++)
-        {
-            if (isPre(s.charAt(i)))
-            {
-                list.add(new DataBean(s.charAt(i), i));
-            }
-            else
-            {
-                DataBean bean = new DataBean(s.charAt(i), i);
-                
-                int removePosition = -1;
-                for (int j = 0; j < list.size(); j++)
-                {
-                    if (list.get(j).equals(bean))
-                    {
-                        removePosition = j;
-                        break;
-                    }
-                }
-                
-                if (-1 == removePosition)
-                {
-                    return false;
-                }
-                else
-                {
-                    list.remove(removePosition);
-                }
-            }
-        }
-        
-        return list.isEmpty();
-    }
-    
-    private boolean isPre(char c)
-    {
-        if (c == '(' || c == '[' || c == '{')
-        {
-            return true;
-        }
-        
-        return false;
-    }
-    
-    private class DataBean
-    {
-        private Character character;
-        
-        private int position;
-        
-        public DataBean(Character character, int position)
-        {
-            super();
-            this.character = character;
-            this.position = position;
-        }
-        
-        public Character getCharacter()
-        {
-            return character;
-        }
-        
-        public int getPosition()
-        {
-            return position;
-        }
-        
-        @Override
-        public boolean equals(Object obj)
-        {
-            if (obj instanceof DataBean)
-            {
-                DataBean temp = (DataBean)obj;
-                
-                if ('(' == character)
-                {
-                    if (')' == temp.getCharacter() && (temp.getPosition() - position) % 2 == 1)
-                    {
-                        return true;
-                    }
-                }
-                else if ('[' == character)
-                {
-                    if (']' == temp.getCharacter() && (temp.getPosition() - position) % 2 == 1)
-                    {
-                        return true;
-                    }
-                }
-                else if ('{' == character)
-                {
-                    if ('}' == temp.getCharacter() && (temp.getPosition() - position) % 2 == 1)
-                    {
-                        return true;
-                    }
-                }
-                
-                return false;
-            }
-            
-            return false;
-        }
-    }
     
     /**
      * <pre>
@@ -139,7 +28,8 @@ public class Solution
      * @param s
      * @return
      */
-    public boolean isValid2(String s)
+    @Override
+    public boolean isValid(String s)
     {
         Deque<Character> stack = new LinkedList<>();
         int index = 0;
