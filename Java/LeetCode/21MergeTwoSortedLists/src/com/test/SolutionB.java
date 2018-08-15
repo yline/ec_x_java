@@ -1,66 +1,19 @@
 package com.test;
 
-public class Solution
+import com.test.base.ListNode;
+import com.test.base.Solution;
+
+/**
+ * 遍历比较两个链表
+ * 
+ * 时间复杂度：n+m
+ * 
+ * @author YLine
+ *
+ * 2018年8月15日 下午4:03:22
+ */
+public class SolutionB implements Solution
 {
-    public ListNode mergeTwoLists(ListNode l1, ListNode l2)
-    {
-        if (null == l1)
-        {
-            return l2;
-        }
-        
-        if (null == l2)
-        {
-            return l1;
-        }
-        
-        ListNode result = new ListNode(0);
-        ListNode temp = result;
-        while (null != l1 && null != l2)
-        {
-            if (l1.val < l2.val)
-            {
-                temp.next = new ListNode(l1.val);
-                temp = temp.next;
-                
-                l1 = l1.next;
-            }
-            else
-            {
-                temp.next = new ListNode(l2.val);
-                temp = temp.next;
-                
-                l2 = l2.next;
-            }
-        }
-        
-        // 结束时,对空进行判断
-        if (null != l1)
-        {
-            temp.next = l1;
-        }
-        
-        if (null != l2)
-        {
-            temp.next = l2;
-        }
-        
-        return result.next;
-    }
-    
-    public ListNode newListNode(int... number)
-    {
-        ListNode result = new ListNode(0);
-        ListNode temp = result;
-        
-        for (int i = 0; i < number.length; i++)
-        {
-            temp.next = new ListNode(number[i]);
-            temp = temp.next;
-        }
-        
-        return result.next;
-    }
     
     /**
      * <pre>
@@ -83,7 +36,8 @@ public class Solution
      * @param l2
      * @return
      */
-    public ListNode mergeTwoLists2(ListNode l1, ListNode l2)
+    @Override
+    public ListNode mergeTwoLists(ListNode l1, ListNode l2)
     {
         ListNode head = new ListNode(0); // 创建一个头结点，最后还要删除掉
         ListNode tail = head;

@@ -1,10 +1,10 @@
-package com.test;
+package com.test.base;
 
 public class ListNode
 {
-    int val;
+    public int val;
     
-    ListNode next;
+    public ListNode next;
     
     public ListNode(int x)
     {
