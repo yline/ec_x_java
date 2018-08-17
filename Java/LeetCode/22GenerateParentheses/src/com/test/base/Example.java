@@ -3,8 +3,8 @@ package com.test.base;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.test.SolutionA;
 import com.test.SolutionB;
+import com.test.SolutionC;
 
 import junit.framework.TestCase;
 
@@ -19,9 +19,9 @@ public class Example extends TestCase
         super.setUp();
     }
     
-    public void testSolutionA()
+    public void testSolutionB()
     {
-        solution = new SolutionA();
+        solution = new SolutionB();
         assertSolution();
         for (int i = 1; i < 14; i++)
         {
@@ -29,9 +29,9 @@ public class Example extends TestCase
         }
     }
     
-    public void testSolutionB()
+    public void testSolutionC()
     {
-        solution = new SolutionB();
+        solution = new SolutionC();
         assertSolution();
         for (int i = 1; i < 14; i++)
         {
