@@ -1,12 +1,19 @@
 package com.test;
 
-public class Solution
+import com.test.base.ListNode;
+import com.test.base.Solution;
+
+/**
+ * 两两比较，最终获取
+ * 
+ * 时间复杂度：n*m
+ * 
+ * @author YLine
+ *
+ * 2018年8月20日 下午5:24:24
+ */
+public class SolutionA implements Solution
 {
-    /**
-     * Merge k sorted linked lists and return it as one sorted list. Analyze and describe its complexity.
-     * @param lists
-     * @return
-     */
     public ListNode mergeKLists(ListNode[] lists)
     {
         if (null == lists || lists.length == 0)
@@ -67,19 +74,5 @@ public class Solution
         tail.next = (l1 != null ? l1 : l2);
         
         return head.next; // head的下一个节点是第一个数据结点
-    }
-    
-    public ListNode newListNode(int... number)
-    {
-        ListNode result = new ListNode(0);
-        ListNode temp = result;
-        
-        for (int i = 0; i < number.length; i++)
-        {
-            temp.next = new ListNode(number[i]);
-            temp = temp.next;
-        }
-        
-        return result.next;
     }
 }
