@@ -5,6 +5,16 @@ import java.util.List;
 
 import com.test.base.Solution;
 
+/**
+ * 递归的方式，递归公式  f(m) = f(m-1)'('*(是否存在) + f(m-1)')';
+ * 
+ * 时间复杂度：
+ * n*n
+ * 
+ * @author YLine
+ *
+ * 2018年8月20日 下午2:18:21
+ */
 public class SolutionB implements Solution
 {
     
