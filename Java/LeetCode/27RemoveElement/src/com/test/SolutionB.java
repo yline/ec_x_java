@@ -1,49 +1,10 @@
 package com.test;
 
-import java.util.Arrays;
+import com.test.base.Solution;
 
-public class Solution
+public class SolutionB implements Solution
 {
     /**
-     * Given an array and a value, remove all instances of that value in place and return the new length.
-     * 
-     * Do not allocate extra space for another array, you must do this in place with constant memory.
-     * 
-     * The order of elements can be changed. It doesn't matter what you leave beyond the new length.
-     * 
-     * Example:
-     * Given input array nums = [3,2,2,3], val = 3
-     * 
-     * Your function should return length = 2, with the first two elements of nums being 2.
-     * @param nums
-     * @param val
-     * @return
-     */
-    public int removeElement(int[] nums, int val)
-    {
-        if (null == nums || nums.length == 0)
-        {
-            return 0;
-        }
-        
-        int left = 0;
-        for (int i = 0; i < nums.length; i++)
-        {
-            if (val != nums[i])
-            {
-                nums[left] = nums[i];
-                
-                left++;
-            }
-        }
-        
-        System.out.println(Arrays.toString(nums));
-        
-        return left;
-    }
-    
-    /**
-     * <pre>
      * 原题
      * Given an array and a value, remove all instances of that value in place and return the new length.
      *  The order of elements can be changed. It doesn’t matter what you leave beyond the new length.
@@ -53,13 +14,9 @@ public class Solution
      *
      * 解题思路
      * 从左边找值为elem的元素的位置，j从右边找值不为elem的元素的位置，然后将j位置的数值移动到i位置。
-     * </pre>
-     *
-     * @param A
-     * @param elem
-     * @return
      */
-    public int removeElement2(int[] A, int elem)
+    @Override
+    public int removeElement(int[] A, int elem)
     {
         int exchange = 0; // 记录交换的次数，也就是统计数组中与elem元素值相等的个数
         
