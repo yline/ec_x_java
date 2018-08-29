@@ -1,72 +1,20 @@
 package com.test;
 
-public class Solution
+import com.test.base.ListNode;
+import com.test.base.Solution;
+
+/**
+ * 方案：周期性翻转
+ * 
+ * 时间复杂度：
+ * n
+ * 
+ * @author YLine
+ *
+ * 2018年8月29日 下午5:04:29
+ */
+public class SolutionB implements Solution
 {
-    /**
-     * 原来是循环,获取
-     * Given a linked list, reverse the nodes of a linked list k at a time and return its modified list
-     * 
-     * k is a positive integer and is less than or equal to the length of the linked list. If the number of nodes is not a multiple of k then left-out nodes in the end should remain as it is.
-     * 
-     * You may not alter the values in the nodes, only nodes itself may be changed.
-     * 
-     * Only constant memory is allowed.
-     * 
-     * For example,
-     * Given this linked list: 1->2->3->4->5
-     * For k = 2, you should return: 2->1->4->3->5
-     * For k = 3, you should return: 3->2->1->4->5
-     * 
-     * @param head
-     * @param k
-     * @return
-     */
-    public ListNode reverseKGroup(ListNode head, int k)
-    {
-        ListNode node = head;
-        while (null != node)
-        {
-            node = reverseGroup(node, k);
-        }
-        return head;
-    }
-    
-    /**
-     * 反转一次
-     * @param node  当前的游标剩下的 链表
-     * @param k 反转周期
-     * @return
-     */
-    public ListNode reverseGroup(ListNode node, int k)
-    {
-        ListNode cursor = node;
-        int[] cacheNumber = new int[k];
-        int i = 0;
-        
-        // 统计node的个数
-        while (null != cursor && i < k)
-        {
-            cacheNumber[i] = cursor.val;
-            
-            cursor = cursor.next;
-            i++;
-        }
-        
-        // k的值 大于节点数,不需要改变
-        if (k > i)
-        {
-            return null;
-        }
-        
-        cursor = node;
-        for (int j = i - 1; j >= 0; j--)
-        {
-            cursor.val = cacheNumber[j];
-            cursor = cursor.next;
-        }
-        
-        return cursor;
-    }
     
     /**
      * <pre>
@@ -105,7 +53,8 @@ public class Solution
      * @param k
      * @return
      */
-    public ListNode reverseKGroup2(ListNode head, int k)
+    @Override
+    public ListNode reverseKGroup(ListNode head, int k)
     {
         if (k <= 1)
         {
@@ -169,19 +118,5 @@ public class Solution
         }
         
         return root.next;
-    }
-    
-    public ListNode newListNode(int... number)
-    {
-        ListNode result = new ListNode(0);
-        ListNode temp = result;
-        
-        for (int i = 0; i < number.length; i++)
-        {
-            temp.next = new ListNode(number[i]);
-            temp = temp.next;
-        }
-        
-        return result.next;
     }
 }
