@@ -1,4 +1,7 @@
-package com.test;
+package com.test.base;
+
+import com.test.SolutionA;
+import com.test.SolutionB;
 
 import junit.framework.TestCase;
 
@@ -11,10 +14,22 @@ public class Example extends TestCase
         throws Exception
     {
         super.setUp();
-        solution = new Solution();
+        
     }
     
-    public void testSolution()
+    public void testSolutionA()
+    {
+        solution = new SolutionA();
+        assertSolution();
+    }
+    
+    public void testSolutionB()
+    {
+        solution = new SolutionB();
+        assertSolution();
+    }
+    
+    private void assertSolution()
     {
         assertEquals(185, solution.divide(555, 3));
         assertEquals(185, solution.divide(556, 3));
