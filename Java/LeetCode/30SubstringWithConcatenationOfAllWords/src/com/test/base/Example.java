@@ -1,7 +1,10 @@
-package com.test;
+package com.test.base;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import com.test.SolutionA;
+import com.test.SolutionB;
 
 import junit.framework.TestCase;
 
@@ -14,10 +17,21 @@ public class Example extends TestCase
         throws Exception
     {
         super.setUp();
-        solution = new Solution();
     }
     
-    public void testSolution()
+    public void testSolutionA()
+    {
+        solution = new SolutionA();
+        assertSolution();
+    }
+    
+    public void testSolutionB()
+    {
+        solution = new SolutionB();
+        assertSolution();
+    }
+    
+    private void assertSolution()
     {
         String s1 = "barfoothefoobarman";
         String[] word1 = new String[] {"foo", "bar"};
@@ -26,11 +40,11 @@ public class Example extends TestCase
         result1.add(9);
         
         // 检测工具类
-        assertEquals(true, solution.isContain(0, s1, word1, new ArrayList<>()) != -1);
-        assertEquals(true, solution.isContain(3, s1, word1, new ArrayList<>()) != -1);
-        assertEquals(true, solution.isContain(9, s1, word1, new ArrayList<>()) != -1);
-        assertEquals(true, solution.isContain(12, s1, word1, new ArrayList<>()) != -1);
-        assertEquals(false, solution.isContain(11, s1, word1, new ArrayList<>()) != -1);
+        assertEquals(true, isEqual(s1, word1, 0));
+        assertEquals(true, isEqual(s1, word1, 3));
+        assertEquals(true, isEqual(s1, word1, 9));
+        assertEquals(true, isEqual(s1, word1, 12));
+        assertEquals(false, isEqual(s1, word1, 11));
         
         // 检测最终结果
         assertEquals(result1.toString(), solution.findSubstring(s1, word1).toString());
@@ -52,6 +66,26 @@ public class Example extends TestCase
         result3.add(9);
         result3.add(12);
         assertEquals(result3.toString(), solution.findSubstring(s3, word3).toString());
+    }
+    
+    private boolean isEqual(String stack, String[] words, int start)
+    {
+        for (String string : words)
+        {
+            // 数组越界
+            if (start + string.length() >= stack.length())
+            {
+                continue;
+            }
+            
+            // 有值相同
+            if (string.equals(stack.substring(start, start + string.length())))
+            {
+                return true;
+            }
+        }
+        
+        return false;
     }
     
     @Override
