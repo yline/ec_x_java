@@ -2,8 +2,11 @@ package com.test;
 
 import java.util.Stack;
 
-public class Solution
+import com.test.base.Solution;
+
+public class SolutionA implements Solution
 {
+    @Override
     public int longestValidParentheses(String s)
     {
         // 用于记录待匹配的左括号和右括号的位置

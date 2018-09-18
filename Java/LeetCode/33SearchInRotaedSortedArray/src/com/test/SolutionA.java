@@ -1,7 +1,23 @@
 package com.test;
 
-public class Solution
+import com.test.base.Solution;
+
+/**
+ * 时间复杂度：
+ * log n + log n = 2 * log n ==> O(log n)
+ * 
+ * @author YLine
+ *
+ * 2018年9月18日 下午4:36:48
+ */
+public class SolutionA implements Solution
 {
+    /**
+     * 查询目标值
+     * 
+     * 1，先查询到旋转的点
+     * 2，依据目标值，判断左侧还是右侧；然后分段查找
+     */
     public int search(int[] nums, int target)
     {
         if (nums.length == 0)
