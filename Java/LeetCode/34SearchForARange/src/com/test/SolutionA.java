@@ -1,6 +1,8 @@
 package com.test;
 
-public class Solution
+import com.test.base.Solution;
+
+public class SolutionA implements Solution
 {
     /**
      * 1，先使用二分法，查询到相等的值；若没有，则返回-1
@@ -9,6 +11,7 @@ public class Solution
      * @param target 目标值
      * @return 结果
      */
+    @Override
     public int[] searchRange(int[] nums, int target)
     {
         if (nums.length == 0)
