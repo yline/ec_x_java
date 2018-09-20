@@ -2,7 +2,7 @@ package com.test;
 
 import java.util.Arrays;
 
-public class Solution
+public class SolutionA
 {
     /**
      * 检查数独是否合法
@@ -24,6 +24,7 @@ public class Solution
         {
             if (!isValidLine(board[i]))
             {
+                System.out.println("行异常，row " + i);
                 return false;
             }
         }
@@ -41,6 +42,7 @@ public class Solution
                 board[7][i],
                 board[8][i]))
             {
+                System.out.println("列异常 column = " + i);
                 return false;
             }
         }
@@ -60,7 +62,7 @@ public class Solution
                     board[1 + i][2 + j],
                     board[2 + i][2 + j]))
                 {
-                    System.out.println("i = " + i + ", j = " + j);
+                    System.out.println("九宫格异常 i = " + i + ", j = " + j);
                     return false;
                 }
             }
@@ -74,7 +76,7 @@ public class Solution
      * @param symbol 长度为9的数组(实际不要求长度)
      * @return
      */
-    public boolean isValidLine(char... symbol)
+    public boolean isValidLine2(char... symbol)
     {
         char[] tempArray = new char[symbol.length];
         
@@ -89,6 +91,36 @@ public class Solution
                 if ('\0' == tempArray[tempIndex])
                 {
                     tempArray[tempIndex] = tempChar;
+                }
+                else
+                {
+                    System.out.println(Arrays.toString(symbol));
+                    return false;
+                }
+            }
+        }
+        
+        return true;
+    }
+    
+    /**
+     * 校验9个字符，是否合法，boolean方式，内存最少
+     * @param symbol 长度为9的数组(实际不要求长度)
+     * @return
+     */
+    public boolean isValidLine(char... symbol)
+    {
+        boolean[] tempArray = new boolean[symbol.length];
+        
+        int index;
+        for (int i = 0; i < tempArray.length; i++)
+        {
+            if (symbol[i] <= '9' && symbol[i] >= '1')
+            {
+                index = symbol[i] - '1';
+                if (!tempArray[index])
+                {
+                    tempArray[index] = true;
                 }
                 else
                 {
