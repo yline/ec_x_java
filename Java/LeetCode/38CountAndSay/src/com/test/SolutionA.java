@@ -1,19 +1,10 @@
 package com.test;
 
-public class Solution
+import com.test.base.Solution;
+
+public class SolutionA implements Solution
 {
-    /**
-     * 数数，前一个推倒出后一个
-     * 
-     * 1.     1
-     * 2.     11
-     * 3.     21
-     * 4.     1211
-     * 5.     111221
-     * 
-     * @param n
-     * @return
-     */
+    @Override
     public String countAndSay(int n)
     {
         String lastStr = "1";
