@@ -6,6 +6,23 @@ import java.util.List;
 
 import com.test.base.Solution;
 
+/**
+ * 方案：递推
+ * 
+ * 案例：{2,3,6,7}  target = 7
+ * 1 --> 2,2,2,2 
+ * 2 --> 2,2,3 通过添加
+ * 3 --> 2,3,3 排除
+ * 4 --> 2,6 排除
+ * 5 --> 3,3,3 排除
+ * 6 --> 3,6   排除
+ * 7 --> 6,6   排除
+ * 8 --> 7 通过，添加；结束
+ * 
+ * @author YLine
+ *
+ * 2018年11月12日 下午8:09:22
+ */
 public class SolutionA implements Solution
 {
     @Override
@@ -19,43 +36,52 @@ public class SolutionA implements Solution
         
         int tempResult = 0;
         
-        int left = 0, index = 0;
-        while (left < rightMax)
+        int index = 0;
+        while (index <= rightMax)
         {
-            if (index > rightMax) // 超越了临界值
+            if (tempResult + candidates[index] >= target)
             {
-                left++;
-                index = left;
-            }
-            
-            if (tempResult + candidates[index] > target)
-            {
-                // 复原
-                tempResult -= tempList.get(tempList.size() - 1);
-                tempList.remove(tempList.size() - 1);
-                
-                index++;
-            }
-            else if (tempResult + candidates[index] == target)
-            {
-                // 添加 满足条件的内容
-                List<Integer> dataList = new ArrayList<>(tempList);
-                dataList.add(candidates[index]);
-                result.add(tempList);
-                
-                // 复原
-                if (!tempList.isEmpty())
+                // 添加内容
+                if (tempResult + candidates[index] == target)
                 {
-                    tempResult -= tempList.get(tempList.size() - 1);
-                    tempList.remove(tempList.size() - 1);
+                    List<Integer> array = new ArrayList<>();
+                    for (Integer integer : tempList)
+                    {
+                        array.add(candidates[integer]);
+                    }
+                    array.add(candidates[index]);
+                    result.add(array);
                 }
                 
-                index++;
+                // 处理
+                if (tempList.isEmpty())
+                {
+                    return result;
+                }
+                else
+                {
+                    // 更新
+                    index = tempList.get(tempList.size() - 1); // 获取最后一个添加的index
+                    tempList.remove(tempList.size() - 1); // 移除数组的最后一个index
+                    tempResult -= candidates[index]; // 修改当前结果值
+                    
+                    index++;
+                    
+                    // 排除，2,5,5 --> 8 这种情况，直接index过界，再往后退一步
+                    while (!tempList.isEmpty() && index > rightMax)
+                    {
+                        index = tempList.get(tempList.size() - 1);
+                        tempList.remove(tempList.size() - 1);
+                        tempResult -= candidates[index];
+                        
+                        index++;
+                    }
+                }
             }
             else
             {
                 tempResult += candidates[index];
-                tempList.add(candidates[index]); // 添加到临时列表
+                tempList.add(index);
             }
         }
         
@@ -82,49 +108,4 @@ public class SolutionA implements Solution
         return 0;
     }
     
-    public void bay()
-    {
-        
-    }
-    
-    /**
-     * 计算出结果
-     * @param result 最终返回的数据
-     * @param candidates 组合的原始值
-     * @param start 开始遍历的位置
-     * @param tempTarget 当前的总和
-     * @param target 目标值
-     */
-    /*
-    public void combine(int[] candidates, int start, int target)
-    {
-        // 上次总值，新计算出的总值
-        int lastTotal = 0, newTotal = 0;
-        
-        List<Integer> singleList = new ArrayList<>();
-        List<List<Integer>> result = new ArrayList<>();
-        
-        for (int i = 0; i < candidates.length;)
-        {
-            newTotal = lastTotal + candidates[i];
-            if (newTotal > target)
-            {
-                lastTotal -= singleList.get(singleList.size() - 1); // 更新总和
-                singleList.remove(singleList.size() - 1); // 移除最后一个
-                
-                i++; // 移动位置
-            }
-            else if (newTotal < target)
-            {
-                singleList.add(candidates[i]);
-                lastTotal = newTotal;
-            }
-            else
-            {
-                result.add(singleList); // 符合要求
-                
-                lastTotal -= singleList.get(singleList.size() - 1);
-            }
-        }
-    }*/
 }
