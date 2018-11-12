@@ -4,6 +4,7 @@ import java.util.Arrays;
 
 import com.test.SolutionA;
 import com.test.SolutionB;
+import com.test.SolutionC;
 
 import junit.framework.TestCase;
 
@@ -34,7 +35,7 @@ public class Example extends TestCase
     {
         solution = new SolutionA();
         
-        char[][] sudokuTemp = EmptySudoku;
+        char[][] sudokuTemp = deepClone(EmptySudoku);
         solution.solveSudoku(sudokuTemp);
         
         log(sudokuTemp);
@@ -46,7 +47,19 @@ public class Example extends TestCase
     {
         solution = new SolutionB();
         
-        char[][] sudokuTemp = EmptySudoku;
+        char[][] sudokuTemp = deepClone(EmptySudoku);
+        solution.solveSudoku(sudokuTemp);
+        
+        log(sudokuTemp);
+        
+        assertSolution(FullSudoku, sudokuTemp);
+    }
+    
+    public void testSolutionC()
+    {
+        solution = new SolutionC();
+        
+        char[][] sudokuTemp = deepClone(EmptySudoku);
         solution.solveSudoku(sudokuTemp);
         
         log(sudokuTemp);
@@ -77,6 +90,24 @@ public class Example extends TestCase
         {
             System.out.println(Arrays.toString(expect[i]));
         }
+    }
+    
+    /**
+     * 深度拷贝一个，默认的clone方法属于浅拷贝
+     * @param expect
+     * @return
+     */
+    private char[][] deepClone(char[][] expect)
+    {
+        char[][] result = new char[expect.length][expect[0].length];
+        for (int i = 0; i < expect.length; i++)
+        {
+            for (int j = 0; j < expect[i].length; j++)
+            {
+                result[i][j] = expect[i][j];
+            }
+        }
+        return result;
     }
     
     @Override
