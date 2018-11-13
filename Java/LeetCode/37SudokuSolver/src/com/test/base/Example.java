@@ -3,7 +3,6 @@ package com.test.base;
 import java.util.Arrays;
 
 import com.test.SolutionA;
-import com.test.SolutionB;
 import com.test.SolutionC;
 
 import junit.framework.TestCase;
@@ -34,18 +33,7 @@ public class Example extends TestCase
     public void testSolutionA()
     {
         solution = new SolutionA();
-        
-        char[][] sudokuTemp = deepClone(EmptySudoku);
-        solution.solveSudoku(sudokuTemp);
-        
-        log(sudokuTemp);
-        
-        assertSolution(FullSudoku, sudokuTemp);
-    }
-    
-    public void testSolutionB()
-    {
-        solution = new SolutionB();
+        System.out.println("---------------------A----------------------------");
         
         char[][] sudokuTemp = deepClone(EmptySudoku);
         solution.solveSudoku(sudokuTemp);
@@ -58,6 +46,7 @@ public class Example extends TestCase
     public void testSolutionC()
     {
         solution = new SolutionC();
+        System.out.println("---------------------C----------------------------");
         
         char[][] sudokuTemp = deepClone(EmptySudoku);
         solution.solveSudoku(sudokuTemp);

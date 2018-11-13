@@ -2,6 +2,15 @@ package com.test;
 
 import com.test.base.Solution;
 
+/**
+ * DFS
+ * 公式：f(n) = 1f(n) + 2f(n) + 3f(n) + 4f(n) + 5f(n) + 6f(n) + 7f(n) + 8f(n) + 9f(n)
+ * 函数f(n), 表示为:从左到右,剩余的最终的解（由于有值，因此，可以直接从0开始遍历）
+ * 
+ * @author YLine
+ *
+ * 2018年11月13日 上午11:44:21
+ */
 public class SolutionA implements Solution
 {
     private static final char Empty = '.';
@@ -15,7 +24,6 @@ public class SolutionA implements Solution
         }
         
         solve(board);
-        System.out.println("1 = 1");
     }
     
     private boolean solve(char[][] board)
