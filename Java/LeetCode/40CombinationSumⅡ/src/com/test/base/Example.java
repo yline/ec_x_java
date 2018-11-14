@@ -6,6 +6,7 @@ import java.util.Collections;
 import java.util.List;
 
 import com.test.SolutionA;
+import com.test.SolutionB;
 
 import junit.framework.TestCase;
 
@@ -18,19 +19,45 @@ public class Example extends TestCase
         throws Exception
     {
         super.setUp();
-        solution = new SolutionA();
     }
     
     public void testSolutionA()
     {
+        solution = new SolutionA();
         // A
         int[] candidatesA = {10, 1, 2, 7, 6, 1, 5};
         
         List<List<Integer>> expectA = new ArrayList<>();
+        expectA.add(Arrays.asList(2, 6));
         expectA.add(Arrays.asList(1, 7));
         expectA.add(Arrays.asList(1, 2, 5));
-        expectA.add(Arrays.asList(2, 6));
         expectA.add(Arrays.asList(1, 1, 6));
+        
+        List<List<Integer>> actualA = solution.combinationSum2(candidatesA, 8);
+        assertEqualOfList(expectA, actualA);
+        
+        // B
+        int[] candidatesB = {2, 5, 2, 1, 2};
+        
+        List<List<Integer>> expectB = new ArrayList<>();
+        expectB.add(Arrays.asList(5));
+        expectB.add(Arrays.asList(1, 2, 2));
+        
+        List<List<Integer>> actualB = solution.combinationSum2(candidatesB, 5);
+        assertEqualOfList(expectB, actualB);
+    }
+    
+    public void testSolutionB()
+    {
+        solution = new SolutionB();
+        // A
+        int[] candidatesA = {10, 1, 2, 7, 6, 1, 5};
+        
+        List<List<Integer>> expectA = new ArrayList<>();
+        expectA.add(Arrays.asList(1, 1, 6));
+        expectA.add(Arrays.asList(1, 2, 5));
+        expectA.add(Arrays.asList(1, 7));
+        expectA.add(Arrays.asList(2, 6));
         
         List<List<Integer>> actualA = solution.combinationSum2(candidatesA, 8);
         assertEqualOfList(expectA, actualA);
