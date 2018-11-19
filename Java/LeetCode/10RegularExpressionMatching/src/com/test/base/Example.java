@@ -1,6 +1,7 @@
 package com.test.base;
 
-import com.test.SolutionC;
+import com.test.SolutionA;
+import com.test.SolutionD;
 
 import junit.framework.TestCase;
 
@@ -15,33 +16,25 @@ public class Example extends TestCase
         super.setUp();
     }
     
-    //    public void testSolutionA()
-    //    {
-    //        solution = new SolutionA();
-    //        assertSolution();
-    //    }
-    
-    public void testSolutionB()
+    // 递推
+    public void testSolutionA()
     {
-        //        solution = new SolutionB();
-        //        assertSolution();
+        solution = new SolutionA();
+        assertSolution();
     }
     
-    public void testSolutionC()
+    // 递归实现
+    public void testSolutionD()
     {
-        solution = new SolutionC();
-        
-        boolean isMatch = solution.isMatch("112233", "1*.*");
-        System.out.println(isMatch);
-        
-        //        assertSolution();
+        solution = new SolutionD();
+        assertSolution();
     }
     
     private void assertSolution()
     {
-        //        assertEquals(false, solution.isMatch("aa", "*a")); // 数组越界
-        //        assertEquals(false, solution.isMatch("aa", "*aa"));
-        //        assertEquals(false, solution.isMatch("aab", "*.*"));
+        assertEquals(false, solution.isMatch("aa", "*a")); // 数组越界
+        assertEquals(true, solution.isMatch("aa", "*aa"));
+        assertEquals(true, solution.isMatch("aab", "*.*"));
         
         assertEquals(true, solution.isMatch("eqwfdasfda", ".*"));
         assertEquals(false, solution.isMatch("dasfewqrddasfd", ".*dd"));
@@ -49,7 +42,8 @@ public class Example extends TestCase
         assertEquals(true, solution.isMatch("123fda", ".*"));
         assertEquals(true, solution.isMatch("123fda", ".***"));
         assertEquals(false, solution.isMatch("111111111111112", "1***"));
-        assertEquals(true, solution.isMatch("111111111111112", "1**.*"));
+        assertEquals(true, solution.isMatch("111111111111112", "1***.*"));
+        assertEquals(true, solution.isMatch("111111111111112", "1*1111111111.*"));
         
         assertEquals(false, solution.isMatch("aa", "a"));
         assertEquals(true, solution.isMatch("aa", "aa"));

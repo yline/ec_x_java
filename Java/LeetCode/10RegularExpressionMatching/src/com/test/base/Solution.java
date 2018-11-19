@@ -5,7 +5,7 @@ package com.test.base;
  * 输入一个string和pattern，实现支持'.'和'*'的正则匹配
  * 
  * '.' Matches any single character.  '.'匹配任意一个，单个字符
- * '*' Matches zero or more of the preceding element. '*'匹配0到n个z,前一个字符
+ * '*' Matches zero or more of the preceding element. '*'匹配0到n个,前一个字符
  * 
  * The matching should cover the entire input string (not partial).
  * 匹配，必须匹配整个字符串
