@@ -46,34 +46,7 @@ public class SolutionA implements Solution
             }
             else
             {
-                int doubleMultipy = 0; // 连续的 * 的次数
-                StringBuilder pBuilder = new StringBuilder(); // 到下一个 * 的字符串集合；或者到最后的集合
-                for (int i = pIndex + 1; i < p.length(); i++)
-                {
-                    if (MULTIFY == p.charAt(i))
-                    {
-                        if (pBuilder.length() == 0)
-                        {
-                            doubleMultipy++;
-                        }
-                        else
-                        {
-                            break;
-                        }
-                    }
-                    pBuilder.append(p.charAt(i));
-                }
-                
-                // 匹配到的下一个位置
-                int nextDistance = s.indexOf(pBuilder.toString(), sIndex);
-                if (nextDistance == -1) // 未匹配到位置
-                {
-                    return false;
-                }
-                else
-                {
-                    return dfs(s, sIndex, p, pIndex + 1 + doubleMultipy) || dfs(s, nextDistance + 1, p, pIndex);
-                }
+                return dfs(s, sIndex, p, pIndex + 1) || dfs(s, sIndex + 1, p, pIndex);
             }
         }
         else
