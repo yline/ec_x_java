@@ -18,6 +18,11 @@ public class Example extends TestCase
     
     public void testSolution()
     {
+        assertEquals(false, solution.isMatch("aa", "a"));
+        assertEquals(true, solution.isMatch("aa", "*"));
+        assertEquals(false, solution.isMatch("cb", "?a"));
+        assertEquals(true, solution.isMatch("adceb", "*a*b"));
+        assertEquals(false, solution.isMatch("acdcb", "a*c?b"));
     }
     
     @Override
