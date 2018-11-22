@@ -1,7 +1,6 @@
 package com.test.base;
 
 import com.test.SolutionA;
-import com.test.SolutionD;
 
 import junit.framework.TestCase;
 
@@ -16,22 +15,25 @@ public class Example extends TestCase
         super.setUp();
     }
     
-    // 递推
+    // 递推【动态规划】
     public void testSolutionA()
     {
         solution = new SolutionA();
         assertSolution();
     }
     
-    // 递归实现
-    public void testSolutionD()
-    {
-        solution = new SolutionD();
-        assertSolution();
-    }
+    //    // 递归实现
+    //    public void testSolutionD()
+    //    {
+    //        solution = new SolutionD();
+    //        assertSolution();
+    //    }
     
     private void assertSolution()
     {
+        assertEquals(true, solution.isMatch("adadccc", "ad*adc*c"));
+        assertEquals(false, solution.isMatch("adadccc", "ad*addcc"));
+        
         assertEquals(false, solution.isMatch("aa", "*a")); // 数组越界
         assertEquals(true, solution.isMatch("aa", "*aa"));
         assertEquals(true, solution.isMatch("aab", "*.*"));

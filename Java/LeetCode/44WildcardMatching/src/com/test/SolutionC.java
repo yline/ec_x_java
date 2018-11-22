@@ -6,24 +6,25 @@ import java.util.List;
 import com.test.base.Solution;
 
 /**
- * 在SolutionA上改进
- * 由于 * 和多个*效果一致，因此，p进行*分离；得到 pArray 和 pIndex；*和字符片段，必定是交迭出现
+ * 在SolutionB上改进
+ * 函数f(s, sIndex, pArray, pIndex)
  * 
- * 当p(pIndex) == *时，= f(s, sIndex+1, p, pIndex) || f(s, sIndex, p, pIndex+1)
+ * 当p(pIndex) == *时，
+ * 计算下一个偏移量 diff = function(s, sIndex, pArray[pIndex+1])
+ * = f(s, sIndex+diff, p, pIndex) || f(s, sIndex, pArray, pIndex+1)
+ * 
  * 当p(pIndex) == *时，
  * segment = pArray[pIndex]
- * = s(sIndex+segment.length) == pArray(pIndex) && f(s, sIndex+segment.length, p, pIndex)
+ * = s(sIndex+segment.length) == pArray(pIndex) && f(s, sIndex+segment.length, pArray, pIndex)
  * 
- * 优化点：解决了多个*重复计算的问题
- * 
- * 测试时间超时；
- * 本机：371.645s
+ * 优化点：解决片段移动速度缓慢的问题
+ * 运行还是超时：261.278s
  * 
  * @author YLine
  *
- * 2018年11月22日 下午3:26:27
+ * 2018年11月22日 下午3:44:54
  */
-public class SolutionB implements Solution
+public class SolutionC implements Solution
 {
     private static final char SINGLE = '?';
     
@@ -55,7 +56,19 @@ public class SolutionB implements Solution
             }
             else
             {
-                return dfs(s, sIndex, pArray, pIndex + 1) || dfs(s, sIndex + 1, pArray, pIndex);
+                if (pIndex + 1 == pArray.length) // 倒数第二个是 * 则直接成功
+                {
+                    return true;
+                }
+                else
+                {
+                    int diff = fastMove(s, sIndex, pArray[pIndex + 1]);
+                    if (diff == -1)
+                    {
+                        return dfs(s, sIndex, pArray, pIndex + 1);
+                    }
+                    return dfs(s, sIndex, pArray, pIndex + 1) || dfs(s, sIndex + diff, pArray, pIndex);
+                }
             }
         }
         else // 片段
@@ -74,6 +87,33 @@ public class SolutionB implements Solution
             }
             return dfs(s, sIndex + segment.length(), pArray, pIndex + 1);
         }
+    }
+    
+    /**
+     * @return 偏移量
+     */
+    public int fastMove(String s, int sIndex, String pSegment)
+    {
+        int remainder = s.length() - pSegment.length() + 1;
+        for (int i = sIndex + 1; i < remainder; i++)
+        {
+            boolean isBreak = false;
+            for (int j = 0; j < pSegment.length(); j++)
+            {
+                if (s.charAt(i + j) != pSegment.charAt(j) && SINGLE != pSegment.charAt(j))
+                {
+                    isBreak = true;
+                    break;
+                }
+            }
+            
+            if (!isBreak)
+            {
+                return i - sIndex;
+            }
+        }
+        
+        return -1;
     }
     
     /**
@@ -125,4 +165,5 @@ public class SolutionB implements Solution
         String[] pArray = new String[segmentList.size()];
         return segmentList.toArray(pArray);
     }
+    
 }

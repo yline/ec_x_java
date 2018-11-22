@@ -1,6 +1,6 @@
 package com.test.base;
 
-import com.test.SolutionB;
+import com.test.SolutionD;
 
 import junit.framework.TestCase;
 
@@ -21,9 +21,21 @@ public class Example extends TestCase
     //        assertSolution();
     //    }
     
-    public void testSolutionB()
+    //    public void testSolutionB()
+    //    {
+    //        solution = new SolutionB();
+    //        assertSolution();
+    //    }Or
+    
+    //    public void testSolutionC()
+    //    {
+    //        solution = new SolutionC();
+    //        assertSolution();
+    //    }
+    
+    public void testSolutionD()
     {
-        solution = new SolutionB();
+        solution = new SolutionD();
         assertSolution();
     }
     
@@ -34,6 +46,7 @@ public class Example extends TestCase
         assertEquals(false, solution.isMatch("acdcb", "a*c?b"));
         assertEquals(true, solution.isMatch("aa", "*"));
         assertEquals(true, solution.isMatch("adceb", "*a*b"));
+        assertEquals(false, solution.isMatch("b", "?*?"));
         
         String sA = "aaabbbaabaaaaababaabaaabbabbbbbbbbaabababbabbbaaaaba";
         String pA = "a*******b";
@@ -44,7 +57,7 @@ public class Example extends TestCase
                 + "abaabbbababababbbbaaabbbbbabaaaabbababbbbaababaabbababbbbbababbbabaaaaaaaabbbbbaabaaababaaaabb";
         String pB =
             "**aa*****ba*a*bb**aa*ab****a*aaaaaa***a*aaaa**bbabb*b*b**aaaaaaaaa*a********ba*bbb***a*ba*bb*bb**a*b*bb";
-        // assertEquals(true, solution.isMatch(sB, pB));
+        assertEquals(false, solution.isMatch(sB, pB));
     }
     
     @Override
