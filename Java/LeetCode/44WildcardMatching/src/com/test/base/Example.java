@@ -15,24 +15,6 @@ public class Example extends TestCase
         super.setUp();
     }
     
-    //    public void testSolutionA()
-    //    {
-    //        solution = new SolutionA();
-    //        assertSolution();
-    //    }
-    
-    //    public void testSolutionB()
-    //    {
-    //        solution = new SolutionB();
-    //        assertSolution();
-    //    }Or
-    
-    //    public void testSolutionC()
-    //    {
-    //        solution = new SolutionC();
-    //        assertSolution();
-    //    }
-    
     public void testSolutionD()
     {
         solution = new SolutionD();
@@ -47,6 +29,10 @@ public class Example extends TestCase
         assertEquals(true, solution.isMatch("aa", "*"));
         assertEquals(true, solution.isMatch("adceb", "*a*b"));
         assertEquals(false, solution.isMatch("b", "?*?"));
+        assertEquals(false, solution.isMatch("abc", "abc*defghijk"));
+        assertEquals(true, solution.isMatch("abefcdgiescdfimde", "ab*cd?i*de"));
+        assertEquals(true, solution.isMatch("a", "a*"));
+        assertEquals(true, solution.isMatch("a", "*?*"));
         
         String sA = "aaabbbaabaaaaababaabaaabbabbbbbbbbaabababbabbbaaaaba";
         String pA = "a*******b";

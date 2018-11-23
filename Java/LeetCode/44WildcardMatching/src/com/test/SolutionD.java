@@ -6,8 +6,8 @@ import java.util.List;
 import com.test.base.Solution;
 
 /**
- * 在SolutionC上改进
  * 使用非常暴力的手段
+ * 
  * 
  * @author YLine
  *
@@ -22,142 +22,122 @@ public class SolutionD implements Solution
     @Override
     public boolean isMatch(String s, String p)
     {
-        List<String> pList = splitToArray(p);
-        if (pList.isEmpty()) // 长度为 0
+        if (p.length() == 0) // 长度为0，则入口处理
         {
             return s.isEmpty();
         }
-        else if (pList.size() == 1) // 长度为1
+        
+        // 如果p = *，则直接通过
+        if (p.length() == 1 && p.charAt(0) == MULTIFY)
         {
-            if (MULTIFY == pList.get(0).charAt(0))
+            return true;
+        }
+        
+        List<String> pList = splitToArray(p);
+        if (pList.size() == 1) // 长度为1，则不可能为 *
+        {
+            String pSegment = pList.get(0);
+            if (s.length() == pSegment.length())
+            {
+                return isContain(s, 0, pSegment);
+            }
+            else
+            {
+                return false;
+            }
+        }
+        //        else if (pList.size() == 2) // 长度等于2
+        //        {
+        //            String pSegment;
+        //            if (MULTIFY != pList.get(0).charAt(0))
+        //            {
+        //                
+        //            }
+        //        }
+        else // 长度大于等于2的处理
+        {
+            String pFirst = pList.get(0);
+            boolean isFirstSpecial = (MULTIFY != pFirst.charAt(0)); // 首个，不为*，特殊处理
+            
+            // 字符串首部，不符合条件，排除
+            if (isFirstSpecial && !isContain(s, 0, pFirst))
+            {
+                return false;
+            }
+            
+            String pLast = pList.get(pList.size() - 1);
+            boolean isLastSpecial = (MULTIFY != pLast.charAt(0)); // 尾部，不为*，特殊处理
+            
+            // 字符串尾部，不符合条件，排除
+            if (isLastSpecial && s.length() > pLast.length() && !isContain(s, s.length() - pLast.length(), pLast))
+            {
+                return false;
+            }
+            
+            if ((isFirstSpecial || isLastSpecial) && pList.size() == 2)
+            {
+                return true;
+            }
+            
+            // 中间的状态了；不需要全等，只需要p的片段，全部依次存在在s中即可
+            int sLeft = isFirstSpecial ? pFirst.length() : 0;
+            int sRight = isLastSpecial ? s.length() - pLast.length() : s.length();
+            int pLeft = isFirstSpecial ? 1 : 0;
+            int pRight = isLastSpecial ? pList.size() - 1 : pList.size();
+            return isMatch(s, sLeft, sRight, pList, pLeft, pRight);
+        }
+    }
+    
+    /**
+     * s是否从 start位置，开始，与pSegment相等
+     * @param s s字符串
+     * @param start 开始位置
+     * @param pSegment pSegment
+     * @return true 相等
+     */
+    private boolean isContain(String s, int start, String pSegment)
+    {
+        if (start + pSegment.length() > s.length())
+        {
+            return false;
+        }
+        
+        for (int i = 0; i < pSegment.length(); i++)
+        {
+            if (s.charAt(i + start) != pSegment.charAt(i) && pSegment.charAt(i) != SINGLE)
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+    
+    private boolean isMatch(String s, int sLeft, int sRight, List<String> pArray, int pLeft, int pRight)
+    {
+        int pIndex = pLeft + 1; // 开始第一个，一定是 *；
+        
+        for (int i = sLeft; i <= sRight;)
+        {
+            if (pIndex >= pRight) // 如果遍历完成
             {
                 return true;
             }
             else
             {
-                String pSegment = pList.get(0);
-                if (s.length() == pSegment.length())
+                String pSegment = pArray.get(pIndex);
+                boolean isContain = isContain(s, i, pSegment);
+                if (isContain)
                 {
-                    for (int i = 0; i < s.length(); i++)
-                    {
-                        if (s.charAt(i) != pSegment.charAt(i) && pSegment.charAt(i) != SINGLE)
-                        {
-                            return false;
-                        }
-                    }
-                    return true;
+                    pIndex += 2;
+                    i += pSegment.length();
                 }
                 else
                 {
-                    return false;
+                    i++;
                 }
             }
         }
-        else // 长度大于2的处理
-        {
-            int startOffset = 0;
-            String pFirst = pList.get(0);
-            if (MULTIFY != pFirst.charAt(0)) // 不带*的开头
-            {
-                if (s.length() >= pFirst.length())
-                {
-                    for (int i = 0; i < pFirst.length(); i++)
-                    {
-                        if (s.charAt(i) != pFirst.charAt(i) && pFirst.charAt(i) != SINGLE)
-                        {
-                            return false;
-                        }
-                    }
-                }
-                else
-                {
-                    return false;
-                }
-                
-                startOffset = pFirst.length();
-                pList.remove(0); // 第一个过关，则移除第一个
-            }
-            
-            int endOffset = 0;
-            String pLast = pList.get(pList.size() - 1);
-            if (MULTIFY != pLast.charAt(0)) // 不带*的结尾
-            {
-                if (s.length() >= pLast.length())
-                {
-                    int diff = s.length() - pLast.length();
-                    for (int i = pLast.length() - 1; i >= 0; i--)
-                    {
-                        if (s.charAt(i + diff) != pLast.charAt(i) && pLast.charAt(i) != SINGLE)
-                        {
-                            return false;
-                        }
-                    }
-                }
-                else
-                {
-                    return false;
-                }
-                
-                endOffset = pLast.length();
-                pList.remove(pList.size() - 1); // 最后一个过关，则移除最后一个
-            }
-            
-            // 长度超过s
-            if (startOffset + endOffset > s.length())
-            {
-                return false;
-            }
-            
-            // 中间的状态了；不需要全等，只需要p的片段，全部依次存在在s中即可
-            return isOrderExist(s, pList, startOffset, endOffset);
-        }
-    }
-    
-    private boolean isOrderExist(String s, List<String> pArray, int startOffset, int endOffset)
-    {
-        if (pArray.isEmpty())
-        {
-            return true;
-        }
-        
-        int index = startOffset;
-        for (int k = 0; k < pArray.size();)
-        {
-            String pSegment = pArray.get(k);
-            if (MULTIFY != pSegment.charAt(0)) // 相等，则跳过
-            {
-                boolean isBreak = false;
-                for (int i = 0; i < pSegment.length(); i++)
-                {
-                    if (i + index >= s.length() - endOffset)
-                    {
-                        return false;
-                    }
-                    
-                    if (s.charAt(i + index) != pSegment.charAt(i) && SINGLE != pSegment.charAt(i))
-                    {
-                        isBreak = true;
-                        break;
-                    }
-                }
-                
-                if (!isBreak)
-                {
-                    k++;
-                    index += pSegment.length();
-                }
-                else
-                {
-                    index++;
-                }
-            }
-            else
-            {
-                k++;
-            }
-        }
-        
-        return true;
+        return false;
     }
     
     /**
