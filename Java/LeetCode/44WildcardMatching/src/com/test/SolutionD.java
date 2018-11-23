@@ -7,7 +7,9 @@ import com.test.base.Solution;
 
 /**
  * 使用非常暴力的手段
+ * 先分首位两段，然后，修改成：是否依次存在在 S中
  * 
+ * 耗时：42ms
  * 
  * @author YLine
  *
@@ -27,15 +29,14 @@ public class SolutionD implements Solution
             return s.isEmpty();
         }
         
-        // 如果p = *，则直接通过
-        if (p.length() == 1 && p.charAt(0) == MULTIFY)
-        {
-            return true;
-        }
-        
         List<String> pList = splitToArray(p);
-        if (pList.size() == 1) // 长度为1，则不可能为 *
+        if (pList.size() == 1) // 长度为1
         {
+            if (MULTIFY == pList.get(0).charAt(0)) // 如果p = *，则直接通过
+            {
+                return true;
+            }
+            
             String pSegment = pList.get(0);
             if (s.length() == pSegment.length())
             {
@@ -46,14 +47,6 @@ public class SolutionD implements Solution
                 return false;
             }
         }
-        //        else if (pList.size() == 2) // 长度等于2
-        //        {
-        //            String pSegment;
-        //            if (MULTIFY != pList.get(0).charAt(0))
-        //            {
-        //                
-        //            }
-        //        }
         else // 长度大于等于2的处理
         {
             String pFirst = pList.get(0);
@@ -69,14 +62,9 @@ public class SolutionD implements Solution
             boolean isLastSpecial = (MULTIFY != pLast.charAt(0)); // 尾部，不为*，特殊处理
             
             // 字符串尾部，不符合条件，排除
-            if (isLastSpecial && s.length() > pLast.length() && !isContain(s, s.length() - pLast.length(), pLast))
+            if (isLastSpecial && s.length() >= pLast.length() && !isContain(s, s.length() - pLast.length(), pLast))
             {
                 return false;
-            }
-            
-            if ((isFirstSpecial || isLastSpecial) && pList.size() == 2)
-            {
-                return true;
             }
             
             // 中间的状态了；不需要全等，只需要p的片段，全部依次存在在s中即可
@@ -86,6 +74,38 @@ public class SolutionD implements Solution
             int pRight = isLastSpecial ? pList.size() - 1 : pList.size();
             return isMatch(s, sLeft, sRight, pList, pLeft, pRight);
         }
+    }
+    
+    /**
+     * p片段是否全部，依次存在在s中
+     * @return true(是)
+     */
+    private boolean isMatch(String s, int sLeft, int sRight, List<String> pArray, int pLeft, int pRight)
+    {
+        int pIndex = pLeft + 1; // 开始第一个，一定是 *；
+        
+        for (int i = sLeft; i <= sRight;) // 默认加校验一次
+        {
+            if (pIndex >= pRight) // 如果遍历完成
+            {
+                return true;
+            }
+            else
+            {
+                String pSegment = pArray.get(pIndex);
+                boolean isContain = isContain(s, i, pSegment);
+                if (isContain)
+                {
+                    pIndex += 2;
+                    i += pSegment.length();
+                }
+                else
+                {
+                    i++;
+                }
+            }
+        }
+        return false;
     }
     
     /**
@@ -110,34 +130,6 @@ public class SolutionD implements Solution
             }
         }
         return true;
-    }
-    
-    private boolean isMatch(String s, int sLeft, int sRight, List<String> pArray, int pLeft, int pRight)
-    {
-        int pIndex = pLeft + 1; // 开始第一个，一定是 *；
-        
-        for (int i = sLeft; i <= sRight;)
-        {
-            if (pIndex >= pRight) // 如果遍历完成
-            {
-                return true;
-            }
-            else
-            {
-                String pSegment = pArray.get(pIndex);
-                boolean isContain = isContain(s, i, pSegment);
-                if (isContain)
-                {
-                    pIndex += 2;
-                    i += pSegment.length();
-                }
-                else
-                {
-                    i++;
-                }
-            }
-        }
-        return false;
     }
     
     /**

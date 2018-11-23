@@ -1,5 +1,6 @@
 package com.test.base;
 
+import com.test.SolutionA;
 import com.test.SolutionD;
 
 import junit.framework.TestCase;
@@ -13,6 +14,12 @@ public class Example extends TestCase
         throws Exception
     {
         super.setUp();
+    }
+    
+    public void testSolutionA()
+    {
+        solution = new SolutionA();
+        assertSolution();
     }
     
     public void testSolutionD()
@@ -33,6 +40,7 @@ public class Example extends TestCase
         assertEquals(true, solution.isMatch("abefcdgiescdfimde", "ab*cd?i*de"));
         assertEquals(true, solution.isMatch("a", "a*"));
         assertEquals(true, solution.isMatch("a", "*?*"));
+        assertEquals(false, solution.isMatch("ac", "*ab"));
         
         String sA = "aaabbbaabaaaaababaabaaabbabbbbbbbbaabababbabbbaaaaba";
         String pA = "a*******b";
