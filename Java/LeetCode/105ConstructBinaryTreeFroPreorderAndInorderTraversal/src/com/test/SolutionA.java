@@ -44,16 +44,14 @@ public class SolutionA implements Solution
         if (leftCount > 0) // 代表，左边还有数据
         {
             TreeNode left = new TreeNode(preorder[preLeft + 1]);
-            dfs(left, preorder, preLeft + 1, inorder, inLeft, leftCount);
-            root.left = left;
+            root.left = dfs(left, preorder, preLeft + 1, inorder, inLeft, leftCount);
         }
         
         int rightCount = length - leftCount - 1; // 右边的位数
         if (rightCount > 0) // 代表，右边还有数据【开，所以是1】
         {
             TreeNode right = new TreeNode(preorder[preLeft + leftCount + 1]);
-            dfs(right, preorder, preLeft + leftCount + 1, inorder, inLeft + leftCount + 1, rightCount);
-            root.right = right;
+            root.right = dfs(right, preorder, preLeft + leftCount + 1, inorder, inLeft + leftCount + 1, rightCount);
         }
         
         return root;
