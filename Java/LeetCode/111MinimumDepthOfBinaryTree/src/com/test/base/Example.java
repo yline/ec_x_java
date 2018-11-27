@@ -53,6 +53,9 @@ public class Example extends TestCase
         TreeNode rootC = new TreeNode(1);
         rootC.left = new TreeNode(2);
         assertEquals(2, solution.minDepth(rootC));
+        
+        // D
+        TreeNode rootD = new TreeNode(1);
     }
     
     @Override

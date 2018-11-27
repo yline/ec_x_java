@@ -5,6 +5,7 @@ import com.test.base.TreeNode;
 
 /**
  * 函數：
+ * 坑点：如果是单值走下去，不算终止
  * 
  * @author YLine
  *
@@ -23,18 +24,38 @@ public class SolutionA implements Solution
         return dfs(root);
     }
     
+    /**
+     * @param node 节点
+     * @return 最小值
+     */
     private int dfs(TreeNode node)
     {
-        if (null == node.left && null == node.right)
+        if (null == node)
         {
-            return 1;
+            return 0;
         }
         
-        if (null == node.left || null == node.right)
+        if (null == node.left)
         {
-            return 2;
+            if (null == node.right)
+            {
+                return 1;
+            }
+            else
+            {
+                return 1 + dfs(node.right);
+            }
         }
-        
-        return 1 + Math.min(dfs(node.left), dfs(node.right));
+        else
+        {
+            if (null == node.right)
+            {
+                return 1 + dfs(node.left);
+            }
+            else
+            {
+                return 1 + Math.min(dfs(node.left), dfs(node.right));
+            }
+        }
     }
 }
