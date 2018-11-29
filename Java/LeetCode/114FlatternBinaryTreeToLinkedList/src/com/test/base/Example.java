@@ -48,15 +48,13 @@ public class Example extends TestCase
         rightRightA2.left = new TreeNode(5);
         rightRightA2.right = new TreeNode(1);
         
-        List<List<Integer>> resultA = new ArrayList<>();
-        resultA.add(Arrays.asList(5, 4, 11, 2));
-        resultA.add(Arrays.asList(5, 8, 4, 5));
+        int[] resultA = {5, 4, 11, 7, 2, 8, 13, 4, 5, 1};
         
         solution.flatten(rootA);
-        log(rootA);
+        isEqual(resultA, rootA);
     }
     
-    private void log(TreeNode root)
+    private void isEqual(int[] expected, TreeNode root)
     {
         List<Integer> data = new ArrayList<>();
         while (null != root)
@@ -64,7 +62,13 @@ public class Example extends TestCase
             data.add(root.val);
             root = root.right;
         }
-        System.out.println(Arrays.toString(data.toArray()));
+        System.out.println("actual = " + Arrays.toString(data.toArray()));
+        
+        assertEquals(expected.length, data.size());
+        for (int i = 0; i < expected.length; i++)
+        {
+            assertEquals(expected[i], data.get(i).intValue());
+        }
     }
     
     @Override
