@@ -23,6 +23,7 @@ public class SolutionB implements Solution
         int[] count = new int[tArray.length];
         for (int i = 0; i < sArray.length; i++) // s遍历
         {
+            //for (int j = 0; j < tArray.length; j++) // t倒序遍历
             for (int j = tArray.length - 1; j >= 0; j--) // t倒序遍历
             {
                 if (tArray[j] == sArray[i])

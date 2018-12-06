@@ -55,7 +55,6 @@ public class SolutionA implements Solution
     /**
      * 求，组成，从小到大排序的，并且长度等于 t.length()的可能性
      * @param data 二维数组
-     * @param startArray 二维数组选中的一维数组的开始值
      * @param index 二维数组的当前下标
      * @param lastValue 上一个一维数组选中的值
      */

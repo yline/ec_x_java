@@ -2,6 +2,7 @@ package com.test.base;
 
 import com.test.SolutionA;
 import com.test.SolutionB;
+import com.test.SolutionC;
 
 import junit.framework.TestCase;
 
@@ -30,19 +31,8 @@ public class Example extends TestCase
     
     public void testSolutionC()
     {
-        for (int i = 40; i < 50; i++)
-        {
-            System.out.println("i = " + i + ", result = " + dfs(i));
-        }
-    }
-    
-    private int dfs(int n)
-    {
-        if (n == 1 || n == 2)
-        {
-            return n;
-        }
-        return dfs(n - 2) + dfs(n - 1);
+        solution = new SolutionC();
+        assertSolution();
     }
     
     private void assertSolution()
