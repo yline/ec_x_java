@@ -18,6 +18,6 @@ public class SolutionA implements Solution
             return n;
         }
         
-        return (dfs(n - 1) << 1) + dfs(n - 3);
+        return (dfs(n - 2) << 1) + dfs(n - 3);
     }
 }
