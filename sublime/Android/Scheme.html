@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Scheme</title>
+</head>
+<body>
+
+	<h3>1,参考</h3>
+	<a href="https://www.cnblogs.com/whoislcj/p/5825333.html">Scheme URL使用</a>
+	<br>
+	
+	<h3>2，完整 Scheme格式</h3>
+	<div>[scheme]://[host]:[port][path]?[query]</div>
+	<table border="1" cellpadding="10" cellspacing="0">
+		<tr>
+			<th>api</th>
+			<th>案例</th>
+		</tr>
+		<tr>
+			<td>uri.toString()</td>
+			<td>https://blog.csdn.net/search?locationNum=1&fps=1</td>
+		</tr>
+		<tr>
+			<td>uri.getScheme()</td>
+			<td>https</td>
+		</tr>
+		<tr>
+			<td>uri.getHost()</td>
+			<td>blog.csdn.net</td>
+		</tr>
+		<tr>
+			<td>uri.getPort()</td>
+			<td>-1</td>
+		</tr>
+		<tr>
+			<td>uri.getPath()</td>
+			<td>/search</td>
+		</tr>
+		<tr>
+			<td>uri.getQuery()</td>
+			<td>locationNum=1&fps=1</td>
+		</tr>
+		<tr>
+			<td>uri.getAuthority()</td>
+			<td>blog.csdn.net</td>
+		</tr>
+	</table>
+
+	<h3>3,使用方法</h3>
+	<h4>1) activity</h4>
+	<xmp>
+	<activity android:name=".export.ExportActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="com.yline"
+                    android:scheme="activity" />
+            </intent-filter>
+        </activity>
+	</xmp>
+	<xmp>
+	public static void startActivity(Context context, String attach) {
+		String routerUrl = "activity://com.yline" + attach;
+		Intent intent = new Intent(Intent.ACTION_VIEW);
+		intent.setData(Uri.parse(routerUrl));
+		if (null != intent.resolveActivity(context.getPackageManager())) {
+			context.startActivity(intent);
+		} else {
+			LogUtil.v(routerUrl + " is not exist");
+		}
+	}
+	</xmp>
+	<div>Third关闭：Application -> 对应Activity【虽然进程不同，但后台只有一个应用；再从桌面打开Third，重复使用该进程】</div>
+	<div>Third活着：对应Activity</div>
+	<div>Third活着(非首次)：对应Activity</div>
+
+
+	<h4>2) service</h4>
+	<xmp>
+	<service android:name=".export.ExportService">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="com.yline"
+                    android:scheme="service" />
+            </intent-filter>
+        </service>
+	</xmp>
+	<xmp>
+	public static void startService(Context context, String attach) {
+		String routerUrl = "service://com.yline" + attach;
+		Intent intent = new Intent(Intent.ACTION_VIEW);
+		intent.setData(Uri.parse(routerUrl));
+		ComponentName componentName = context.startService(intent);
+		if (null == componentName) {
+			LogUtil.v(routerUrl + " is not exist");
+		}
+	}
+	</xmp>
+
+	
+	<h4>3) receiver</h4>
+	<xmp>
+	<receiver android:name=".export.ExportReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="com.yline"
+                    android:scheme="receiver" />
+            </intent-filter>
+        </receiver>
+	</xmp>
+	<xmp>
+	public static void startReceiver(Context context, String attach) {
+		String routerUrl = "receiver://com.yline" + attach;
+		Intent intent = new Intent(Intent.ACTION_VIEW);
+		intent.setData(Uri.parse(routerUrl));
+		context.sendBroadcast(intent);
+	}
+	</xmp>
+
+
+	<br>	
+	<br>	
+	<br>	
+	<br>	
+	<br>	
+	<br>	
+	<br>	
+	<br>	
+	<br>	
+	<br>	
+	<br>	
+	<br>	
+	<br>	
+	<br>	
+	<br>	
+</body>
+</html>
