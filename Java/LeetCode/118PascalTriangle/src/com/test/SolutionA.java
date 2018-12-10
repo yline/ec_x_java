@@ -6,7 +6,6 @@ import java.util.List;
 import com.test.base.Solution;
 
 /**
- *  记录最左侧的内容，然后指向下一个，空间复杂度: O(log2(n)) 忽略为O(1)
  * @author YLine
  *
  * 2018年12月10日 下午4:16:42
