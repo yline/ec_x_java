@@ -1,11 +1,12 @@
 package com.test;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import com.test.base.Solution;
 
-public class SolutionA implements Solution
+public class SolutionB implements Solution
 {
     
     @Override
@@ -56,12 +57,14 @@ public class SolutionA implements Solution
         }
         else
         {
+            HashMap<Integer, Integer> hashMap = new HashMap<>();
+            
             final int endIndex = dataList.size() - 1;
             int profit = 0;
             for (int i = 0; i < endIndex; i++)
             {
-                int preMax = dfs(dataList, 0, i);
-                int postMax = dfs(dataList, i + 1, endIndex);
+                int preMax = dfs(dataList, 0, i, hashMap);
+                int postMax = dfs(dataList, i + 1, endIndex, hashMap);
                 profit = Math.max(profit, preMax + postMax);
             }
             return profit;
@@ -72,14 +75,20 @@ public class SolutionA implements Solution
      * 计算 start - end中的最大值
      * 这里可以使用，hashMap优化
      */
-    private int dfs(List<Point> data, int start, int end)
+    private int dfs(List<Point> data, int start, int end, HashMap<Integer, Integer> hashMap)
     {
+        int key = start * data.size() + end;
+        if (hashMap.containsKey(key))
+        {
+            return hashMap.get(key);
+        }
+        
         if (start == end)
         {
             return data.get(start).max - data.get(start).min;
         }
         
-        int preMax = dfs(data, start, end - 1);
+        int preMax = dfs(data, start, end - 1, hashMap);
         
         int postMax = data.get(end).max - data.get(end).min;
         for (int i = end; i >= start; i--)
@@ -87,7 +96,9 @@ public class SolutionA implements Solution
             postMax = Math.max(postMax, data.get(end).max - data.get(i).min);
         }
         
-        return Math.max(preMax, postMax);
+        int result = Math.max(preMax, postMax);
+        hashMap.put(key, result);
+        return result;
     }
     
     private static class Point
