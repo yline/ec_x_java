@@ -10,6 +10,9 @@ Design an algorithm to find the maximum profit. You may complete at most two tra
 Note: You may not engage in multiple transactions at the same time (i.e., you must sell the stock before you buy again).
 买一次，卖一次
 
+问题：
+买之前必须卖掉
+
 Example 1:
 Input: [3,3,5,0,0,3,1,4]
 Output: 6
