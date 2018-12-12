@@ -7,6 +7,13 @@ For this problem, a path is defined as any sequence of nodes from some starting 
 in the tree along the parent-child connections. The path must contain at least one node and 
 does not need to go through the root.
 
+疑点：path指的是单向，即：不允许以下这种组合
+       1
+      / \
+     2   3
+        / \
+       2   3
+
 Example 1:
 
 Input: [1,2,3]

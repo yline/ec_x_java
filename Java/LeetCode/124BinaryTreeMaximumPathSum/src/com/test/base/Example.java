@@ -58,6 +58,20 @@ public class Example extends TestCase
         TreeNode rootD = new TreeNode(2);
         rootD.left = new TreeNode(-1);
         rootD.left = new TreeNode(-2);
+        
+        // E
+        TreeNode rootE = new TreeNode(2);
+        
+        TreeNode rootRightE = new TreeNode(-3);
+        rootE.left = new TreeNode(9);
+        rootE.right = rootRightE;
+        
+        TreeNode rootRightRightE = new TreeNode(1);
+        rootRightE.right = rootRightRightE;
+        
+        rootRightRightE.left = new TreeNode(3);
+        rootRightRightE.right = new TreeNode(4);
+        assertEquals(13, solution.maxPathSum(rootE));
     }
     
     @Override
