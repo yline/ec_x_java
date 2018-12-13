@@ -3,6 +3,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Scheme</title>
+	<base target="_blank">
 </head>
 <body>
 
@@ -48,7 +49,9 @@
 	</table>
 
 	<h3>3,使用方法</h3>
+
 	<h4>1) activity</h4>
+	<div>提供者</div>
 	<xmp>
 	<activity android:name=".export.ExportActivity">
             <intent-filter>
@@ -63,6 +66,7 @@
             </intent-filter>
         </activity>
 	</xmp>
+	<div>使用者</div>
 	<xmp>
 	public static void startActivity(Context context, String attach) {
 		String routerUrl = "activity://com.yline" + attach;
@@ -81,6 +85,7 @@
 
 
 	<h4>2) service</h4>
+	<div>提供者</div>
 	<xmp>
 	<service android:name=".export.ExportService">
             <intent-filter>
@@ -95,20 +100,53 @@
             </intent-filter>
         </service>
 	</xmp>
+	<div>使用者</div>
 	<xmp>
 	public static void startService(Context context, String attach) {
 		String routerUrl = "service://com.yline" + attach;
 		Intent intent = new Intent(Intent.ACTION_VIEW);
 		intent.setData(Uri.parse(routerUrl));
-		ComponentName componentName = context.startService(intent);
-		if (null == componentName) {
-			LogUtil.v(routerUrl + " is not exist");
+		if (Build.VERSION.SDK_INT > Build.VERSION_CODES.M) {
+			boolean isExist = attachComponentName(context, intent);
+			if (isExist) {
+				context.startService(intent);
+			} else {
+				LogUtil.v(routerUrl + " is not exist");
+			}
+		} else {
+			context.startService(intent);
+		}
+	}
+	
+	/**
+	 * 如果不加，6.0以上报错：
+	 * Service Intent must be explicit
+	 */
+	private static boolean attachComponentName(Context context, Intent intent) {
+		ComponentName componentName = null;
+		PackageManager packageManager = context.getPackageManager();
+		if (null != packageManager) {
+			ResolveInfo resolveInfo = packageManager.resolveService(intent, 0);
+			if (null != resolveInfo) {
+				String packageName = resolveInfo.serviceInfo.packageName;
+				String className = resolveInfo.serviceInfo.name;
+				componentName = new ComponentName(packageName, className);
+			}
+		}
+		
+		if (null != componentName) {
+			intent.setComponent(componentName);
+			return true;
+		} else {
+			return false;
 		}
 	}
 	</xmp>
-
+	<div>Service开启从外部开启，和从内部开启现象相同【onCraete一次，之后onStartCommand】</div>
+	
 	
 	<h4>3) receiver</h4>
+	<div>提供者</div>
 	<xmp>
 	<receiver android:name=".export.ExportReceiver">
             <intent-filter>
@@ -123,6 +161,7 @@
             </intent-filter>
         </receiver>
 	</xmp>
+	<div>使用者</div>
 	<xmp>
 	public static void startReceiver(Context context, String attach) {
 		String routerUrl = "receiver://com.yline" + attach;
@@ -131,7 +170,7 @@
 		context.sendBroadcast(intent);
 	}
 	</xmp>
-
+	<div>Service开启从外部开启，和从内部开启现象相同【onReceive】</div>
 
 	<br>	
 	<br>	
