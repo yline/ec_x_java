@@ -22,16 +22,29 @@ public class Example extends TestCase
     public void testSolutionA()
     {
         solution = new SolutionA();
-        solution.findLadders("hit", "cog", Arrays.asList("hot", "dot", "dog", "lot", "log", "cog"));
-        solution.findLadders("hit", "cog", Arrays.asList("hot", "dot", "dog", "lot", "log"));
+        assertSolution();
     }
     
     public void testSolutionB()
     {
         solution = new SolutionB();
-        solution.findLadders("hit", "cog", Arrays.asList("hot", "dot", "dog", "lot", "log", "cog"));
-        solution.findLadders("hit", "cog", Arrays.asList("hot", "dot", "dog", "lot", "log"));
-        solution.findLadders("sand", "acne", LongList);
+        assertSolution();
+    }
+    
+    private void assertSolution()
+    {
+        assertEquals(5, solution.ladderLength("hit", "cog", Arrays.asList("hot", "dot", "dog", "lot", "log", "cog")));
+        assertEquals(0, solution.ladderLength("hit", "cog", Arrays.asList("hot", "dot", "dog", "lot", "log")));
+        assertEquals(3, solution.ladderLength("hot", "dog", Arrays.asList("hot", "dog", "dot")));
+        assertEquals(11, solution.ladderLength("sand", "acne", LongList));
+    }
+    
+    @Override
+    protected void tearDown()
+        throws Exception
+    {
+        solution = null;
+        super.tearDown();
     }
     
     private static final List<String> LongList = Arrays.asList("slit",
@@ -2889,12 +2902,4 @@ public class Example extends TestCase
         "chef",
         "rest",
         "lame");
-    
-    @Override
-    protected void tearDown()
-        throws Exception
-    {
-        solution = null;
-        super.tearDown();
-    }
 }
