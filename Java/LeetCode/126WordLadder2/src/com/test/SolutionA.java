@@ -3,6 +3,8 @@ package com.test;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.function.Predicate;
 
 import com.test.base.Solution;
 
@@ -42,25 +44,14 @@ public class SolutionA implements Solution
         dataList.addAll(wordList);
         
         // 开始解析【n*n】
-        List<List<Integer>> formatList = new ArrayList<>(dataList.size());
-        for (int i = 0; i < dataList.size(); i++)
-        {
-            formatList.add(new ArrayList<>());
-        }
-        
-        // int[][] formatArray = new int[dataList.size()][dataList.size()];
+        int[][] formatArray = new int[dataList.size()][dataList.size()];
         for (int i = 0; i < dataList.size(); i++)
         {
             for (int j = i; j < dataList.size(); j++)
             {
                 if (i != j)
                 {
-                    if (1 == diffWord(dataList.get(i), dataList.get(j)))
-                    {
-                        formatList.get(i).add(j);
-                        formatList.get(j).add(i);
-                    }
-                    // formatArray[i][j] = formatArray[j][i] = diffWord(dataList.get(i), dataList.get(j));
+                    formatArray[i][j] = formatArray[j][i] = diffWord(dataList.get(i), dataList.get(j));
                 }
             }
         }
@@ -72,8 +63,8 @@ public class SolutionA implements Solution
         HashMap<Integer, Integer> hashMap = new HashMap<>();
         hashMap.put(0, 0);
         
-        // dfs(resultList, dataList, formatArray, 0, index + 1, pathList, hashMap, 0);
-        /*        
+        dfs(resultList, dataList, formatArray, 0, index + 1, pathList, hashMap, 0);
+        
         if (resultList.size() > 0)
         {
             int min = resultList.get(0).size();
@@ -91,13 +82,13 @@ public class SolutionA implements Solution
                     return (t.size() > finalMin);
                 }
             });
-        }*/
+        }
         
         return resultList;
     }
-    /*    
-    private boolean dfs(List<List<String>> resultList, List<String> sourceList, List<List<Integer>> dataList, int start,
-        int end, List<String> pathList, Map<Integer, Integer> hashMap, int level)
+    
+    private boolean dfs(List<List<String>> resultList, List<String> sourceList, int[][] data, int start, int end,
+        List<String> pathList, Map<Integer, Integer> hashMap, int level)
     {
         if (start == end) // 到了结果
         {
@@ -123,7 +114,7 @@ public class SolutionA implements Solution
         }
         
         return false; // 还没到结果就直接结束的
-    }*/
+    }
     
     /**
      * 计算两个字符，字符不同的总数
