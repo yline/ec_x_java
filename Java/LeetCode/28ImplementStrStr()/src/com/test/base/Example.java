@@ -1,5 +1,7 @@
 package com.test.base;
 
+import java.util.Arrays;
+
 import com.test.SolutionA;
 import com.test.SolutionB;
 
@@ -26,6 +28,12 @@ public class Example extends TestCase
     {
         solution = new SolutionB();
         assertSolution();
+        
+        int[] result1 = SolutionB.getNext("ABCDABDABAB");
+        System.out.println(Arrays.toString(result1));
+        
+        int[] result2 = SolutionB.next("ABCDABDABAB");
+        System.out.println(Arrays.toString(result2));
     }
     
     private void assertSolution()
@@ -53,6 +61,10 @@ public class Example extends TestCase
         String haystack5 = "mississippi";
         String needle5 = "issip";
         assertEquals(4, solution.strStr(haystack5, needle5));
+        
+        String haystack6 = "a";
+        String needle6 = "";
+        assertEquals(0, solution.strStr(haystack6, needle6));
     }
     
     @Override

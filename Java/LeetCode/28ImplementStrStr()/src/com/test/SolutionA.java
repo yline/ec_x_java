@@ -14,37 +14,32 @@ import com.test.base.Solution;
  */
 public class SolutionA implements Solution
 {
+    
     @Override
     public int strStr(String haystack, String needle)
     {
-        int stackLength = haystack.length();
-        int needleLength = needle.length();
-        if (needleLength == 0)
+        if (needle.length() == 0)
         {
             return 0;
         }
         
-        int index = 0;
-        
-        int temp = 0;
-        boolean isEqual = true;
-        
-        while (index + needleLength <= stackLength)
+        final int restLength = haystack.length() - needle.length() + 1;
+        for (int i = 0; i < restLength; i++)
         {
-            isEqual = (needle.charAt(temp) == haystack.charAt(temp + index));
-            while (isEqual)
+            for (int j = 0; j < needle.length(); j++)
             {
-                if (temp == needleLength - 1)
+                if (haystack.charAt(i + j) == needle.charAt(j))
                 {
-                    return index;
+                    if (j == needle.length() - 1)
+                    {
+                        return i;
+                    }
                 }
-                
-                temp++;
-                isEqual = (needle.charAt(temp) == haystack.charAt(temp + index));
+                else
+                {
+                    break;
+                }
             }
-            
-            temp = 0;
-            index++;
         }
         
         return -1;
