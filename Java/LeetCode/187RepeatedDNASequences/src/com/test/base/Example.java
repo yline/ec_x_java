@@ -28,6 +28,9 @@ public class Example extends TestCase
     {
         List<String> resultA = solution.findRepeatedDnaSequences("AAAAACCCCCAAAAACCCCCCAAAAAGGGTTT");
         isEqual(Arrays.asList("AAAAACCCCC", "CCCCCAAAAA"), resultA);
+        
+        List<String> resultB = solution.findRepeatedDnaSequences("AAAAAAAAAAAAAAAAAAAA");
+        isEqual(Arrays.asList("AAAAAAAAAA"), resultB);
     }
     
     private void isEqual(List<String> expected, List<String> actual)

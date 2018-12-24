@@ -1,9 +1,12 @@
 package com.test.base;
 
+import static org.junit.Assert.assertArrayEquals;
+
 import java.util.Arrays;
 
 import com.test.SolutionA;
 import com.test.SolutionB;
+import com.test.SolutionC;
 
 import junit.framework.TestCase;
 
@@ -30,10 +33,22 @@ public class Example extends TestCase
         assertSolution();
         
         int[] result1 = SolutionB.getNext("ABCDABDABAB");
-        System.out.println(Arrays.toString(result1));
+        System.out.println("ABCDABDABAB - " + Arrays.toString(result1));
         
-        int[] result2 = SolutionB.next("ABCDABDABAB");
-        System.out.println(Arrays.toString(result2));
+        int[] result2 = SolutionB.getNext("SSSSSSSSSSS");
+        System.out.println("SSSSSSSSSSS - " + Arrays.toString(result2));
+    }
+    
+    public void testSolutionC()
+    {
+        assertArrayEquals(new int[] {0}, SolutionC.next("A"));
+        assertArrayEquals(new int[] {0, 0}, SolutionC.next("AB"));
+        assertArrayEquals(new int[] {0, 0, 1, 0, 1, 2, 2}, SolutionC.next("aabaaac"));
+        assertArrayEquals(new int[] {0, 0, 0, 0, 0, 1, 2, 0, 1, 2, 1}, SolutionC.next("ABCDABDABAB"));
+        assertArrayEquals(new int[] {0, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9}, SolutionC.next("SSSSSSSSSSS"));
+        
+        solution = new SolutionC();
+        assertSolution();
     }
     
     private void assertSolution()
@@ -65,6 +80,14 @@ public class Example extends TestCase
         String haystack6 = "a";
         String needle6 = "";
         assertEquals(0, solution.strStr(haystack6, needle6));
+        
+        String haystack7 = "aabaaabaaac";
+        String needle7 = "aabaaac";
+        assertEquals(4, solution.strStr(haystack7, needle7));
+        
+        String haystack8 = "ababcaababcaabc";
+        String needle8 = "ababcaabc";
+        assertEquals(6, solution.strStr(haystack8, needle8));
     }
     
     @Override
