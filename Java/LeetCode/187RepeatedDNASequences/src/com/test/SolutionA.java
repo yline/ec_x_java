@@ -1,13 +1,13 @@
 package com.test;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import com.test.base.Solution;
 
 /**
- * KMP算法
- * 
+ * 36ms
  * @author YLine
  *
  * 2018年12月12日 上午11:01:22
@@ -19,114 +19,72 @@ public class SolutionA implements Solution
     @Override
     public List<String> findRepeatedDnaSequences(String s)
     {
-        if (s.length() <= LENGTH)
+        if (s.length() < LENGTH)
         {
             return new ArrayList<>();
         }
         
         List<String> result = new ArrayList<>();
         
-        int[] next = next(s); // 计算快速移动的偏移
-        boolean[] sign = new boolean[s.length()]; // 记录遍历过的true
-        
-        int index = 0;
-        final int length = s.length() - LENGTH;
-        while (index < length)
+        int[] valueArray = value(s);
+        HashMap<Integer, Boolean> hashMap = new HashMap<>(); // 值 - 是否已添加过字符串
+        for (int i = 0; i < valueArray.length; i++)
         {
-            if (sign[index])
+            if (hashMap.containsKey(valueArray[i]))
             {
-                index++;
-                continue;
+                if (!hashMap.get(valueArray[i]))
+                {
+                    result.add(s.substring(i, i + LENGTH));
+                    hashMap.put(valueArray[i], true);
+                }
             }
-            
-            boolean isMatch = signArray(s, next, sign, index + 1, index);
-            if (isMatch)
+            else
             {
-                result.add(s.substring(index, index + LENGTH));
+                hashMap.put(valueArray[i], false);
             }
-            index++;
         }
         
         return result;
     }
     
-    private boolean signArray(String haystack, int[] next, boolean[] sign, int hayStart, int start)
+    /**
+     * 在前面的为低位，后面的为高位
+     * @param stack
+     * @return
+     */
+    public int[] value(String stack)
     {
-        boolean isMatch = false;
+        int[] valueArray = new int[stack.length() - LENGTH + 1];
         
-        int hayIndex = hayStart, needIndex = 0;
-        while (hayIndex < haystack.length() && needIndex < LENGTH)
+        // 计算第一个Value
+        for (int i = 0; i < LENGTH; i++)
         {
-            if (haystack.charAt(hayIndex) == haystack.charAt(start + needIndex))
-            {
-                hayIndex++;
-                needIndex++;
-                if (needIndex == LENGTH) // 所有符合条件的，都设置为true
-                {
-                    isMatch = true;
-                    sign[hayIndex - needIndex] = true;
-                    
-                    needIndex = 0;
-                    hayIndex = hayIndex - needIndex + 1; // 回到第二个
-                }
-            }
-            else
-            {
-                if (needIndex == 0)
-                {
-                    hayIndex++;
-                    needIndex = next[needIndex];
-                }
-                else
-                {
-                    needIndex = next[needIndex];
-                }
-            }
+            valueArray[0] += (charValue(stack.charAt(i)) << (2 * i));
         }
         
-        return isMatch;
+        // 依据首个，计算其他的Value
+        for (int i = 1; i < valueArray.length; i++)
+        {
+            valueArray[i] = (valueArray[i - 1] >> 2) + (charValue(stack.charAt(i + LENGTH - 1)) << 18);
+        }
+        
+        return valueArray;
     }
     
-    private static final int TAG = -5;
-    
-    /**
-     * A --> {0}
-     * AB --> {0, 0}
-     * aabaaac --> {0, 0, 1, 0, 1, 2, 2}
-     * ABCDABDABAB --> {0, 0, 0, 0, 0, 1, 2, 0, 1, 2, 1}
-     * SSSSSSSSSSS --> {0, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9}
-     * 
-     * @param needle 字符串
-     * @return 如果当前位置，不匹配，可以移动的距离
-     */
-    public static int[] next(String needle)
+    private int charValue(char ch)
     {
-        int[] next = new int[needle.length()];
-        
-        next[0] = TAG;
-        int k = TAG;
-        int index = 0;
-        while (index < needle.length() - 1)
+        switch (ch)
         {
-            if (k == TAG)
-            {
-                index++;
-                k = 0;
-                next[index] = 0;
-            }
-            else if (needle.charAt(k) == needle.charAt(index))
-            {
-                index++;
-                k++;
-                next[index] = k;
-            }
-            else
-            {
-                k = next[k];
-            }
+            case 'A':
+                return 0;
+            case 'G':
+                return 1;
+            case 'T':
+                return 2;
+            case 'C':
+                return 3;
+            default:
+                return 0;
         }
-        
-        next[0] = 0;
-        return next;
     }
 }

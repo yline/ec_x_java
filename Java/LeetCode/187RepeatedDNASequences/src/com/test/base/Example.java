@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import com.test.SolutionA;
+import com.test.SolutionB;
 
 import junit.framework.TestCase;
 
@@ -24,6 +25,12 @@ public class Example extends TestCase
         assertSolution();
     }
     
+    public void testSolutionB()
+    {
+        solution = new SolutionB();
+        assertSolution();
+    }
+    
     private void assertSolution()
     {
         List<String> resultA = solution.findRepeatedDnaSequences("AAAAACCCCCAAAAACCCCCCAAAAAGGGTTT");
@@ -31,6 +38,12 @@ public class Example extends TestCase
         
         List<String> resultB = solution.findRepeatedDnaSequences("AAAAAAAAAAAAAAAAAAAA");
         isEqual(Arrays.asList("AAAAAAAAAA"), resultB);
+        
+        List<String> resultC = solution.findRepeatedDnaSequences("CCCCCCCCCCCCCCCCCCCCCCCCCCC");
+        isEqual(Arrays.asList("CCCCCCCCCC"), resultC);
+        
+        List<String> resultD = solution.findRepeatedDnaSequences("AAAAACCCCC");
+        isEqual(Arrays.asList(), resultD);
     }
     
     private void isEqual(List<String> expected, List<String> actual)
