@@ -33,7 +33,7 @@ public abstract class Solution
     /**
      * 依据给的值
      * @param num 给值
-     * @return -1、1、0
+     * @return -1（num大了）1（num小了）0（对了）
      */
     public int guess(int num)
     {

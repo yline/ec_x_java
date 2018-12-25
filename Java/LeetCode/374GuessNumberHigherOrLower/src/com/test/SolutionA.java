@@ -9,20 +9,20 @@ public class SolutionA extends Solution
     {
         int left = 1, right = n;
         
-        long value = right;
-        int result = guess((int)value);
+        int value = ((left ^ right) >> 1) + (left & right);
+        int result = guess(value);
         while (result != 0)
         {
-            if (result == 1)
+            if (result == -1) // 值大了
             {
-                left = (int)value;
+                right = value - 1;
             }
             else
             {
-                right = (int)value;
+                left = value + 1;
             }
-            value = (left + right) >> 1;
-            result = guess((int)value);
+            value = ((left ^ right) >> 1) + (left & right);
+            result = guess(value);
         }
         return (int)value;
     }
