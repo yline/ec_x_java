@@ -21,6 +21,12 @@ public class Example extends TestCase
         assertSolution();
     }
     
+    public void testSolutionB()
+    {
+        solution = new SolutionA();
+        assertSolution();
+    }
+    
     private void assertSolution()
     {
         assertEquals(true, solution.judgeCircle("UD"));
