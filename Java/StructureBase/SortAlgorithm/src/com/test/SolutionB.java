@@ -13,24 +13,6 @@ public class SolutionB
         return temp;
     }
     
-    public int[] sortBubble()
-    {
-        int[] temp = ARRAY.clone();
-        for (int i = 0; i < temp.length - 1; i++)
-        {
-            for (int j = i + 1; j < temp.length; j++)
-            {
-                if (temp[i] > temp[j])
-                {
-                    int tempInt = temp[i];
-                    temp[i] = temp[j];
-                    temp[j] = tempInt;
-                }
-            }
-        }
-        return temp;
-    }
-    
     /**
      * 堆排序
      */

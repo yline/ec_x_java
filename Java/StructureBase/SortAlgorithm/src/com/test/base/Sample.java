@@ -4,6 +4,8 @@ import java.util.Arrays;
 
 import com.test.SolutionB;
 import com.test.SolutionBubble;
+import com.test.SolutionInsert;
+import com.test.SolutionSelect;
 
 import junit.framework.TestCase;
 
@@ -26,11 +28,22 @@ public class Sample extends TestCase
         logSolution("Bubble");
     }
     
+    public void testInsert()
+    {
+        solution = new SolutionInsert();
+        logSolution("Insert");
+    }
+    
+    public void testSelect()
+    {
+        solution = new SolutionSelect();
+        logSolution("Select");
+    }
+    
     public void testSort()
     {
         SolutionB solution = new SolutionB();
         System.out.println(Arrays.toString(solution.sortQuick()));
-        System.out.println(Arrays.toString(solution.sortBubble()));
         System.out.println(Arrays.toString(solution.sortHeap()));
         System.out.println(Arrays.toString(solution.sortMerge()));
     }
@@ -39,9 +52,9 @@ public class Sample extends TestCase
     {
         Node[] array = Node.createNodeArray();
         System.out.println("-------------------" + tag + "----------------");
-        System.out.println(Arrays.toString(array));
+        System.out.println("start--" + Arrays.toString(array));
         solution.sort(array);
-        System.out.println(Arrays.toString(array));
+        System.out.println("finish-" + Arrays.toString(array));
     }
     
     @Override
