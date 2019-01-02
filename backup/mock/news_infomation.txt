@@ -1,0 +1,22 @@
+{
+    "code":1,
+    "data":{
+        "widthRatio":"0.92",
+        "news_id":"597381763",
+        "title":"大哥在工地边卖稀罕汤 工人们排着队来买 不到十块就能吃到撑",
+        "images":[
+
+        ],
+        "content":"",
+        "source_title":"农村美食记",
+        "source_url":"https://view.inews.qq.com/a/20181125A13M7N00?uid=#",
+        "news_date":"11-25 17:46",
+        "click_count":"24108",
+        "is_public":false,
+        "ios_url":false,
+        "news_category":"0",
+        "is_deal_style":false,
+        "mp_img":""
+    },
+    "msg":"success"
+}
