@@ -3,6 +3,28 @@ package com.test;
 import com.test.base.Node;
 import com.test.base.Solution;
 
+/**
+ * 希尔排序
+ * 
+ * 1，最好情况时间复杂度
+ * O(n)
+ * 
+ * 2，最坏情况时间复杂度
+ * O(n^(3/2))  增量序列为[1,2,4,8,16...]
+ * 
+ * 3，平均情况时间复杂度
+ * ...
+ * 
+ * 4，空间复杂度
+ * O(1)
+ * 
+ * 5，稳定性
+ * 不稳定
+ * 
+ * @author YLine
+ *
+ * 2019年2月20日 上午10:21:58
+ */
 public class SolutionShell implements Solution
 {
     

@@ -5,6 +5,8 @@ import java.util.Arrays;
 import com.test.SolutionB;
 import com.test.SolutionBubble;
 import com.test.SolutionInsert;
+import com.test.SolutionMerge;
+import com.test.SolutionMergeB;
 import com.test.SolutionSelect;
 import com.test.SolutionShell;
 
@@ -51,6 +53,16 @@ public class Sample extends TestCase
         logSolution("Shell");
     }
     
+    // 并归排序
+    public void testMerge()
+    {
+        solution = new SolutionMerge(); // 递推
+        logSolution("Merge");
+        
+        solution = new SolutionMergeB(); // 递归
+        logSolution("MergeB");
+    }
+    
     // 待分析的排序方式
     public void testSort()
     {
@@ -58,7 +70,6 @@ public class Sample extends TestCase
         System.out.println("------------------- sort other ----------------");
         System.out.println(Arrays.toString(solution.sortQuick()));
         System.out.println(Arrays.toString(solution.sortHeap()));
-        System.out.println(Arrays.toString(solution.sortMerge()));
     }
     
     private void logSolution(String tag)
@@ -68,6 +79,14 @@ public class Sample extends TestCase
         System.out.println("start--" + Arrays.toString(array));
         solution.sort(array);
         System.out.println("finish-" + Arrays.toString(array));
+        
+        // 校验是增量的数组
+        Node temp = array[0];
+        for (int i = 1; i < array.length; i++)
+        {
+            assert temp.value <= array[i].value;
+            temp = array[i];
+        }
     }
     
     @Override
