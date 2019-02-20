@@ -6,6 +6,7 @@ import com.test.SolutionB;
 import com.test.SolutionBubble;
 import com.test.SolutionInsert;
 import com.test.SolutionSelect;
+import com.test.SolutionShell;
 
 import junit.framework.TestCase;
 
@@ -22,27 +23,39 @@ public class Sample extends TestCase
         super.setUp();
     }
     
+    // 冒泡排序
     public void testBubble()
     {
         solution = new SolutionBubble();
         logSolution("Bubble");
     }
     
+    // 插入排序
     public void testInsert()
     {
         solution = new SolutionInsert();
         logSolution("Insert");
     }
     
+    // 选择排序
     public void testSelect()
     {
         solution = new SolutionSelect();
         logSolution("Select");
     }
     
+    // 希尔排序
+    public void testShell()
+    {
+        solution = new SolutionShell();
+        logSolution("Shell");
+    }
+    
+    // 待分析的排序方式
     public void testSort()
     {
         SolutionB solution = new SolutionB();
+        System.out.println("------------------- sort other ----------------");
         System.out.println(Arrays.toString(solution.sortQuick()));
         System.out.println(Arrays.toString(solution.sortHeap()));
         System.out.println(Arrays.toString(solution.sortMerge()));
