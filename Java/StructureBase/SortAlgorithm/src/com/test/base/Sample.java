@@ -7,6 +7,7 @@ import com.test.SolutionBubble;
 import com.test.SolutionInsert;
 import com.test.SolutionMerge;
 import com.test.SolutionMergeB;
+import com.test.SolutionQuick;
 import com.test.SolutionSelect;
 import com.test.SolutionShell;
 
@@ -61,6 +62,13 @@ public class Sample extends TestCase
         
         solution = new SolutionMergeB(); // 递归
         logSolution("MergeB");
+    }
+    
+    // 快速排序
+    public void testQuick()
+    {
+        solution = new SolutionQuick();
+        logSolution("Quick");
     }
     
     // 待分析的排序方式

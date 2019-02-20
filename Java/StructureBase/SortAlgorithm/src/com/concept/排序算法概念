@@ -14,7 +14,10 @@
 冒泡排序：SolutionBubble
 插入排序：SolutionInsert
 选择排序：SolutionSelect
+希尔排序：SolutionShell
 
+并归排序：SolutionMerge + SolutionMergeB
+快速排序：SolutionQuick
 
 
 

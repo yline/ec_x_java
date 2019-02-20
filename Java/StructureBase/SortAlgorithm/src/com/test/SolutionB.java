@@ -8,13 +8,14 @@ public class SolutionB
     
     public int[] sortQuick()
     {
+        
         int[] temp = ARRAY.clone();
         Arrays.sort(temp);
         return temp;
     }
     
     /**
-     * 堆排序
+     * .堆排序
      */
     public int[] sortHeap()
     {
