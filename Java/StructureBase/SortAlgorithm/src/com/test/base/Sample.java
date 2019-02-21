@@ -3,13 +3,16 @@ package com.test.base;
 import java.util.Arrays;
 
 import com.test.SolutionB;
-import com.test.SolutionBubble;
-import com.test.SolutionInsert;
-import com.test.SolutionMerge;
-import com.test.SolutionMergeB;
-import com.test.SolutionQuick;
-import com.test.SolutionSelect;
-import com.test.SolutionShell;
+import com.test.logn.SolutionMerge;
+import com.test.logn.SolutionMergeB;
+import com.test.logn.SolutionQuick;
+import com.test.n.SolutionBucket;
+import com.test.n.SolutionCounting;
+import com.test.n.SolutionRadix;
+import com.test.n2.SolutionBubble;
+import com.test.n2.SolutionInsert;
+import com.test.n2.SolutionSelect;
+import com.test.n2.SolutionShell;
 
 import junit.framework.TestCase;
 
@@ -71,12 +74,32 @@ public class Sample extends TestCase
         logSolution("Quick");
     }
     
+    // 桶排序
+    public void testBucket()
+    {
+        solution = new SolutionBucket();
+        logSolution("Bucket");
+    }
+    
+    // 基数排序
+    public void testCounting()
+    {
+        solution = new SolutionCounting();
+        logSolution("Counting");
+    }
+    
+    // 基数排序
+    public void testRadix()
+    {
+        SolutionRadix radix = new SolutionRadix();
+        radix.sort();
+    }
+    
     // 待分析的排序方式
     public void testSort()
     {
         SolutionB solution = new SolutionB();
         System.out.println("------------------- sort other ----------------");
-        System.out.println(Arrays.toString(solution.sortQuick()));
         System.out.println(Arrays.toString(solution.sortHeap()));
     }
     

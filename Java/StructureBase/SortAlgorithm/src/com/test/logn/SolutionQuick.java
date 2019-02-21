@@ -1,4 +1,4 @@
-package com.test;
+package com.test.logn;
 
 import com.test.base.Node;
 import com.test.base.Solution;

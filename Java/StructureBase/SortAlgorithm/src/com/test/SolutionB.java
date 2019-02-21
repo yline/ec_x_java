@@ -1,18 +1,8 @@
 package com.test;
 
-import java.util.Arrays;
-
 public class SolutionB
 {
     public static final int[] ARRAY = {5, 8, 4, 12, 32, -12, -43, 0, 9, 43, -23, 8, -4, 43, 5};
-    
-    public int[] sortQuick()
-    {
-        
-        int[] temp = ARRAY.clone();
-        Arrays.sort(temp);
-        return temp;
-    }
     
     /**
      * .堆排序
