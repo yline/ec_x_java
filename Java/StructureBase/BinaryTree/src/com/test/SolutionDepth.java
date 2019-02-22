@@ -3,68 +3,16 @@ package com.test;
 import java.util.LinkedList;
 import java.util.Queue;
 
-import com.test.bean.TreeNode;
+import com.test.base.TreeNode;
 
 /**
- * 获取节点个数、等； 需要加上 新建二叉树、二叉树查找
- * 二叉树大全
- * https://github.com/yuzhangcmu/LeetCode/blob/master/tree/TreeDemo.java
+ * .计算节点深度
  * @author YLine
  *
- * 2017年1月11日 上午11:51:56
+ * 2019年2月22日 下午5:12:06
  */
-public class Solution
+public class SolutionDepth
 {
-    private StringBuffer stringBuffer = new StringBuffer();
-    
-    public void init()
-    {
-        stringBuffer = new StringBuffer();
-    }
-    
-    public String getResult()
-    {
-        return stringBuffer.toString();
-    }
-    
-    public int getNodeNumber(TreeNode<String> node)
-    {
-        if (null == node)
-        {
-            return 0;
-        }
-        
-        return getNodeNumber(node.getLeftNode()) + getNodeNumber(node.getRightNode()) + 1;
-    }
-    
-    public int getNodeNumberNonRecursive(TreeNode<String> node)
-    {
-        int i = 0;
-        
-        Queue<TreeNode<String>> queue = new LinkedList<>();
-        TreeNode<String> root = node;
-        
-        queue.add(root);
-        
-        while (!queue.isEmpty())
-        {
-            TreeNode<String> temp = queue.poll();
-            i++;
-            
-            if (null != temp.getLeftNode())
-            {
-                queue.add(temp.getLeftNode());
-            }
-            
-            if (null != temp.getRightNode())
-            {
-                queue.add(temp.getRightNode());
-            }
-        }
-        
-        return i;
-    }
-    
     public int getDepth(TreeNode<String> node)
     {
         if (null == node)
