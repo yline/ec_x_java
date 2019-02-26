@@ -12,15 +12,15 @@ public class SolutionBintraySearch implements Solution
 {
     private static int TYPE = 1;
     
-    public static final int TYPE_1 = 1; // 查找值等于给定值的元素[无重复值]
+    public static final int TYPE_EQUAL = 1; // 查找值等于给定值的元素[无重复值]
     
-    public static final int TYPE_2 = 2; // 查找第一个值等于给定值的元素[有重复值]
+    public static final int TYPE_EQUAL_FIRST = 2; // 查找第一个值等于给定值的元素[有重复值]
     
-    public static final int TYPE_3 = 3; // 查找最后一个值等于给定值的元素[有重复值]
+    public static final int TYPE_EQUAL_LAST = 3; // 查找最后一个值等于给定值的元素[有重复值]
     
-    public static final int TYPE_4 = 4; // 查找第一个大于等于给定值的元素
+    public static final int TYPE_BIGGER_FIRST = 4; // 查找第一个大于等于给定值的元素
     
-    public static final int TYPE_5 = 5; // 查找最后一个小于等于给定值的元素
+    public static final int TYPE_SMALLER_LAST = 5; // 查找最后一个小于等于给定值的元素
     
     public static void setType(int type)
     {
@@ -32,65 +32,15 @@ public class SolutionBintraySearch implements Solution
     {
         switch (TYPE)
         {
-            case TYPE_1:
-                return bintraySearchEqual(array, value);
-            case TYPE_2:
-                return bintraySearchEqualFirst(array, value);
-            case TYPE_3:
+            case TYPE_EQUAL_LAST:
                 return bintraySearchEqualLast(array, value);
-            case TYPE_4:
+            case TYPE_BIGGER_FIRST:
                 return bintraySearchBiggerFirst(array, value);
-            case TYPE_5:
-                return bintraySearchBiggerLast(array, value);
+            case TYPE_SMALLER_LAST:
+                return bintraySearchSmallerLast(array, value);
             default:
                 return -1;
         }
-    }
-    
-    /**
-     * 查找值等于给定值的元素[无重复值]
-     */
-    private int bintraySearchEqual(int[] array, int value)
-    {
-        int left = 0, mid, right = array.length - 1;
-        if (value < array[left] || value > array[right])
-        {
-            return -1;
-        }
-        
-        while (left <= right)
-        {
-            mid = (left + right) >> 1;
-            if (value > array[mid])
-            {
-                left = mid + 1;
-            }
-            else if (value < array[mid])
-            {
-                right = mid - 1;
-            }
-            else
-            {
-                return mid;
-            }
-        }
-        
-        return -1;
-    }
-    
-    /**
-     * 查找第一个值等于给定值的元素[有重复值]
-     * @return
-     */
-    private int bintraySearchEqualFirst(int[] array, int value)
-    {
-        int left = 0, mid, right = array.length - 1;
-        if (value < array[left] || value > array[right])
-        {
-            return -1;
-        }
-        
-        return -1;
     }
     
     /**
@@ -112,7 +62,7 @@ public class SolutionBintraySearch implements Solution
     /**
      * 查找最后一个小于等于给定值的元素
      */
-    private int bintraySearchBiggerLast(int[] array, int value)
+    private int bintraySearchSmallerLast(int[] array, int value)
     {
         return -1;
     }
