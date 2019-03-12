@@ -38,4 +38,14 @@ public class DataSource
         
         return A;
     }
+    
+    /**
+     * .创建一个二叉查找树
+     * @return 二叉树的头
+     */
+    public static TreeNode<Integer> createSearchTreeNode()
+    {
+        
+        return null;
+    }
 }
