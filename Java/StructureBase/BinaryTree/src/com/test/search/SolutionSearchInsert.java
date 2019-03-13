@@ -10,8 +10,43 @@ import com.test.base.TreeNode;
  */
 public class SolutionSearchInsert
 {
-    public void insert(TreeNode<Integer> root, int data)
+    /**
+     * 大的插入右方，小的插入左方，所以返回插入的节点即可
+     * 如果存在相同的value，则返回失败
+     */
+    public boolean insert(TreeNode<Integer> root, int data)
     {
-        
+        TreeNode<Integer> temp = root;
+        if (data == temp.getData())
+        {
+            return false;
+        }
+        else if (data > temp.getData())
+        {
+            if (null != temp.getRightNode())
+            {
+                return insert(temp.getRightNode(), data);
+            }
+            else
+            {
+                // 这里代表插入右节点
+                System.out.println("insert right, parent = " + temp.getData());
+                return true;
+            }
+        }
+        else
+        {
+            if (null != temp.getLeftNode())
+            {
+                return insert(temp.getLeftNode(), data);
+            }
+            else
+            {
+                // 这里代表插入左节点
+                System.out.println("insert left, parent = " + temp.getData());
+                return true;
+            }
+            
+        }
     }
 }

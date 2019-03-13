@@ -1,5 +1,7 @@
 package com.test.base;
 
+import com.test.search.SolutionSearchDelete;
+import com.test.search.SolutionSearchInsert;
 import com.test.search.SolutionSearchLookup;
 
 import junit.framework.TestCase;
@@ -25,23 +27,17 @@ public class SearchExample extends TestCase
         TreeNode<Integer> rootNode = DataSource.createSearchTreeNode();
         SolutionSearchLookup solution = new SolutionSearchLookup();
         
-        assertSolution(null, solution.find(rootNode, 1));
-        assertSolution(new TreeNode<Integer>(2), solution.find(rootNode, 2));
-        assertSolution(new TreeNode<Integer>(5), solution.find(rootNode, 5));
-        assertSolution(new TreeNode<Integer>(6), solution.find(rootNode, 6));
-        assertSolution(null, solution.find(rootNode, 9));
-        assertSolution(new TreeNode<Integer>(10), solution.find(rootNode, 10));
-        assertSolution(new TreeNode<Integer>(16), solution.find(rootNode, 16));
-        assertSolution(null, solution.find(rootNode, 19));
+        assertLookupSolution(null, solution.find(rootNode, 1));
+        assertLookupSolution(new TreeNode<Integer>(2), solution.find(rootNode, 2));
+        assertLookupSolution(new TreeNode<Integer>(5), solution.find(rootNode, 5));
+        assertLookupSolution(new TreeNode<Integer>(6), solution.find(rootNode, 6));
+        assertLookupSolution(null, solution.find(rootNode, 9));
+        assertLookupSolution(new TreeNode<Integer>(10), solution.find(rootNode, 10));
+        assertLookupSolution(new TreeNode<Integer>(16), solution.find(rootNode, 16));
+        assertLookupSolution(null, solution.find(rootNode, 19));
     }
     
-    // 插入
-    public void testInsert()
-    {
-        
-    }
-    
-    private void assertSolution(TreeNode<Integer> expected, TreeNode<Integer> actual)
+    private void assertLookupSolution(TreeNode<Integer> expected, TreeNode<Integer> actual)
     {
         if (null == expected)
         {
@@ -51,6 +47,55 @@ public class SearchExample extends TestCase
         {
             assertEquals(expected.getData(), actual.getData());
         }
+    }
+    
+    // 插入
+    public void testInsert()
+    {
+        TreeNode<Integer> rootNode = DataSource.createSearchTreeNode();
+        SolutionSearchInsert solution = new SolutionSearchInsert();
+        
+        assertInsertSolution(true, 2, solution.insert(rootNode, 1));
+        assertInsertSolution(false, -1, solution.insert(rootNode, 2));
+        assertInsertSolution(false, -1, solution.insert(rootNode, 5));
+        assertInsertSolution(false, -1, solution.insert(rootNode, 6));
+        assertInsertSolution(true, 8, solution.insert(rootNode, 9));
+        assertInsertSolution(false, -1, solution.insert(rootNode, 10));
+        assertInsertSolution(false, -1, solution.insert(rootNode, 16));
+        assertInsertSolution(true, 18, solution.insert(rootNode, 19));
+        assertInsertSolution(true, 18, solution.insert(rootNode, 20));
+    }
+    
+    private void assertInsertSolution(boolean expectResult, int expectNode, boolean actual)
+    {
+        assertEquals(expectResult, actual);
+        if (expectResult)
+        {
+            System.out.println("expect node = " + expectNode);
+        }
+    }
+    
+    // 删除
+    public void testDelete()
+    {
+        TreeNode<Integer> rootNode = DataSource.createSearchTreeNode();
+        SolutionSearchDelete solution = new SolutionSearchDelete();
+        
+        assertEquals(false, solution.delete(rootNode, 1));
+        assertEquals(true, solution.delete(rootNode, 2));
+        assertEquals(true, solution.delete(rootNode, 5));
+        assertEquals(true, solution.delete(rootNode, 6));
+        assertEquals(false, solution.delete(rootNode, 9));
+        assertEquals(true, solution.delete(rootNode, 10));
+        assertEquals(true, solution.delete(rootNode, 16));
+        assertEquals(false, solution.delete(rootNode, 19));
+        assertEquals(false, solution.delete(rootNode, 20));
+    }
+    
+    // 中序遍历
+    public void testOrderMiddle()
+    {
+        
     }
     
     @Override
