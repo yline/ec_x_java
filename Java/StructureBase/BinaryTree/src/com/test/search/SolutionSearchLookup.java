@@ -1,5 +1,7 @@
 package com.test.search;
 
+import com.test.base.TreeNode;
+
 /**
  * 二叉查找树，查找操作
  * @author YLine
@@ -8,5 +10,29 @@ package com.test.search;
  */
 public class SolutionSearchLookup
 {
-    // TODO
+    /**
+     * @param data 数值
+     * @return 对应的节点，null if 不存在
+     */
+    public TreeNode<Integer> find(TreeNode<Integer> root, int data)
+    {
+        if (null == root)
+        {
+            return null;
+        }
+        
+        TreeNode<Integer> temp = root;
+        if (data == temp.getData())
+        {
+            return temp;
+        }
+        else if (data < temp.getData())
+        {
+            return find(temp.getLeftNode(), data);
+        }
+        else
+        {
+            return find(temp.getRightNode(), data);
+        }
+    }
 }
