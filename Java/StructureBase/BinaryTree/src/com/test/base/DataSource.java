@@ -41,6 +41,7 @@ public class DataSource
     
     /**
      * .创建一个二叉查找树(二叉搜索树[满二叉树])
+     * 无重复数据
      * @return 二叉树的头
      */
     public static TreeNode<Integer> createSearchTreeNode()
@@ -83,4 +84,5 @@ public class DataSource
         
         return v10;
     }
+    
 }

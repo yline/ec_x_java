@@ -1,8 +1,12 @@
 package com.test.base;
 
+import java.util.Arrays;
+import java.util.List;
+
 import com.test.search.SolutionSearchDelete;
 import com.test.search.SolutionSearchInsert;
 import com.test.search.SolutionSearchLookup;
+import com.test.search.SolutionSearchOrderMiddle;
 
 import junit.framework.TestCase;
 
@@ -95,7 +99,15 @@ public class SearchExample extends TestCase
     // 中序遍历
     public void testOrderMiddle()
     {
+        TreeNode<Integer> rootNode = DataSource.createSearchTreeNode();
+        SolutionSearchOrderMiddle solution = new SolutionSearchOrderMiddle();
         
+        List<Integer> result = solution.middlerOrder(rootNode);
+        System.out.println(Arrays.toString(result.toArray()));
+        for (int i = 1; i < result.size(); i++)
+        {
+            assert (result.get(i - 1) < result.get(i));
+        }
     }
     
     @Override
