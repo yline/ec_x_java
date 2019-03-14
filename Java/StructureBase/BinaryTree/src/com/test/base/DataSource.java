@@ -85,4 +85,45 @@ public class DataSource
         return v10;
     }
     
+    /**
+     * .创建一个二叉查找树(二叉搜索树[满二叉树])
+     * 有重复数据
+     * @return 二叉树的头
+     */
+    public static TreeNode<Integer> createSearch2TreeNode()
+    {
+        TreeNode<Integer> v5 = new TreeNode<Integer>(5);
+        
+        TreeNode<Integer> v3a = new TreeNode<Integer>(3);
+        TreeNode<Integer> v7a = new TreeNode<Integer>(7);
+        
+        TreeNode<Integer> v2b = new TreeNode<Integer>(2);
+        TreeNode<Integer> v3b = new TreeNode<Integer>(3);
+        TreeNode<Integer> v6b = new TreeNode<Integer>(6);
+        TreeNode<Integer> v7b = new TreeNode<Integer>(7);
+        
+        TreeNode<Integer> v1c = new TreeNode<Integer>(1);
+        TreeNode<Integer> v2c = new TreeNode<Integer>(2);
+        TreeNode<Integer> v4c = new TreeNode<Integer>(4);
+        TreeNode<Integer> v5c = new TreeNode<Integer>(5);
+        TreeNode<Integer> v6c = new TreeNode<Integer>(6);
+        TreeNode<Integer> v8c = new TreeNode<Integer>(8);
+        
+        v5.setLeftNode(v3a);
+        v5.setRightNode(v7a);
+        
+        v3a.setLeftNode(v2b);
+        v3a.setRightNode(v3b);
+        v7a.setLeftNode(v6b);
+        v7a.setRightNode(v7b);
+        
+        v2b.setLeftNode(v1c);
+        v2b.setRightNode(v2c);
+        v3b.setRightNode(v4c);
+        v6b.setLeftNode(v5c);
+        v6b.setRightNode(v6c);
+        v7b.setRightNode(v8c);
+        
+        return v5;
+    }
 }
