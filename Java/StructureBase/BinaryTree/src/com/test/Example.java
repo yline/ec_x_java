@@ -1,7 +1,7 @@
-package com.test.base;
+package com.test;
 
-import com.test.SolutionCount;
-import com.test.SolutionDepth;
+import com.test.base.DataSource;
+import com.test.base.TreeNode;
 
 import junit.framework.TestCase;
 

@@ -1,12 +1,11 @@
-package com.test.base;
+package com.test.search2;
 
 import java.util.Arrays;
 import java.util.List;
 
+import com.test.base.DataSource;
+import com.test.base.TreeNode;
 import com.test.search.SolutionSearchOrderMiddle;
-import com.test.search2.SolutionSearch2Delete;
-import com.test.search2.SolutionSearch2Insert;
-import com.test.search2.SolutionSearch2Lookup;
 
 import junit.framework.TestCase;
 

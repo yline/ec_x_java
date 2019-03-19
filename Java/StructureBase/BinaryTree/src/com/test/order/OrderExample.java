@@ -1,9 +1,7 @@
-package com.test.base;
+package com.test.order;
 
-import com.test.order.SolutionOrderAfter;
-import com.test.order.SolutionOrderLevel;
-import com.test.order.SolutionOrderMiddle;
-import com.test.order.SolutionOrderPre;
+import com.test.base.DataSource;
+import com.test.base.TreeNode;
 
 import junit.framework.TestCase;
 
