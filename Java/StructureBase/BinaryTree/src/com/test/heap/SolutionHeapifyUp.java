@@ -1,10 +1,11 @@
 package com.test.heap;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
- * .堆化，从上至下，以删除为例
+ * .堆化，从下至上，以新增为例
  * @author YLine
  *
  * 2019年3月19日 下午7:45:03
@@ -18,12 +19,43 @@ public class SolutionHeapifyUp
     public List<Integer> buildTestSource()
     {
         List<Integer> dataList = new ArrayList<>();
-        // todo set a heap array
+        dataList.add(null); // 首个空
+        dataList.addAll(Arrays.asList(33));
+        dataList.addAll(Arrays.asList(17, 21));
+        dataList.addAll(Arrays.asList(16, 13, 15, 9));
+        dataList.addAll(Arrays.asList(5, 6, 7, 8, 1, 2));
         return dataList;
     }
     
-    public void insert(List<Integer> data, int newValue)
+    public void insert(List<Integer> dataList, int newValue)
     {
-        // 插入
+        // 插入最后一个
+        dataList.add(newValue);
+        
+        // 从下至上，堆化
+        int lastIndex = dataList.size() - 1;
+        while (lastIndex > 1)
+        {
+            int preIndex = lastIndex / 2;
+            if (dataList.get(preIndex) < dataList.get(lastIndex)) // 插入不满足要求
+            {
+                swap(dataList, preIndex, lastIndex);
+                lastIndex = preIndex;
+            }
+            else
+            {
+                break;
+            }
+        }
+    }
+    
+    private void swap(List<Integer> dataList, int pre, int last)
+    {
+        if (pre != last)
+        {
+            int temp = dataList.get(pre);
+            dataList.set(pre, dataList.get(last));
+            dataList.set(last, temp);
+        }
     }
 }
