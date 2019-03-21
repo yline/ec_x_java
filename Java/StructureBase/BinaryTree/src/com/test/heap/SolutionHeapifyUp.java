@@ -33,29 +33,6 @@ public class SolutionHeapifyUp
         dataList.add(newValue);
         
         // 从下至上，堆化
-        int lastIndex = dataList.size() - 1;
-        while (lastIndex > 1)
-        {
-            int preIndex = lastIndex / 2;
-            if (dataList.get(preIndex) < dataList.get(lastIndex)) // 插入不满足要求
-            {
-                swap(dataList, preIndex, lastIndex);
-                lastIndex = preIndex;
-            }
-            else
-            {
-                break;
-            }
-        }
-    }
-    
-    private void swap(List<Integer> dataList, int pre, int last)
-    {
-        if (pre != last)
-        {
-            int temp = dataList.get(pre);
-            dataList.set(pre, dataList.get(last));
-            dataList.set(last, temp);
-        }
+        SolutionHeap.heapifyUp(dataList, dataList.size() - 1);
     }
 }

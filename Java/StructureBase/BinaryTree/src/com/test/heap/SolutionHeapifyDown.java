@@ -35,48 +35,6 @@ public class SolutionHeapifyDown
         dataList.set(1, lastValue);
         
         // 从上至下堆化
-        int maxIndex = (dataList.size() - 1) / 2; // 最后一个index
-        boolean isOdd = (dataList.size() & 0x01) == 1; // 是否是奇数
-        int preIndex = 1;
-        while (preIndex <= maxIndex) // 非叶子节点
-        {
-            if (isOdd && preIndex == maxIndex) // 一个子节点
-            {
-                if (dataList.get(preIndex) < dataList.get(preIndex * 2))
-                {
-                    swap(dataList, preIndex, preIndex * 2);
-                    preIndex *= 2;
-                }
-                else
-                {
-                    break;
-                }
-            }
-            else // 两个子节点
-            {
-                if (dataList.get(preIndex) < dataList.get(preIndex * 2) || dataList.get(preIndex) < dataList.get(
-                    preIndex * 2 + 1))
-                {
-                    int exchangeIndex = (dataList.get(preIndex * 2) > dataList.get(preIndex * 2 + 1) ? preIndex * 2
-                        : preIndex * 2 + 1);
-                    swap(dataList, preIndex, exchangeIndex);
-                    preIndex = exchangeIndex;
-                }
-                else
-                {
-                    break;
-                }
-            }
-        }
-    }
-    
-    private void swap(List<Integer> dataList, int pre, int last)
-    {
-        if (pre != last)
-        {
-            int temp = dataList.get(pre);
-            dataList.set(pre, dataList.get(last));
-            dataList.set(last, temp);
-        }
+        SolutionHeap.heapifyDown(dataList, 1, dataList.size() - 1);
     }
 }
