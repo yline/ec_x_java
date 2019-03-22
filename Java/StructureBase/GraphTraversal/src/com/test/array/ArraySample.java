@@ -1,12 +1,11 @@
-package com.test.base;
+package com.test.array;
 
 import static org.junit.Assert.assertArrayEquals;
 
 import java.util.Arrays;
 
-import com.test.SolutionBFS;
-import com.test.SolutionDFS;
-import com.test.SolutionDFSNonRecursive;
+import com.test.base.ArrayGraph;
+import com.test.base.ArraySolution;
 
 import junit.framework.TestCase;
 
@@ -18,17 +17,17 @@ import junit.framework.TestCase;
  *
  * 2019年2月22日 下午4:39:56
  */
-public class Sample extends TestCase
+public class ArraySample extends TestCase
 {
-    private Graph graph;
+    private ArrayGraph graph;
     
-    private Solution solution;
+    private ArraySolution solution;
     
     @Override
     protected void setUp()
         throws Exception
     {
-        graph = Graph.createUndirectGraph(6);
+        graph = ArrayGraph.createUndirectGraph(6);
         super.setUp();
     }
     

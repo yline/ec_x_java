@@ -1,10 +1,10 @@
-package com.test;
+package com.test.array;
 
 import java.util.LinkedList;
 import java.util.Queue;
 
-import com.test.base.Graph;
-import com.test.base.Solution;
+import com.test.base.ArrayGraph;
+import com.test.base.ArraySolution;
 
 /**
  * .广度优先遍历算法 Breadth-first search（非递归）
@@ -12,11 +12,11 @@ import com.test.base.Solution;
  *
  * 2019年2月22日 下午3:08:16
  */
-public class SolutionBFS implements Solution
+public class SolutionBFS implements ArraySolution
 {
     
     @Override
-    public Object[] traverse(Graph graph)
+    public Object[] traverse(ArrayGraph graph)
     {
         Queue<Integer> queue = new LinkedList<>(); // LinkedList实现了Queue接口 FIFO
         

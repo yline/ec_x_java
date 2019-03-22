@@ -1,9 +1,9 @@
-package com.test;
+package com.test.array;
 
 import java.util.Stack;
 
-import com.test.base.Graph;
-import com.test.base.Solution;
+import com.test.base.ArrayGraph;
+import com.test.base.ArraySolution;
 
 /**
  * DFS:非递归方式 
@@ -12,11 +12,11 @@ import com.test.base.Solution;
  *
  * 2019年2月22日 下午4:25:32
  */
-public class SolutionDFSNonRecursive implements Solution
+public class SolutionDFSNonRecursive implements ArraySolution
 {
     
     @Override
-    public Object[] traverse(Graph graph)
+    public Object[] traverse(ArrayGraph graph)
     {
         int size = graph.getSize();
         Object[] objArray = new Object[size];

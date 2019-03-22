@@ -1,7 +1,7 @@
-package com.test;
+package com.test.array;
 
-import com.test.base.Graph;
-import com.test.base.Solution;
+import com.test.base.ArrayGraph;
+import com.test.base.ArraySolution;
 
 /**
  * DFS:递归方式 
@@ -10,12 +10,12 @@ import com.test.base.Solution;
  *
  * 2019年2月22日 下午3:52:51
  */
-public class SolutionDFS implements Solution
+public class SolutionDFS implements ArraySolution
 {
     private int startIndex = 0;
     
     @Override
-    public Object[] traverse(Graph graph)
+    public Object[] traverse(ArrayGraph graph)
     {
         int size = graph.getSize();
         Object[] objArray = new Object[size];
@@ -37,7 +37,7 @@ public class SolutionDFS implements Solution
      * @param index 开始位置
      * @param deep 遍历深度
      */
-    private void dfs(Graph graphs, Object[] objArray, int index, int deep)
+    private void dfs(ArrayGraph graphs, Object[] objArray, int index, int deep)
     {
         if (graphs.isVisited(index))
         {

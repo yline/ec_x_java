@@ -9,23 +9,23 @@ import java.util.Arrays;
  *
  * 2019年2月22日 下午1:53:14
  */
-public class Graph
+public class ArrayGraph
 {
-    public static Graph createUndirectGraph(int capacity)
+    public static ArrayGraph createUndirectGraph(int capacity)
     {
-        Graph graph = new Graph(UNDIRECTED_GRAPH, capacity);
+        ArrayGraph graph = new ArrayGraph(UNDIRECTED_GRAPH, capacity);
         attachData(graph);
         return graph;
     }
     
-    public static Graph createDirectGraph(int capacity)
+    public static ArrayGraph createDirectGraph(int capacity)
     {
-        Graph graph = new Graph(DIRECTED_GRAPH, capacity);
+        ArrayGraph graph = new ArrayGraph(DIRECTED_GRAPH, capacity);
         attachData(graph);
         return graph;
     }
     
-    private static void attachData(Graph graph)
+    private static void attachData(ArrayGraph graph)
     {
         graph.addVertex("0");
         graph.addVertex("1");
@@ -68,7 +68,7 @@ public class Graph
      * @param graphType 图的类型：有向图/无向图 
      * @param size 图的 最大容量值 
      */
-    private Graph(boolean graphType, int capacity)
+    private ArrayGraph(boolean graphType, int capacity)
     {
         this.graphType = graphType;
         this.capacity = capacity;
