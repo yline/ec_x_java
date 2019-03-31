@@ -1,5 +1,8 @@
 package com.test.single;
 
+import com.test.single.bm.BMBadChar;
+import com.test.single.bm.BMGoodSuffix;
+
 /**
  * BM（Boyer-Moore）算法，在不匹配时，找规律，让模式串多滑动几位
  * 
@@ -19,8 +22,9 @@ public class SolutionBM implements SingleModelSolution
     @Override
     public int matching(String mainStr, String patternStr)
     {
-        // 这个方法，是一个分发方法，不实现具体功能
-        testGoodSuffix(mainStr, patternStr);
+        int goodMatch = BMGoodSuffix.goodSuffixBm(mainStr, patternStr);
+        
+        int badMatch = BMBadChar.badCharBm(mainStr, patternStr);
         
         testBadChar(mainStr, patternStr);
         
@@ -33,6 +37,8 @@ public class SolutionBM implements SingleModelSolution
     // 单独，好后缀，实现
     private void testGoodSuffix(String mainStr, String patternStr)
     {
+        BMGoodSuffix.goodSuffixBm(mainStr, patternStr);
+        
         /*SolutionBM solution = new SolutionBM();
         int[] resultA = solution.goodSuffix("cabcab".toCharArray());
         System.out.println(Arrays.toString(resultA));
@@ -59,4 +65,3 @@ public class SolutionBM implements SingleModelSolution
         
     }
 }
-

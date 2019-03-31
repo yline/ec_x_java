@@ -44,7 +44,6 @@ public class BMBadChar
         return -1;
     }
     
-    
     /**
      * 利用坏字符，计算下一个需要移动的距离
      * @param patternArray 模式串
