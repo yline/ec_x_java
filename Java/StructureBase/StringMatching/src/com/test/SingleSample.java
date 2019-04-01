@@ -18,6 +18,7 @@ public class SingleSample extends TestCase
     // 测试 BF算法
     public void testBF()
     {
+        System.out.println("-------------testBF--------------");
         SolutionBF solution = new SolutionBF();
         assertEquals(0, solution.matching("", ""));
         assertEquals(0, solution.matching("aaaaaaaaaaaaaaaaaaaa", "aaa"));
@@ -29,6 +30,7 @@ public class SingleSample extends TestCase
     // 测试 RK算法
     public void testRK()
     {
+        System.out.println("-------------testRK--------------");
         SolutionRK solution = new SolutionRK();
         assertEquals(0, solution.matching("", ""));
         assertEquals(0, solution.matching("aaaaaaaaaaaaaaaaaaaa", "aaa"));
@@ -40,7 +42,9 @@ public class SingleSample extends TestCase
     // 测试 BM算法，好后缀计算
     public void testBMGoodSuffix()
     {
+        System.out.println("-------------testBMGoodSuffix--------------");
         SolutionBM solution = new SolutionBM();
+        
         assertEquals(0, solution.matching("", ""));
         assertEquals(0, solution.matching("aaaaaaaaaaaaaaaaaaaa", "aaa"));
         assertEquals(20, solution.matching("bbbbbbbbbbbbbbbbbbbbaaa", "aaa"));

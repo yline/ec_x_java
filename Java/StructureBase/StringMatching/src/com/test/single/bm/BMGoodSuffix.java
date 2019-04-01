@@ -16,10 +16,16 @@ public class BMGoodSuffix
      */
     public static int goodSuffixBm(String mainStr, String patternStr)
     {
+        if (patternStr.length() == 0)
+        {
+            return 0;
+        }
+        
         int[] suffixArray = getNextArray(patternStr.toCharArray());
         
         int mainIndex = 0;
-        while (mainIndex < mainStr.length())
+        int length = mainStr.length() - patternStr.length() + 1;
+        while (mainIndex < length)
         {
             int badIndex = -1;
             for (int i = patternStr.length() - 1; i >= 0; i--)
@@ -40,12 +46,12 @@ public class BMGoodSuffix
             if (badIndex == patternStr.length() - 1)
             {
                 // 没有好后缀，移动一位
-                mainIndex -= 1;
+                mainIndex += 1;
             }
             else
             {
                 // 有好后缀，移动计算好的位数
-                mainIndex -= suffixArray[badIndex];
+                mainIndex += suffixArray[badIndex];
             }
         }
         

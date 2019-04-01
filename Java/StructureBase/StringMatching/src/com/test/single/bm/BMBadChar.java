@@ -16,10 +16,16 @@ public class BMBadChar
      */
     public static int badCharBm(String mainStr, String patternStr)
     {
+        if (patternStr.length() == 0)
+        {
+            return 0;
+        }
+        
         char[] patternArray = patternStr.toCharArray();
         
         int mainIndex = 0;
-        while (mainIndex < mainStr.length())
+        int length = mainStr.length() - patternStr.length() + 1;
+        while (mainIndex < length)
         {
             int badIndex = -1;
             for (int i = patternStr.length() - 1; i >= 0; i--)

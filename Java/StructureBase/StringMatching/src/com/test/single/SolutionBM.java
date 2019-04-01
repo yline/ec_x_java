@@ -1,6 +1,5 @@
 package com.test.single;
 
-import com.test.single.bm.BMBadChar;
 import com.test.single.bm.BMGoodSuffix;
 
 /**
@@ -23,44 +22,21 @@ public class SolutionBM implements SingleModelSolution
     public int matching(String mainStr, String patternStr)
     {
         int goodMatch = BMGoodSuffix.goodSuffixBm(mainStr, patternStr);
-        
+        /*
         int badMatch = BMBadChar.badCharBm(mainStr, patternStr);
         
-        testBadChar(mainStr, patternStr);
+        int mergeMatch = BMMerge.mergeBm(mainStr, patternStr);
         
-        testMerge(mainStr, patternStr);
+        assertEquals(goodMatch, badMatch);
+        assertEquals(goodMatch, mergeMatch);*/
         
-        // 结果永远是 -1
-        return -1;
+        return goodMatch;
     }
     
-    // 单独，好后缀，实现
-    private void testGoodSuffix(String mainStr, String patternStr)
-    {
-        BMGoodSuffix.goodSuffixBm(mainStr, patternStr);
-        
-        /*SolutionBM solution = new SolutionBM();
-        int[] resultA = solution.goodSuffix("cabcab".toCharArray());
-        System.out.println(Arrays.toString(resultA));
-        
-        int[] resultB = solution.goodSuffix("acabab".toCharArray());
-        System.out.println(Arrays.toString(resultB));
-        
-        int[] resultC = solution.goodSuffix("bcabab".toCharArray());
-        System.out.println(Arrays.toString(resultC));
-        
-        int[] resultD = solution.goodSuffix("bbabbb".toCharArray());
-        System.out.println(Arrays.toString(resultD));*/
-    }
-    
-    // 单独，坏字符，实现
-    private void testBadChar(String mainStr, String patternStr)
-    {
-        
-    }
-    
-    // 坏字符和好后缀，合并实现
-    private void testMerge(String mainStr, String patternStr)
+    /**
+     * .好后缀
+     */
+    public void testGoodSuffix()
     {
         
     }
