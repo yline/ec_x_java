@@ -11,6 +11,10 @@ public class AcRobot
 {
     private AcNode root = new AcNode('/'); // 无效的，头字符
     
+    /**
+     * 更新Trie树
+     * @param str 新增加的模式串
+     */
     public void insert(String str)
     {
         // 构建树
@@ -24,6 +28,11 @@ public class AcRobot
         // 处理failed指针
     }
     
+    /**
+     * 在主串中，找到所有的模式串的，位置以及对应的模式串(不管嵌套，即：一旦满足，则直接下一个开始查询)
+     * @param str
+     * @return
+     */
     public boolean find(String str)
     {
         AcNode temp = root;
