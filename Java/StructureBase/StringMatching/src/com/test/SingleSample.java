@@ -7,6 +7,13 @@ import com.test.single.SolutionRK;
 
 import junit.framework.TestCase;
 
+/**
+ * 单模式，字符串匹配
+ * 单模式：在一个模式串和一个主串之间进行匹配
+ * @author YLine
+ *
+ * 2019年4月8日 下午5:17:11
+ */
 public class SingleSample extends TestCase
 {
     @Override
