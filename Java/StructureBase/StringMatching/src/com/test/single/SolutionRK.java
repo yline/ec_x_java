@@ -9,8 +9,10 @@ import java.util.Arrays;
  * n : 主串长度
  * m : 模式串长度
  * 
- * 1, 空间复杂度：O(n); 时间复杂度:O(m)
- * 2, hash算法，的要求相对很高，不同场景对应不同的hash算法，很难统一
+ * 简介：利用hash值，计算m的hash值，然后计算n的所有可能值的hash值
+ * 1，时间复杂度：最坏 = (n - m) * hash
+ * 2，空间负责度：n
+ * 3，对hash算法，的要求相对很高，不同场景对应不同的hash算法，很难统一
  * 
  * @author YLine
  *

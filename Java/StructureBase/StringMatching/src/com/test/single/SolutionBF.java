@@ -6,7 +6,9 @@ package com.test.single;
  * n : 主串长度
  * m : 模式串长度
  * 
- * 1，时间复杂度为O(n*m)
+ * 简介：暴力匹配
+ * 1，时间复杂度：最坏 = n*m
+ * 2，空间复杂度：1
  * 
  * @author YLine
  *

@@ -2,6 +2,7 @@ package com.test;
 
 import com.test.single.SolutionBF;
 import com.test.single.SolutionBM;
+import com.test.single.SolutionKMP;
 import com.test.single.SolutionRK;
 
 import junit.framework.TestCase;
@@ -39,12 +40,25 @@ public class SingleSample extends TestCase
         assertEquals(10, solution.matching("ccccccccccaaacccccccccc", "aaa"));
     }
     
-    // 测试 BM算法，好后缀计算
-    public void testBMGoodSuffix()
+    // 测试 BM算法，后缀计算
+    public void testBM()
     {
-        System.out.println("-------------testBMGoodSuffix--------------");
+        System.out.println("-------------testBM--------------");
         SolutionBM solution = new SolutionBM();
         solution.testGoodSuffix();
+        
+        assertEquals(0, solution.matching("", ""));
+        assertEquals(0, solution.matching("aaaaaaaaaaaaaaaaaaaa", "aaa"));
+        assertEquals(20, solution.matching("bbbbbbbbbbbbbbbbbbbbaaa", "aaa"));
+        assertEquals(20, solution.matching("ccccccccccccccccccccaaa", "aaa"));
+        assertEquals(10, solution.matching("ccccccccccaaacccccccccc", "aaa"));
+    }
+    
+    // 测试 KMP，多移动几位
+    public void testKMP()
+    {
+        System.out.println("-------------testKMP--------------");
+        SolutionKMP solution = new SolutionKMP();
         
         assertEquals(0, solution.matching("", ""));
         assertEquals(0, solution.matching("aaaaaaaaaaaaaaaaaaaa", "aaa"));
