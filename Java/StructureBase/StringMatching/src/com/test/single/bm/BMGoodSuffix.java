@@ -87,10 +87,11 @@ public class BMGoodSuffix
     public static int[] badIndex2NextArray(char[] patternArray)
     {
         int[] suffixArray = new int[patternArray.length - 1];
-        for (int badIndex = patternArray.length - 2; badIndex >= 0; badIndex--)
+        int endIndex = patternArray.length - 2;
+        for (int badIndex = endIndex; badIndex >= 0; badIndex--)
         {
             // 每次匹配的位置
-            int suffixIndex = badIndex2Next(patternArray, badIndex, badIndex);
+            int suffixIndex = badIndex2Next(patternArray, badIndex, endIndex);
             
             // suffixIndex为下一个，移动对齐的位置；而移动的个数 = patternArray.length - 1 - suffixIndex
             suffixArray[badIndex] = suffixIndex;

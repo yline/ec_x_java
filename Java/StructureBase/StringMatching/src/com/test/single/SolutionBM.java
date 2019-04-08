@@ -1,6 +1,11 @@
 package com.test.single;
 
+import static org.junit.Assert.assertArrayEquals;
+import static org.junit.Assert.assertEquals;
+
+import com.test.single.bm.BMBadChar;
 import com.test.single.bm.BMGoodSuffix;
+import com.test.single.bm.BMMerge;
 
 /**
  * BM（Boyer-Moore）算法，在不匹配时，找规律，让模式串多滑动几位
@@ -22,15 +27,15 @@ public class SolutionBM implements SingleModelSolution
     public int matching(String mainStr, String patternStr)
     {
         int goodMatch = BMGoodSuffix.goodSuffixBm(mainStr, patternStr);
-        /*
+        
         int badMatch = BMBadChar.badCharBm(mainStr, patternStr);
         
         int mergeMatch = BMMerge.mergeBm(mainStr, patternStr);
         
         assertEquals(goodMatch, badMatch);
-        assertEquals(goodMatch, mergeMatch);*/
+        assertEquals(goodMatch, mergeMatch);
         
-        return goodMatch;
+        return mergeMatch;
     }
     
     /**
@@ -38,6 +43,13 @@ public class SolutionBM implements SingleModelSolution
      */
     public void testGoodSuffix()
     {
-        
+        assertGoodSuffix("aaa", 1, 1);
     }
+    
+    private void assertGoodSuffix(String patternStr, int... nextArray)
+    {
+        int[] actualArray = BMGoodSuffix.getNextArray(patternStr.toCharArray());
+        assertArrayEquals(nextArray, actualArray);
+    }
+    
 }

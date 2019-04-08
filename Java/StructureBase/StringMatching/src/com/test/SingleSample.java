@@ -44,6 +44,7 @@ public class SingleSample extends TestCase
     {
         System.out.println("-------------testBMGoodSuffix--------------");
         SolutionBM solution = new SolutionBM();
+        solution.testGoodSuffix();
         
         assertEquals(0, solution.matching("", ""));
         assertEquals(0, solution.matching("aaaaaaaaaaaaaaaaaaaa", "aaa"));

@@ -25,7 +25,7 @@ public class BMBadChar
         
         int mainIndex = 0;
         int length = mainStr.length() - patternStr.length() + 1;
-        while (mainIndex < length)
+        while (mainIndex < length && mainIndex >= 0)
         {
             int badIndex = -1;
             for (int i = patternStr.length() - 1; i >= 0; i--)
@@ -44,7 +44,7 @@ public class BMBadChar
             }
             
             char badChar = mainStr.charAt(mainIndex + badIndex);
-            mainIndex -= getNextMove(patternArray, badChar, badIndex);
+            mainIndex += getNextMove(patternArray, badChar, badIndex);
         }
         
         return -1;
@@ -59,7 +59,7 @@ public class BMBadChar
      */
     private static int getNextMove(char[] patternArray, char badChar, int badIndex)
     {
-        for (int i = badIndex; i >= 0; i--)
+        for (int i = badIndex - 1; i >= 0; i--)
         {
             if (badChar == patternArray[i])
             {
