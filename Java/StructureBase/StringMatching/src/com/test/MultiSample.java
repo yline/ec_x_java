@@ -1,6 +1,9 @@
 package com.test;
 
+import java.util.List;
+
 import com.test.multi.ac.AcRobot;
+import com.test.multi.ac.AcRobot.AcResult;
 import com.test.multi.trie.Trie;
 
 import junit.framework.TestCase;
@@ -58,8 +61,16 @@ public class MultiSample extends TestCase
         robot.insert("bcd");
         robot.insert("abcd");
         
+        // 构建failed指针，正式建立成Ac自动机
+        robot.buildFailurePointer();
+        
         // 查找对应的值
-        robot.find("adfdsjfkdasjfkldsjal;fjdsla");
+        List<AcResult> result = robot.find("abcd");
+        System.out.println("result size = " + result.size());
+        for (int i = 0; i < result.size(); i++)
+        {
+            System.out.println("index = " + i + ", result = " + result.get(i).toString());
+        }
     }
     
     @Override

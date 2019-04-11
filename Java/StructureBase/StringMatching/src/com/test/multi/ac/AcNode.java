@@ -25,12 +25,16 @@ public class AcNode
     // 如果，该节点匹配失败，则自动匹配到其它节点。如果没有，则为null, 上层处理为root
     public AcNode failed;
     
+    // 匹配到时，都是找到最后一个字符，无法确定第一个字符。因此记录长度，直接从主串中获取对应的正确的模式串
+    public int length;
+    
     public AcNode(char value)
     {
         this.value = value;
         this.next = new HashMap<>();
         this.isEnd = false;
         this.failed = null;
+        this.length = 0;
     }
     
     /**
@@ -66,8 +70,13 @@ public class AcNode
         return null;
     }
     
-    public void setFlag(boolean isEnd)
+    /**
+     * 设置，是否是末尾节点
+     * @param isEnd
+     */
+    public void setFlag(boolean isEnd, int length)
     {
         this.isEnd = isEnd;
+        this.length = length;
     }
 }

@@ -83,19 +83,19 @@ public class SolutionKMP implements SingleModelSolution
         int index = 0;
         while (index < needle.length() - 1)
         {
-            if (k == TAG)
+            if (k == TAG) // a，开始位置，直接置为0
             {
                 index++;
                 k = 0;
                 next[index] = 0;
             }
-            else if (needle.charAt(k) == needle.charAt(index))
+            else if (needle.charAt(k) == needle.charAt(index)) // b，下一个值相等
             {
                 index++;
                 k++;
                 next[index] = k;
             }
-            else
+            else // c，下一个值不相等
             {
                 k = next[k];
             }
