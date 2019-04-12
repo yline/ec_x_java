@@ -14,7 +14,7 @@ import java.util.Queue;
  */
 public class AcRobot
 {
-    private AcNode root = new AcNode('/'); // 无效的，头字符
+    private AcNode root = new AcNode('/', 0); // 无效的，头字符
     
     /**
      * 更新Trie树
@@ -26,9 +26,9 @@ public class AcRobot
         AcNode temp = root;
         for (int i = 0; i < str.length(); i++)
         {
-            temp = temp.insert(str.charAt(i));
+            temp = temp.insert(str.charAt(i), i + 1);
         }
-        temp.setFlag(true, str.length());
+        temp.setFlag(true);
     }
     
     /**
@@ -50,31 +50,57 @@ public class AcRobot
             // 遍历抛出节点的子节点
             for (AcNode childNode : popNode.next.values())
             {
-                // 上一个节点的坏指针
-                AcNode topFailedNode = popNode.failed;
-                while (null != topFailedNode)
-                {
-                    AcNode topFailedNextNode = topFailedNode.next.get(childNode.value);
-                    if (null != topFailedNextNode)
-                    {
-                        childNode.failed = topFailedNextNode;
-                        break;
-                    }
-                    else
-                    {
-                        topFailedNode = topFailedNode.failed;
-                    }
-                }
-                
-                // 没有遍历到相应的内容
-                if (null == topFailedNode)
+                // 当前父节点为根节点时
+                if (popNode == root)
                 {
                     childNode.failed = root;
+                }
+                else
+                {
+                    // 上一个节点的坏指针
+                    AcNode topFailedNode = popNode.failed;
+                    while (null != topFailedNode)
+                    {
+                        AcNode topFailedNextNode = topFailedNode.next.get(childNode.value);
+                        if (null != topFailedNextNode)
+                        {
+                            childNode.failed = topFailedNextNode;
+                            break;
+                        }
+                        else
+                        {
+                            topFailedNode = topFailedNode.failed;
+                        }
+                    }
+                    
+                    // 没有遍历到相应的内容[或者失败指针，指向root]
+                    if (null == topFailedNode)
+                    {
+                        childNode.failed = root;
+                    }
                 }
                 
                 // 添加子节点
                 queue.add(childNode);
             }
+        }
+    }
+    
+    public void logAcNode()
+    {
+        logAcNodeDfs(root, 1);
+    }
+    
+    /**
+     * 遍历所有的内容，打印出来；方便查看错误
+     * @param root
+     */
+    private void logAcNodeDfs(AcNode root, int deep)
+    {
+        for (AcNode childNode : root.next.values())
+        {
+            System.out.println(childNode.toString());
+            logAcNodeDfs(childNode, deep + 1);
         }
     }
     
@@ -90,27 +116,32 @@ public class AcRobot
         AcNode temp = root;
         for (int i = 0; i < str.length(); i++)
         {
-            AcNode tempNext = temp.find(str.charAt(i));
-            // 不是从root出发，并且下一个不是空
-            while (root != temp && null != tempNext)
+            AcNode childNode = temp.find(str.charAt(i));
+            
+            // 不是从root出发，并且下一个为空，直接指向失败指针
+            while (root != temp && null == childNode)
             {
                 temp = temp.failed;
+                childNode = temp.find(str.charAt(i));
             }
             
-            // 没有匹配的内容，重新从root出发
-            if (null == tempNext)
+            // 首个就未找到内容，直接下一个
+            if (null == childNode)
             {
                 temp = root;
+                continue;
             }
-            
-            // 找下一个
-            while (temp != root)
+            else
             {
-                if (temp.isEnd)
+                if (childNode.isEnd)
                 {
-                    resultList.add(new AcResult(str, i, temp.length));
+                    resultList.add(new AcResult(str, i, childNode.length));
+                    temp = root;
                 }
-                temp = temp.failed;
+                else
+                {
+                    temp = childNode;
+                }
             }
         }
         
@@ -128,7 +159,7 @@ public class AcRobot
         public AcResult(String mainStr, int end, int length)
         {
             startIndex = end - length + 1;
-            patternStr = mainStr.substring(startIndex, end);
+            patternStr = mainStr.substring(startIndex, end + 1);
         }
 
         @Override

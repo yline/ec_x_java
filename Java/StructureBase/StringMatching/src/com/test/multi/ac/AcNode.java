@@ -25,24 +25,25 @@ public class AcNode
     // 如果，该节点匹配失败，则自动匹配到其它节点。如果没有，则为null, 上层处理为root
     public AcNode failed;
     
-    // 匹配到时，都是找到最后一个字符，无法确定第一个字符。因此记录长度，直接从主串中获取对应的正确的模式串
+    // 当前的长度(深度)
     public int length;
     
-    public AcNode(char value)
+    public AcNode(char value, int length)
     {
         this.value = value;
         this.next = new HashMap<>();
         this.isEnd = false;
         this.failed = null;
-        this.length = 0;
+        this.length = length;
     }
     
     /**
      * 插入一个内容
      * @param key 下一个字符
+     * @param length 深度
      * @return 下一个字符，对应的节点
      */
-    public AcNode insert(char key)
+    public AcNode insert(char key, int length)
     {
         if (next.containsKey(key))
         {
@@ -50,7 +51,7 @@ public class AcNode
         }
         else
         {
-            AcNode trieNode = new AcNode(key);
+            AcNode trieNode = new AcNode(key, length);
             next.put(key, trieNode);
             return trieNode;
         }
@@ -74,9 +75,28 @@ public class AcNode
      * 设置，是否是末尾节点
      * @param isEnd
      */
-    public void setFlag(boolean isEnd, int length)
+    public void setFlag(boolean isEnd)
     {
         this.isEnd = isEnd;
-        this.length = length;
+    }
+    
+    @Override
+    public String toString()
+    {
+        String failedStr;
+        if (null == failed)
+        {
+            failedStr = "null";
+        }
+        else
+        {
+            failedStr = String.format("{deep: %s, value: %s}", String.valueOf(failed.length), failed.value);
+        }
+        
+        return String.format("{deep: %s, value: %s, isEnd: %s, failed: [%s]}",
+            String.valueOf(length),
+            value,
+            String.valueOf(isEnd),
+            failedStr);
     }
 }
