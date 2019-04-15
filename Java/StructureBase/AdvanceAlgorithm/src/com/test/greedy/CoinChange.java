@@ -14,5 +14,30 @@ package com.test.greedy;
  */
 public class CoinChange
 {
-    // todo
+    private static final int[] Values = {1, 2, 5, 10, 20, 50, 100};
+    
+    /**
+     * 钱币找零
+     * 
+     * 贪心算法：每次都只求最大额
+     * 
+     * @param value 金额
+     * @return -1 if parameter is invalid
+     */
+    public int minPaper(int value)
+    {
+        if (value < 0)
+        {
+            return -1;
+        }
+        
+        int minPaper = 0;
+        int temp = value;
+        for (int i = Values.length - 1; i >= 0; i--)
+        {
+            minPaper += (temp / Values[i]);
+            temp = temp % Values[i];
+        }
+        return minPaper;
+    }
 }
