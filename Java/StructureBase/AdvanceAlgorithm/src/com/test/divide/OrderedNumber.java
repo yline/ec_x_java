@@ -18,4 +18,52 @@ package com.test.divide;
 public class OrderedNumber
 {
     // todo
+    
+    /**
+     * 
+     * @param tempArray
+     * @param start
+     * @param end
+     * @return
+     */
+    private int merge(char[] array, int leftStart, int rightEnd)
+    {
+        
+        int leftEnd = (leftStart + rightEnd) / 2;
+        int rightStart = leftEnd + 1;
+        
+        int result = 0;
+        // 遍历
+        while (leftStart <= leftEnd && rightStart <= rightEnd)
+        {
+            if (array[leftStart] < array[rightStart])
+            {
+                result += (rightEnd - rightStart + 1);
+                leftStart++;
+                
+                // 还需要做交换
+            }
+            else
+            {
+                rightStart++;
+            }
+        }
+        
+        return result;
+        
+        /*
+        int length = Math.min(leftArray.length, rightArray.length);
+        
+        int result = 0;
+        int leftIndex = 0, rightIndex = 0;
+        while (leftIndex < leftArray.length && rightIndex < rightArray.length)
+        {
+            if (leftArray[leftIndex] < rightArray[rightIndex])
+            {
+                
+            }
+        }
+        
+        return result;*/
+    }
 }
