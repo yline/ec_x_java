@@ -49,12 +49,18 @@ public class EightQueens
         return false;
     }
     
+    private void findPosition()
+    {
+        
+    }
+    
     /**
      * .实现棋盘
      */
     private static class Board
     {
         private int filledSize = 0;
+        
         private final int[][] sBoard = new int[8][8];
         
         public Board()
@@ -81,7 +87,6 @@ public class EightQueens
             for (int i = 0; i < sBoard.length; i++)
             {
                 addInner(i, y, value);
-                ;
             }
             
             // 当前列
@@ -212,7 +217,7 @@ public class EightQueens
         }
         
         /**
-         * 依据当前填充的位置，找到下一个可以填充的位置
+         * 依据当前填充的位置，找到下一个可以填充的位置【只能往后找】
          * @param startX
          * @param startY
          * @return
