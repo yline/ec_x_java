@@ -21,6 +21,12 @@ public class OrderedNumber
 {
     /**
      * 求有序对，个数
+     * 
+     * 时间复杂度：n*log(2n)
+     * 空间复杂度：n*log(2n)【可以用全局量优化】
+     * 
+     * 主要是，并归的思想
+     * 
      * @param array 队列
      * @return 有序对个数
      */
