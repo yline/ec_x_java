@@ -1,5 +1,7 @@
 package com.test.divide;
 
+import org.junit.Assert;
+
 /**
  * 有序对个数
  * 如果编程求出一组数据的有序对个数？
@@ -18,52 +20,117 @@ package com.test.divide;
 public class OrderedNumber
 {
     // todo
+    public int calculateOrder(char[] array)
+    {
+        int step = 2;
+        int size = array.length / step;
+        
+        // 分治
+        int result = 0;
+        while (step <= array.length)
+        {
+            for (int i = 0; i < size; i++)
+            {
+                // 可能数组越界，这里处理一下
+                result += merge(array, step * i, step * i + step - 1);
+            }
+            
+            step *= 2;
+            size = array.length / step;
+        }
+        
+        return result;
+    }
+    
+    public void testMerge()
+    {
+        char[] arrayA = {'1', '3', '5', '2', '4', '6'};
+        int resultA = merge(arrayA, 0, arrayA.length - 1);
+        Assert.assertArrayEquals(new char[] {'1', '2', '3', '4', '5', '6'}, arrayA);
+        Assert.assertEquals(6, resultA);
+        
+        char[] arrayB = {'1', '2'};
+        int resultB = merge(arrayB, 0, arrayB.length - 1);
+        Assert.assertArrayEquals(new char[] {'1', '2'}, arrayB);
+        Assert.assertEquals(1, resultB);
+    };
     
     /**
+     * AB区间大小不能为1
      * 
-     * @param tempArray
-     * @param start
-     * @param end
+     * 对数组中的某一段，从中间分开；为A区间和B区间
+     * A区间内 和 B区间内，分别是有序的，并且两个区间连续
+     * 
+     * 最终，AB区间是有序的，并且返回有序对数
+     * 
+     * 时间复杂度：rightEnd-leftStart
+     * 空间复杂度：rightEnd-leftStart
+     * 
+     * @param array 数组
+     * @param finalLeftStart 开始位置
+     * @param rightEnd 结束位置
      * @return
      */
-    private int merge(char[] array, int leftStart, int rightEnd)
+    private int merge(char[] array, final int finalLeftStart, final int finalRightEnd)
     {
+        int length = finalRightEnd - finalLeftStart + 1;
+        char[] tempArray = new char[length];
         
-        int leftEnd = (leftStart + rightEnd) / 2;
-        int rightStart = leftEnd + 1;
+        final int finalLeftEnd = (finalLeftStart + finalRightEnd) / 2;
         
+        // 计算结果值
+        int index = 0;
         int result = 0;
-        // 遍历
-        while (leftStart <= leftEnd && rightStart <= rightEnd)
+        int leftStart = finalLeftStart;
+        int rightStart = finalLeftEnd + 1;
+        
+        while (leftStart <= finalLeftEnd || rightStart <= finalRightEnd)
         {
+            // 左边达到最大值
+            if (leftStart > finalLeftEnd)
+            {
+                for (int i = rightStart; i <= finalRightEnd; i++)
+                {
+                    tempArray[index] = array[i];
+                    index++;
+                }
+                break;
+            }
+            
+            // 右边达到最大值
+            if (rightStart > finalRightEnd)
+            {
+                for (int i = leftStart; i <= finalLeftEnd; i++)
+                {
+                    tempArray[index] = array[i];
+                    index++;
+                }
+                break;
+            }
+            
+            // 两边都还未达到最大值
             if (array[leftStart] < array[rightStart])
             {
-                result += (rightEnd - rightStart + 1);
-                leftStart++;
+                result += (finalRightEnd - rightStart + 1);
                 
-                // 还需要做交换
+                tempArray[index] = array[leftStart];
+                index++;
+                leftStart++;
             }
             else
             {
+                tempArray[index] = array[rightStart];
+                index++;
                 rightStart++;
             }
         }
         
-        return result;
-        
-        /*
-        int length = Math.min(leftArray.length, rightArray.length);
-        
-        int result = 0;
-        int leftIndex = 0, rightIndex = 0;
-        while (leftIndex < leftArray.length && rightIndex < rightArray.length)
+        // 迁移位置
+        for (int i = 0; i < length; i++)
         {
-            if (leftArray[leftIndex] < rightArray[rightIndex])
-            {
-                
-            }
+            array[i + finalLeftStart] = tempArray[i];
         }
         
-        return result;*/
+        return result;
     }
 }
