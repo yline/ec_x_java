@@ -19,24 +19,31 @@ import org.junit.Assert;
  */
 public class OrderedNumber
 {
-    // todo
+    /**
+     * 求有序对，个数
+     * @param array 队列
+     * @return 有序对个数
+     */
     public int calculateOrder(char[] array)
     {
-        int step = 2;
-        int size = array.length / step;
+        int step = 1;
+        int size = 1 + (array.length - 1) / 2 / step;
         
         // 分治
         int result = 0;
-        while (step <= array.length)
+        while (step < array.length)
         {
             for (int i = 0; i < size; i++)
             {
+                int start = 2 * step * i;
+                int end = start + 2 * step - 1;
+                
                 // 可能数组越界，这里处理一下
-                result += merge(array, step * i, step * i + step - 1);
+                result += merge(array, start, start + step - 1, (end >= array.length ? array.length - 1 : end));
             }
             
             step *= 2;
-            size = array.length / step;
+            size = 1 + (array.length - 1) / 2 / step;
         }
         
         return result;
@@ -45,14 +52,24 @@ public class OrderedNumber
     public void testMerge()
     {
         char[] arrayA = {'1', '3', '5', '2', '4', '6'};
-        int resultA = merge(arrayA, 0, arrayA.length - 1);
+        int resultA = merge(arrayA, 0, 2, arrayA.length - 1);
         Assert.assertArrayEquals(new char[] {'1', '2', '3', '4', '5', '6'}, arrayA);
         Assert.assertEquals(6, resultA);
         
         char[] arrayB = {'1', '2'};
-        int resultB = merge(arrayB, 0, arrayB.length - 1);
+        int resultB = merge(arrayB, 0, 0, arrayB.length - 1);
         Assert.assertArrayEquals(new char[] {'1', '2'}, arrayB);
         Assert.assertEquals(1, resultB);
+        
+        char[] arrayC = {'1'};
+        int resultC = merge(arrayC, 0, 0, arrayC.length - 1);
+        Assert.assertArrayEquals(new char[] {'1'}, arrayC);
+        Assert.assertEquals(0, resultC);
+        
+        char[] arrayD = {'1', '2', '3', '4'};
+        int resultD = merge(arrayD, 0, 1, arrayD.length - 1);
+        Assert.assertArrayEquals(new char[] {'1', '2', '3', '4'}, arrayD);
+        Assert.assertEquals(4, resultD);
     };
     
     /**
@@ -71,12 +88,17 @@ public class OrderedNumber
      * @param rightEnd 结束位置
      * @return
      */
-    private int merge(char[] array, final int finalLeftStart, final int finalRightEnd)
+    private int merge(char[] array, final int finalLeftStart, final int finalLeftEnd, final int finalRightEnd)
     {
         int length = finalRightEnd - finalLeftStart + 1;
-        char[] tempArray = new char[length];
         
-        final int finalLeftEnd = (finalLeftStart + finalRightEnd) / 2;
+        // 长度小于2，则不用进行比较了
+        if (length < 2)
+        {
+            return 0;
+        }
+        
+        char[] tempArray = new char[length];
         
         // 计算结果值
         int index = 0;
