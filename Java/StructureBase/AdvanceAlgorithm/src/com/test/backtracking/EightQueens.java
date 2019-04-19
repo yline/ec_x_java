@@ -1,5 +1,8 @@
 package com.test.backtracking;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * 八皇后问题
  * 皇后能横向，纵向和斜向移动，在这三条线上的其他棋子都可以被吃掉
@@ -8,6 +11,7 @@ package com.test.backtracking;
  * （即任意两个皇后都不在同一条横线，竖线和斜线上），问一共有多少种摆法。
  * 
  * 参考：https://www.jianshu.com/p/65c8c60b83b8
+ * 利用，每一行，必定有一个皇后的原理，大概率的下降了遍历难度
  * 
  * @author YLine
  *
@@ -18,44 +22,95 @@ public class EightQueens
     public void eightQueen()
     {
         Board board = new Board();
-        int x = 0, y = 0;
         
-        board.add(x, y, 0);
+        List<Integer> dataList = new ArrayList<>();
+        for (int i = 0; i < 8; i++)
+        {
+            findPosition(board, 0, i, dataList);
+        }
     }
     
-    private boolean tryIndex(Board board, int x, int y)
+    /**
+     * 当前添加的内容
+     * @param x 当前行数
+     * @param y 当前列数
+     */
+    private void findPosition(Board board, int x, int y, List<Integer> dataList)
     {
-        int value = 0;
-        while (value < 8 && value >= 0)
+        // 添加某个点
+        board.add(x, y);
+        dataList.add(y);
+        
+        // 满足条件，退出
+        if (x == 7)
         {
-            board.add(x, y, value);
-            if (!board.isEnd())
-            {
-                int[] next = board.next(x, y);
-                if (null != next)
-                {
-                    value++;
-                    x = next[0];
-                    y = next[1];
-                    
-                    continue;
-                }
-            }
+            print(dataList, x);
+            board.remove(x, y);
+            dataList.remove(Integer.valueOf(y));
             
-            board.remove(x, y, value);
-            value--;
+            return;
         }
         
-        return false;
+        // 找出下一行，剩余的点；若下一行没有；则代表结束
+        List<Integer> nextList = board.next(x+1);
+        if (nextList.isEmpty())
+        {
+            print(dataList, x);
+            
+            board.remove(x, y);
+            dataList.remove(Integer.valueOf(y));
+        }
+        else
+        {
+            for (Integer nextY : nextList)
+            {
+                findPosition(board, x + 1, nextY, dataList);
+            }
+            
+            board.remove(x, y);
+            dataList.remove(Integer.valueOf(y));
+        }
     }
     
-    private void findPosition()
+    // 解法对应的下表值
+    private int value = -1;
+    
+    private void print(List<Integer> dataList, int x)
     {
+        StringBuilder sBuilder = new StringBuilder();
+        for (int i = 0; i < dataList.size(); i++)
+        {
+            sBuilder.append('(');
+            sBuilder.append(i);
+            sBuilder.append(',');
+            sBuilder.append(dataList.get(i));
+            sBuilder.append(')');
+            sBuilder.append("   ");
+        }
         
+        if (x == 7)
+        {
+            value++;
+            System.out.println(sBuilder.toString() + ", index = " + value);
+        }
+        /* 遍历错误的分支就不打印了
+        else
+        {
+            System.err.println(sBuilder.toString());
+        }*/
+    }
+    
+    /**
+     * @return 总共的解法
+     */
+    public int getValue()
+    {
+        return value + 1;
     }
     
     /**
      * .实现棋盘
+     * .当前的行数 = 插入的值【0-8】
      */
     private static class Board
     {
@@ -77,56 +132,34 @@ public class EightQueens
         
         /**
          * 往棋盘，放置一个皇后
+         * 往上遍历，完全没必要【因为之前的插入，行肯定是被填充完了】
          * @param x x位置
-         * @param y y位置
-         * @param value 当前第几个
+         * @param value 当前第几行
          */
-        public void add(int x, int y, int value)
+        public void add(int x, int y)
         {
-            // 当前行
+            // 当前行、列
             for (int i = 0; i < sBoard.length; i++)
             {
-                addInner(i, y, value);
+                addInner(x, i, x);
+                addInner(i, y, x);
             }
             
-            // 当前列
-            for (int j = 0; j < sBoard.length; j++)
-            {
-                addInner(x, j, value);
-            }
-            
-            // 4个斜线
+            // 右下 斜线
             int sx = x, sy = y;
             while (sx < 8 && sy < 8)
             {
-                addInner(sx, sy, value);
+                addInner(sx, sy, x);
                 sx++;
                 sy++;
             }
             
-            sx = x;
-            sy = y;
-            while (sx >= 0 && sy < 8)
-            {
-                addInner(sx, sy, value);
-                sx--;
-                sy++;
-            }
-            
-            sx = x;
-            sy = y;
-            while (sx >= 0 && sy >= 0)
-            {
-                addInner(sx, sy, value);
-                sx--;
-                sy--;
-            }
-            
+            // 左下 斜线
             sx = x;
             sy = y;
             while (sx < 8 && sy >= 0)
             {
-                addInner(sx, sy, value);
+                addInner(sx, sy, x);
                 sx++;
                 sy--;
             }
@@ -143,56 +176,34 @@ public class EightQueens
         
         /**
          * 从棋盘中，移除一个皇后
+         * 往上遍历，完全没必要；因为添加的顺序是从小到大，肯定是小的占据了大的地盘；不可能反过来
          * @param x x位置
-         * @param y y位置
          * @param value 当前第几个
          */
-        public void remove(int x, int y, int value)
+        public void remove(int x, int y)
         {
-            // 当前行
+            // 当前行、列
             for (int i = 0; i < sBoard.length; i++)
             {
-                removeInner(i, y, value);
+                removeInner(x, i, x);
+                removeInner(i, y, x);
             }
             
-            // 当前列
-            for (int j = 0; j < sBoard.length; j++)
-            {
-                removeInner(x, j, value);
-            }
-            
-            // 4个斜线
+            // 右下 斜线
             int sx = x, sy = y;
             while (sx < 8 && sy < 8)
             {
-                removeInner(sx, sy, value);
+                removeInner(sx, sy, x);
                 sx++;
                 sy++;
             }
             
-            sx = x;
-            sy = y;
-            while (sx >= 0 && sy < 8)
-            {
-                removeInner(sx, sy, value);
-                sx--;
-                sy++;
-            }
-            
-            sx = x;
-            sy = y;
-            while (sx >= 0 && sy >= 0)
-            {
-                removeInner(sx, sy, value);
-                sx--;
-                sy--;
-            }
-            
+            // 左下 斜线
             sx = x;
             sy = y;
             while (sx < 8 && sy >= 0)
             {
-                removeInner(sx, sy, value);
+                removeInner(sx, sy, x);
                 sx++;
                 sy--;
             }
@@ -217,35 +228,22 @@ public class EightQueens
         }
         
         /**
-         * 依据当前填充的位置，找到下一个可以填充的位置【只能往后找】
-         * @param startX
-         * @param startY
-         * @return
+         * 在当前行，找到下一个合法的值；如果没有则返回-1
+         * @param x 当前行
+         * @param y 当前列
+         * @return -1 if not match
          */
-        public int[] next(int startX, int startY)
+        public List<Integer> next(int x)
         {
-            // 当前行
-            for (int i = startX; i < sBoard.length; i++)
+            List<Integer> nextList = new ArrayList<>();
+            for (int i = 0; i < sBoard[x].length; i++)
             {
-                if (sBoard[i][startY] == -1)
+                if (sBoard[x][i] == -1)
                 {
-                    return new int[] {i, startY};
+                    nextList.add(i);
                 }
             }
-            
-            // 剩余所有行
-            for (int i = 0; i < sBoard.length; i++)
-            {
-                for (int j = startY + 1; j < sBoard.length; j++)
-                {
-                    if (sBoard[i][j] == -1)
-                    {
-                        return new int[] {i, j};
-                    }
-                }
-            }
-            
-            return null;
+            return nextList;
         }
     }
     
