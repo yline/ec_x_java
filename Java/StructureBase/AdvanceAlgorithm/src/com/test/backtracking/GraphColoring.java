@@ -49,43 +49,76 @@ public class GraphColoring
      * 给无向图，着色
      * @param m 颜色种类
      * @param values 所有的数据
+     * @return 返回所有的数量【并且，颜色会清零】
      */
-    public boolean coloring(Graph graph, int m)
+    public int coloring(Graph graph, int m)
     {
-        Node vertex = graph.getVertex(0);
-        if (null == vertex)
-        {
-            return false;
-        }
-        
-        return true;
+        colorNode(graph, 0, m);
+        return value;
     }
     
-    private void colorNode(Node node, int m)
+    private int value = -1;
+    
+    public int getValue()
     {
+        return value + 1;
+    }
+    
+    public void resetValue()
+    {
+        value = -1;
+    }
+    
+    /**
+     * 这个并不是回溯法；只是普通的递归；
+     * 如果是回溯，则修改实现方案。但整体类似
+     * 
+     * 该方法，只要有方案就结束了
+     * @param graph 图
+     * @param index 开始位置0
+     * @param m 颜色总数
+     */
+    private void colorNode(Graph graph, int index, int m)
+    {
+        if (index == graph.getSize())
+        {
+            // 打印当前的染色方案
+            value++;
+            print(graph, value);
+            return;
+        }
+        
+        Node node = graph.getVertex(index);
+        
+        // 获取可能的染色，颜色
+        int nowColor = -1;
         for (int i = 0; i < m; i++)
         {
-            boolean isColorValid = node.isColorValid(m);
-            if (isColorValid)
+            if (node.isColorValid(i))
             {
-                // 给该节点着色
-                node.setColor(m);
-                
-                // 给剩余的节点着色
-                List<Node> neighborNodeList = node.getNoColorNeighborList();
-                if (!neighborNodeList.isEmpty())
-                {
-                    // 继续着色
-                    for (Node neighborNode : neighborNodeList)
-                    {
-                        colorNode(neighborNode, m);
-                    }
-                }
-                
-                // 该节点颜色返回
-                node.setColor(-1);
+                nowColor = i;
+                break;
             }
         }
+        
+        // 该节点，没有合适的颜色，代表失败
+        if (nowColor != -1)
+        {
+            node.setColor(nowColor);
+            colorNode(graph, index + 1, m);
+            node.setColor(-1);
+        }
+    }
+    
+    public static void print(Graph graph, int index)
+    {
+        StringBuilder sBuilder = new StringBuilder();
+        for (int i = 0; i < graph.getSize(); i++)
+        {
+            Node node = graph.getVertex(i);
+            sBuilder.append(String.format("(%d-%s, color:%d) ", i, node.value, node.color));
+        }
+        System.out.println(sBuilder.toString() + ", index = " + index);
     }
     
     public static class Graph
@@ -133,11 +166,17 @@ public class GraphColoring
          */
         public Node getVertex(int index)
         {
-            if (dataList.isEmpty())
-            {
-                return null;
-            }
+            checkValid(index);
             return dataList.get(index);
+        }
+        
+        /**
+         * 返回节点总数
+         * @return
+         */
+        public int getSize()
+        {
+            return dataList.size();
         }
     }
     

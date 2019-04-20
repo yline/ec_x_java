@@ -3,18 +3,18 @@
 // 包名 - 算法
 greedy -- 贪心算法
 {
-	CoinChange -- 钱币找零
+	CoinChange -- 钱币找零(价值高先行)
 }
 
 divide -- 分治算法
 {
-    OrderedNumber -- 有序对个数
+    OrderedNumber -- 有序对个数(并归)
 }
 
 backtracking -- 回溯算法
 {
-	EightQueens -- 八皇后
-	GraphColoring -- 图的着色
+	EightQueens -- 八皇后(线性遍历，回溯)
+	GraphColoring -- 图的着色(线性遍历，回溯)
 	Knapsack -- 0-1背包
 	Permutations -- 全排列
 	Sudoku -- 数独
