@@ -8,6 +8,7 @@ import com.test.backtracking.GraphColoring.Graph;
 import com.test.backtracking.Knapsack;
 import com.test.backtracking.Permutations;
 import com.test.backtracking.Sudoku;
+import com.test.backtracking.TravelingSaleman;
 
 import junit.framework.TestCase;
 
@@ -59,8 +60,8 @@ public class BacktrackingSample extends TestCase
         
         Knapsack knapsack = new Knapsack();
         
-        List<Knapsack.Goods> goodsList = Knapsack.createGoodsList(new int[] {1, 2, 3, 4, 5, 6, 7, 8, 9},
-            new int[] {1, 3, 5, 7, 9, 11, 13, 15, 17});
+        List<Knapsack.Goods> goodsList =
+            Knapsack.createGoodsList(new int[] {1, 2, 3, 4, 5, 6, 7, 8, 9}, new int[] {1, 3, 5, 7, 9, 11, 13, 15, 17});
         
         assertEquals(2, knapsack.knapsack(goodsList, 3));
         knapsack.reset();
@@ -104,5 +105,48 @@ public class BacktrackingSample extends TestCase
         nineSquare.setInitValue(8, 8, 0);
         sudoku.fill(nineSquare);
         nineSquare.reset();
+    }
+    
+    public void testTravelingSaleman()
+    {
+        System.out.println("-------- TravelingSaleman -------");
+        
+        TravelingSaleman.Graph graph = new TravelingSaleman.Graph();
+        
+        // 添加节点
+        graph.addVertex("A");
+        graph.addVertex("B");
+        graph.addVertex("C");
+        graph.addVertex("D");
+        graph.addVertex("E");
+        
+        // 添加边
+        graph.addEdge(0, 1, 1);
+        graph.addEdge(0, 2, 3);
+        graph.addEdge(0, 3, 4);
+        graph.addEdge(0, 4, 5);
+        
+        graph.addEdge(1, 0, 6);
+        graph.addEdge(1, 2, 7);
+        graph.addEdge(1, 3, 9);
+        graph.addEdge(1, 4, 1);
+        
+        graph.addEdge(2, 1, 2);
+        graph.addEdge(2, 2, 3);
+        graph.addEdge(2, 3, 4);
+        graph.addEdge(2, 4, 6);
+        
+        graph.addEdge(3, 0, 1);
+        graph.addEdge(3, 1, 3);
+        graph.addEdge(3, 2, 5);
+        graph.addEdge(3, 4, 7);
+        
+        graph.addEdge(4, 0, 1);
+        graph.addEdge(4, 1, 4);
+        graph.addEdge(4, 2, 9);
+        graph.addEdge(4, 3, 10);
+        
+        TravelingSaleman saleman = new TravelingSaleman();
+        saleman.travelMin(graph);
     }
 }

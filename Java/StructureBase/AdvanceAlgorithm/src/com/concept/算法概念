@@ -11,14 +11,14 @@ divide -- 分治算法
     OrderedNumber -- 有序对个数(并归)
 }
 
-backtracking -- 回溯算法
+backtracking -- 回溯算法【发现很多并没有“回滚”，而是全排列+剪枝而已】
 {
 	EightQueens -- 八皇后(线性遍历，回溯)
 	GraphColoring -- 图的着色(线性遍历，回溯)
 	Knapsack -- 0-1背包（线性遍历，回溯）
 	Permutations -- 全排列（线性遍历，回溯）
 	Sudoku -- 数独（线性遍历，回溯）
-	TravelingSaleman -- 旅行商问题
+	TravelingSaleman -- 旅行商问题（线性遍历，全排列）
 }
 
 dynamic -- 动态规划
@@ -27,4 +27,6 @@ dynamic -- 动态规划
 	Knapsack -- 0-1背包
 	Knapsack2 -- 0-1背包问题升级
 	ShortestPath -- 最短路径
+	
+	// 旅行商问题？？？不知道可不可以呀
 }
