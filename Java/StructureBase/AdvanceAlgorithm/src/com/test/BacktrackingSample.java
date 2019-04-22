@@ -7,6 +7,7 @@ import com.test.backtracking.GraphColoring;
 import com.test.backtracking.GraphColoring.Graph;
 import com.test.backtracking.Knapsack;
 import com.test.backtracking.Permutations;
+import com.test.backtracking.Sudoku;
 
 import junit.framework.TestCase;
 
@@ -87,5 +88,21 @@ public class BacktrackingSample extends TestCase
         assertEquals(3 * 2 * 1, permutations.reorder('a', 'b', 'c'));
         assertEquals(4 * 3 * 2 * 1, permutations.reorder(false, 'a', 'b', 'c', 'd'));
         assertEquals(5 * 4 * 3 * 2 * 1, permutations.reorder(false, 'a', 'b', 'c', 'd', 'f'));
+    }
+    
+    public void testSudoku()
+    {
+        System.out.println("-------- Sudoku -------");
+        
+        Sudoku sudoku = new Sudoku();
+        
+        Sudoku.NineSquare nineSquare = new Sudoku.NineSquare();
+        sudoku.fill(nineSquare);
+        nineSquare.reset();
+        
+        // 初始化
+        nineSquare.setInitValue(8, 8, 0);
+        sudoku.fill(nineSquare);
+        nineSquare.reset();
     }
 }
