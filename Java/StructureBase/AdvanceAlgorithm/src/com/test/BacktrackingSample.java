@@ -1,8 +1,11 @@
 package com.test;
 
+import java.util.List;
+
 import com.test.backtracking.EightQueens;
 import com.test.backtracking.GraphColoring;
 import com.test.backtracking.GraphColoring.Graph;
+import com.test.backtracking.Knapsack;
 
 import junit.framework.TestCase;
 
@@ -46,5 +49,31 @@ public class BacktrackingSample extends TestCase
         coloring.resetValue();
         coloring.coloring(graphA, 3);
         assertEquals(1, coloring.getValue());
+    }
+    
+    public void testKnapsack()
+    {
+        System.out.println("-------- Knapsack -------");
+        
+        Knapsack knapsack = new Knapsack();
+        
+        List<Knapsack.Goods> goodsList = Knapsack.createGoodsList(new int[] {1, 2, 3, 4, 5, 6, 7, 8, 9},
+            new int[] {1, 3, 5, 7, 9, 11, 13, 15, 17});
+        
+        assertEquals(2, knapsack.knapsack(goodsList, 3));
+        knapsack.reset();
+        
+        assertEquals(45, knapsack.knapsack(goodsList, 81));
+        knapsack.reset();
+        
+        assertEquals(17, knapsack.knapsack(goodsList, 30));
+        knapsack.reset();
+        
+        assertEquals(18, knapsack.knapsack(goodsList, 31));
+        knapsack.reset();
+        
+        assertEquals(18, knapsack.knapsack(goodsList, 32));
+        knapsack.reset();
+        
     }
 }

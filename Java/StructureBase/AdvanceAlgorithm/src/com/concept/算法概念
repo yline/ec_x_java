@@ -15,7 +15,7 @@ backtracking -- 回溯算法
 {
 	EightQueens -- 八皇后(线性遍历，回溯)
 	GraphColoring -- 图的着色(线性遍历，回溯)
-	Knapsack -- 0-1背包
+	Knapsack -- 0-1背包（线性遍历，回溯）
 	Permutations -- 全排列
 	Sudoku -- 数独
 	TravelingSaleman -- 旅行商问题
