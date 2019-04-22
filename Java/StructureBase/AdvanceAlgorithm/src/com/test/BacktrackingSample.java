@@ -6,6 +6,7 @@ import com.test.backtracking.EightQueens;
 import com.test.backtracking.GraphColoring;
 import com.test.backtracking.GraphColoring.Graph;
 import com.test.backtracking.Knapsack;
+import com.test.backtracking.Permutations;
 
 import junit.framework.TestCase;
 
@@ -74,6 +75,17 @@ public class BacktrackingSample extends TestCase
         
         assertEquals(18, knapsack.knapsack(goodsList, 32));
         knapsack.reset();
+    }
+    
+    public void testPermutations()
+    {
+        System.out.println("-------- Permutations -------");
         
+        Permutations permutations = new Permutations();
+        assertEquals(1, permutations.reorder('a'));
+        assertEquals(2 * 1, permutations.reorder('a', 'b'));
+        assertEquals(3 * 2 * 1, permutations.reorder('a', 'b', 'c'));
+        assertEquals(4 * 3 * 2 * 1, permutations.reorder(false, 'a', 'b', 'c', 'd'));
+        assertEquals(5 * 4 * 3 * 2 * 1, permutations.reorder(false, 'a', 'b', 'c', 'd', 'f'));
     }
 }
