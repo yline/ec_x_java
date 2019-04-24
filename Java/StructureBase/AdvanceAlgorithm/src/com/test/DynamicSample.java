@@ -17,6 +17,8 @@ public class DynamicSample extends TestCase
     // 最长公共字符串
     public void testLongestLength()
     {
-        
+        EditDistance.longestLength("mitcmu", "mtacnu", 4);
+        EditDistance.longestLength("Then why do we buy", "We should", 5);
+        EditDistance.longestLength("Then why do we buy albums", "We should just spend all our money on gifts", 12);
     }
 }

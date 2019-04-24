@@ -106,14 +106,14 @@ public class LongestLengthImpl
         {
             for (int j = 1; j < pattern.length(); j++)
             {
-                if (main.charAt(i) == pattern.charAt(i))
+                if (main.charAt(i) == pattern.charAt(j))
                 {
-                    maxArray[i][j] = Math.max(Math.max(maxArray[i - 1][j], maxArray[i][j - 1]), maxArray[i - 1][j - 1]);
+                    maxArray[i][j] =
+                        Math.max(Math.max(maxArray[i - 1][j], maxArray[i][j - 1]), maxArray[i - 1][j - 1] + 1);
                 }
                 else
                 {
-                    maxArray[i][j] = Math.max(Math.max(maxArray[i - 1][j], maxArray[i][j - 1]),
-                        maxArray[i - 1][j - 1] + 1);
+                    maxArray[i][j] = Math.max(Math.max(maxArray[i - 1][j], maxArray[i][j - 1]), maxArray[i - 1][j - 1]);
                 }
             }
         }

@@ -3,6 +3,7 @@ package com.test.dynamic;
 import static org.junit.Assert.assertEquals;
 
 import com.test.dynamic.editdistance.LevenDistanceImpl;
+import com.test.dynamic.editdistance.LongestLengthImpl;
 
 /**
  * 问题：量化两个字符的相似度，编辑距离【莱文斯距离和最长公共字符串】
@@ -49,6 +50,19 @@ public class EditDistance
      */
     public static void longestLength(String main, String pattern, int result)
     {
-        // todo
+        // 防止数据量过大，导致很长时间回溯在执行的问题
+        if (main.length() + pattern.length() > 30)
+        {
+            int dynamic = LongestLengthImpl.dynamic(main, pattern);
+            assertEquals(dynamic, result);
+        }
+        else
+        {
+            int backtrack = LongestLengthImpl.backtrack(main, pattern);
+            int dynamic = LongestLengthImpl.dynamic(main, pattern);
+            assertEquals(backtrack, dynamic);
+            assertEquals(dynamic, result);
+        }
     }
+    
 }
