@@ -65,4 +65,16 @@ public class EditDistance
         }
     }
     
+    /**
+     * 最短路径 todo 路径是什么
+     * @param array 二维
+     * @param result 最短路径的结果值
+     */
+    public static void shortestPath(int[][] array, int result)
+    {
+        int backtrack = ShortestPath.backtrack(array);
+        int dynamic = ShortestPath.dynamic(array);
+        assertEquals(backtrack, dynamic);
+        assertEquals(dynamic, result);
+    }
 }
