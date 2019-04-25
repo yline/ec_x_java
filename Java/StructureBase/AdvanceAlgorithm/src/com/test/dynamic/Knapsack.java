@@ -7,11 +7,37 @@ package com.test.dynamic;
  * 
  * 参考：https://blog.csdn.net/every__day/article/details/88100379
  * 
+ * 回溯法：全排列，然后对比；优化：对计算结果进行缓存【com.test.backtracking.Knapsack 有实现】
+ * 
+ * 动态规划：
+ * 当f(x-1)+a[x] <= C时；f(x) = f(x-1) + a[x];
+ * 当f(x-1)+a[x] >  C时；f(x) = max{f(x-1), ......}; 省略号，代表需要去遍历所有状态
+ * 因此，需要提前记录之前的计算结果；然后，每次都计算到最贴近的值
+ * 
  * @author YLine
  *
  * 2019年4月15日 下午4:01:14
  */
 public class Knapsack
 {
-    // todo
+    public static int dynamic(int[] valueArray, int capacity)
+    {
+        // 这里保存的是，之前计算的保存的量【其实用二叉树，等会节省一些内存空间，但带来一些时间复杂度】
+        // true 代表有值；false 代表无值
+        boolean[] cacheArray = new boolean[capacity + 1]; // 有等号
+        
+        // 每次读取到新的内容，更新缓存
+        // todo
+        
+        // 最后返回值
+        for (int i = capacity; i >= 0; i--)
+        {
+            if (cacheArray[i])
+            {
+                return i + 1;
+            }
+        }
+        // 全部没有，则返回
+        return 0;
+    }
 }

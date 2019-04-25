@@ -23,10 +23,10 @@ backtracking -- 回溯算法【发现很多并没有“回滚”，而是全排�
 
 dynamic -- 动态规划
 {
-	EditDistance -- 量化两个字符的相似度，编辑距离【莱文斯距离和最长公共字符串】
+	EditDistance -- 量化两个字符的相似度，编辑距离【莱文斯距离和最长公共字符串】（状态转移方程）
 	Knapsack -- 0-1背包
 	Knapsack2 -- 0-1背包问题升级
-	ShortestPath -- 最短路径
+	ShortestPath -- 最短路径（状态转移方程）
 	
 	// 旅行商问题？？？不知道可不可以呀
 }
