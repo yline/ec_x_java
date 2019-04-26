@@ -27,14 +27,34 @@ public class Knapsack
         boolean[] cacheArray = new boolean[capacity + 1]; // 有等号
         
         // 每次读取到新的内容，更新缓存
-        // todo
-        
+        for (int i = 0; i < valueArray.length; i++)
+        {
+            if (valueArray[i] > capacity)
+            {
+                continue;
+            }
+            else
+            {
+                // 必须从后往前遍历，这样避免当前改变，对之后遍历的影响
+                int index = valueArray[i];
+                for (int j = capacity - index; j >= 0; j--)
+                {
+                    if (cacheArray[j])
+                    {
+                        cacheArray[j + index] = true;
+                    }
+                }
+                // 必须放在后面
+                cacheArray[index] = true;
+            }
+        }
+
         // 最后返回值
         for (int i = capacity; i >= 0; i--)
         {
             if (cacheArray[i])
             {
-                return i + 1;
+                return i;
             }
         }
         // 全部没有，则返回

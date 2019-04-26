@@ -1,6 +1,7 @@
 package com.test;
 
 import com.test.dynamic.EditDistance;
+import com.test.dynamic.Knapsack;
 import com.test.dynamic.ShortestPath;
 
 import junit.framework.TestCase;
@@ -50,5 +51,24 @@ public class DynamicSample extends TestCase
         int dynamic = ShortestPath.dynamic(array);
         assertEquals(backtrack, result);
         assertEquals(dynamic, result);
+    }
+    
+    /**
+     * 01背包问题，仅重量，无价值变量
+     */
+    public void testKnapsack()
+    {
+        int[] valueArrayA = {1, 2, 3, 4, 5, 6, 7, 8, 9};
+        assertEquals(9, Knapsack.dynamic(valueArrayA, 9));
+        assertEquals(45, Knapsack.dynamic(valueArrayA, 45));
+        assertEquals(45, Knapsack.dynamic(valueArrayA, 100));
+    }
+    
+    /**
+     * 01背包问题，有重量，有价值变量
+     */
+    public void testknapsack()
+    {
+        
     }
 }
