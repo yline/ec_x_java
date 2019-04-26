@@ -2,6 +2,7 @@ package com.test;
 
 import com.test.dynamic.EditDistance;
 import com.test.dynamic.Knapsack;
+import com.test.dynamic.Knapsack2;
 import com.test.dynamic.ShortestPath;
 
 import junit.framework.TestCase;
@@ -69,6 +70,18 @@ public class DynamicSample extends TestCase
      */
     public void testknapsack()
     {
+        int[] heavyArrayA = {1, 2, 3, 4, 5, 6, 7, 8, 9};
+        float[] valueArrayA = {0.1f, 0.2f, 0.3f, 0.4f, 0.5f, 0.6f, 0.7f, 0.8f, 0.9f};
+        assertEquals(0.9f, Knapsack2.dynamic(heavyArrayA, valueArrayA, 9));
+        assertEquals(4.5f, Knapsack2.dynamic(heavyArrayA, valueArrayA, 45));
+        assertEquals(4.5f, Knapsack2.dynamic(heavyArrayA, valueArrayA, 100));
         
+        int[] heavyArrayB = {10, 15, 34, 46, 1, 50};
+        float[] valueArrayB = {3, 4, 7, 77, 10, 19};
+        assertEquals(87f, Knapsack2.dynamic(heavyArrayB, valueArrayB, 50));
+        assertEquals(87f, Knapsack2.dynamic(heavyArrayB, valueArrayB, 51));
+        assertEquals(87f, Knapsack2.dynamic(heavyArrayB, valueArrayB, 56));
+        assertEquals(90f, Knapsack2.dynamic(heavyArrayB, valueArrayB, 57));
+        assertEquals(106f, Knapsack2.dynamic(heavyArrayB, valueArrayB, 97));
     }
 }

@@ -20,23 +20,23 @@ package com.test.dynamic;
  */
 public class Knapsack
 {
-    public static int dynamic(int[] valueArray, int capacity)
+    public static int dynamic(int[] heavyArray, int capacity)
     {
         // 这里保存的是，之前计算的保存的量【其实用二叉树，等会节省一些内存空间，但带来一些时间复杂度】
         // true 代表有值；false 代表无值
         boolean[] cacheArray = new boolean[capacity + 1]; // 有等号
         
         // 每次读取到新的内容，更新缓存
-        for (int i = 0; i < valueArray.length; i++)
+        for (int i = 0; i < heavyArray.length; i++)
         {
-            if (valueArray[i] > capacity)
+            if (heavyArray[i] > capacity)
             {
                 continue;
             }
             else
             {
                 // 必须从后往前遍历，这样避免当前改变，对之后遍历的影响
-                int index = valueArray[i];
+                int index = heavyArray[i];
                 for (int j = capacity - index; j >= 0; j--)
                 {
                     if (cacheArray[j])
