@@ -11,6 +11,8 @@ import com.test.shortest.PathGraph.Vertex;
  * 
  * 参考：https://time.geekbang.org/column/article/76468
  * 
+ * 这个思路简单，实现涉及到数据结构的切换，有点恶心
+ * 
  * @author YLine
  *
  * 2019年4月28日 下午5:22:11
@@ -33,6 +35,7 @@ public class Dijkstra
         Arrays.fill(visitedArray, false);
         
         // 小顶堆
+        Result result = null;
         while (!minHeap.isEmpty())
         {
             Result currentNode = minHeap.poll();
@@ -41,6 +44,7 @@ public class Dijkstra
             // 如果抛出的已经达到终点了，则不用再进行循环了
             if (currentVertex == endVertex)
             {
+                result = currentNode;
                 break;
             }
             
@@ -56,19 +60,42 @@ public class Dijkstra
                     {
                         // 未访问过时
                         int newValue = currentNode.value + edge.getWeight();
-                        minHeap.add(new Result(newValue, nextVertex, currentVertex));
+                        minHeap.add(new Result(newValue, nextVertex, currentNode));
+                        
+                        visitedArray[nextIndex] = true;
                     }
                     else
                     {
                         // 已访问过时，修改数据即可
                         int newValue = currentNode.value + edge.getWeight();
-                        minHeap.update(nextVertex, newValue);
+                        minHeap.update(nextVertex, newValue, currentNode);
                     }
                 }
             }
         }
         
-
+        // 打印结果，和，路径（从后往前）
+        if (null == result)
+        {
+            System.err.println("result is null, 程序异常");
+        }
+        else
+        {
+            Result temp = result;
+            StringBuilder sBuilder = new StringBuilder();
+            while (null != temp)
+            {
+                sBuilder.append(temp.currentVertex.getId());
+                sBuilder.append(" -> ");
+                
+                temp = temp.preResult;
+            }
+            
+            sBuilder.append("result = ");
+            sBuilder.append(result.value);
+            
+            System.out.println(sBuilder.toString());
+        }
     }
     
     /**
@@ -83,7 +110,7 @@ public class Dijkstra
          * 2, 判断，如果新的值 大于等于  旧的Result，则不用处理
          * 3，判断，如果新的值 小于 旧的Result，则更新数据，然后进行堆化
          */
-        public void update(Vertex currentVertex, int newValue)
+        public void update(Vertex currentVertex, int newValue, Result preResult)
         {
             int currentIndex = -1;
             Result currentResult = null;
@@ -98,9 +125,15 @@ public class Dijkstra
             }
             
             // 依据规则，进行处理
-            if (null != currentResult && currentResult.value < newValue)
+            if (null != currentResult && currentResult.value > newValue)
             {
                 currentResult.setValue(newValue);
+                
+                // 更新两层，preResult
+                Result oldPreResult = currentResult.preResult;
+                preResult.setPreResult(oldPreResult);
+                currentResult.setPreResult(preResult);
+                
                 heapifyUp(currentIndex);
             }
         }
@@ -115,12 +148,13 @@ public class Dijkstra
         
         private Vertex currentVertex; // 表示，当前顶点
         
-        private Vertex preVertex; // 表示，最短路径对应的前一个顶点
+        private Result preResult; // 表示，最短路径对应的前一个顶点【可能是一个链表】
         
-        public Result(int val, Vertex vertex, Vertex preVertex)
+        public Result(int val, Vertex vertex, Result preResult)
         {
             this.value = val;
             this.currentVertex = vertex;
+            this.preResult = preResult;
         }
         
         @Override
@@ -143,14 +177,14 @@ public class Dijkstra
             this.value = value;
         }
         
-        public void setPreVertex(Vertex preVertex)
+        public void setPreResult(Result preResult)
         {
-            this.preVertex = preVertex;
+            this.preResult = preResult;
         }
         
-        public Vertex getPreVertex()
+        public Result getPreResult()
         {
-            return preVertex;
+            return preResult;
         }
     }
     

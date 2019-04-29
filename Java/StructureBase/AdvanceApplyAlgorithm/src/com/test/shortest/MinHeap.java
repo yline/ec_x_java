@@ -77,6 +77,6 @@ public class MinHeap<T extends Comparable<T>>
     
     public void heapifyUp(int index)
     {
-        HeapUtils.heapifyUp(mDataList, index - 1, true);
+        HeapUtils.heapifyUp(mDataList, index, true);
     }
 }

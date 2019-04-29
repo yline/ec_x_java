@@ -136,5 +136,10 @@ public class PathGraph
         {
             return edgeArray.iterator();
         }
+        
+        public int getId()
+        {
+            return id;
+        }
     }
 }
