@@ -1,6 +1,7 @@
 package com.test.shortest;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -53,6 +54,15 @@ public class PathGraph
         return vertextList.get(index);
     }
     
+    public int indexOf(Vertex vertex)
+    {
+        if (null == vertex)
+        {
+            return -1;
+        }
+        return vertextList.indexOf(vertex);
+    }
+    
     /**
      * 边
      */
@@ -74,6 +84,11 @@ public class PathGraph
         public int getWeight()
         {
             return weight;
+        }
+        
+        public Vertex getEndVertex()
+        {
+            return end;
         }
     }
     
@@ -105,6 +120,21 @@ public class PathGraph
             
             // 添加内容
             edgeArray.add(edge);
+        }
+        
+        public int getEdgeSize()
+        {
+            return edgeArray.size();
+        }
+        
+        public Edge getEdge(int index)
+        {
+            return edgeArray.get(index);
+        }
+        
+        public Iterator<Edge> iterator()
+        {
+            return edgeArray.iterator();
         }
     }
 }

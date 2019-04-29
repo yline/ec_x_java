@@ -1,5 +1,11 @@
 package com.test.shortest;
 
+import java.util.Arrays;
+import java.util.Iterator;
+
+import com.test.shortest.PathGraph.Edge;
+import com.test.shortest.PathGraph.Vertex;
+
 /**
  * Dijkstra 算法 -- 单源最短路径算法（可以看做是一个动态规划）
  * 
@@ -11,10 +17,141 @@ package com.test.shortest;
  */
 public class Dijkstra
 {
-    // todo 需要实现一个小顶堆
     public static void shortest(PathGraph graph, int start, int end)
     {
+        // 入口校验，这里省略【毕竟不是做产品】
         
+        CustomHeap minHeap = new CustomHeap();
+        Vertex startVertex = graph.getVertex(start);
+        Vertex endVertex = graph.getVertex(end);
+
+        // 进行首个初始化
+        minHeap.add(new Result(0, startVertex, null));
+        
+        // 全部默认未访问
+        boolean[] visitedArray = new boolean[graph.getVertexSize()];
+        Arrays.fill(visitedArray, false);
+        
+        // 小顶堆
+        while (!minHeap.isEmpty())
+        {
+            Result currentNode = minHeap.poll();
+            Vertex currentVertex = currentNode.currentVertex;
+            
+            // 如果抛出的已经达到终点了，则不用再进行循环了
+            if (currentVertex == endVertex)
+            {
+                break;
+            }
+            
+            for (Iterator<Edge> iterator = currentVertex.iterator(); iterator.hasNext();)
+            {
+                Edge edge = iterator.next();
+                Vertex nextVertex = edge.getEndVertex();
+                
+                int nextIndex = graph.indexOf(nextVertex);
+                if (nextIndex != -1)
+                {
+                    if (!visitedArray[nextIndex])
+                    {
+                        // 未访问过时
+                        int newValue = currentNode.value + edge.getWeight();
+                        minHeap.add(new Result(newValue, nextVertex, currentVertex));
+                    }
+                    else
+                    {
+                        // 已访问过时，修改数据即可
+                        int newValue = currentNode.value + edge.getWeight();
+                        minHeap.update(nextVertex, newValue);
+                    }
+                }
+            }
+        }
+        
+
+    }
+    
+    /**
+     * 自定义一个堆，实现更新数据【否则，无法依据内容更新某条数据】
+     */
+    public static class CustomHeap extends MinHeap<Result>
+    {
+        /**
+         * .更新某一条数据
+         * .规则：
+         * 1, 依据当前节点，找到对应的Result
+         * 2, 判断，如果新的值 大于等于  旧的Result，则不用处理
+         * 3，判断，如果新的值 小于 旧的Result，则更新数据，然后进行堆化
+         */
+        public void update(Vertex currentVertex, int newValue)
+        {
+            int currentIndex = -1;
+            Result currentResult = null;
+            for (int i = 1; i < getSize(); i++)
+            {
+                if (getData(i).currentVertex == currentVertex)
+                {
+                    currentIndex = i;
+                    currentResult = getData(i);
+                    break;
+                }
+            }
+            
+            // 依据规则，进行处理
+            if (null != currentResult && currentResult.value < newValue)
+            {
+                currentResult.setValue(newValue);
+                heapifyUp(currentIndex);
+            }
+        }
+    }
+    
+    /**
+     * 选择的节点
+     */
+    public static class Result implements Comparable<Result>
+    {
+        private int value; // 表示，起始顶点到当前顶点的最短路径
+        
+        private Vertex currentVertex; // 表示，当前顶点
+        
+        private Vertex preVertex; // 表示，最短路径对应的前一个顶点
+        
+        public Result(int val, Vertex vertex, Vertex preVertex)
+        {
+            this.value = val;
+            this.currentVertex = vertex;
+        }
+        
+        @Override
+        public int compareTo(Result o)
+        {
+            if (null != o)
+            {
+                return (value < o.value ? -1 : 1);
+            }
+            return 0;
+        }
+        
+        public int getValue()
+        {
+            return value;
+        }
+        
+        public void setValue(int value)
+        {
+            this.value = value;
+        }
+        
+        public void setPreVertex(Vertex preVertex)
+        {
+            this.preVertex = preVertex;
+        }
+        
+        public Vertex getPreVertex()
+        {
+            return preVertex;
+        }
     }
     
     public static PathGraph createGraph()

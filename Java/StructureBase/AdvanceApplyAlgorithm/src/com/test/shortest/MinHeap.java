@@ -1,4 +1,4 @@
-package com.yline.structure;
+package com.test.shortest;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,11 +14,11 @@ import java.util.List;
  *
  * 2019年4月29日 上午9:59:52
  */
-public class MaxHeap<T extends Comparable<T>>
+public class MinHeap<T extends Comparable<T>>
 {
     private List<T> mDataList;
     
-    public MaxHeap()
+    public MinHeap()
     {
         mDataList = new ArrayList<>();
         mDataList.add(null); // 首个空
@@ -30,7 +30,7 @@ public class MaxHeap<T extends Comparable<T>>
         mDataList.add(t);
         
         // 从下至上，堆化
-        HeapUtils.heapifyUp(mDataList, mDataList.size() - 1, false);
+        HeapUtils.heapifyUp(mDataList, mDataList.size() - 1, true);
     }
     
     public T poll()
@@ -55,18 +55,9 @@ public class MaxHeap<T extends Comparable<T>>
         mDataList.set(1, lastValue);
         
         // 从上至下堆化
-        HeapUtils.heapifyDown(mDataList, 1, mDataList.size() - 1, false);
+        HeapUtils.heapifyDown(mDataList, 1, mDataList.size() - 1, true);
 
         return firstValue;
-    }
-    
-    public T peek()
-    {
-        if (mDataList.size() == 1)
-        {
-            return null;
-        }
-        return mDataList.get(1);
     }
     
     public int getSize()
@@ -84,16 +75,8 @@ public class MaxHeap<T extends Comparable<T>>
         return mDataList.size() == 1;
     }
     
-    /**
-     * 更新最后一个
-     * @param t
-     */
-    public void updateLast(T t)
+    public void heapifyUp(int index)
     {
-        // 更新最后一个数据
-        mDataList.set(mDataList.size() - 1, t);
-        
-        // 从下至上堆化
-        HeapUtils.heapifyUp(mDataList, mDataList.size() - 1, false);
+        HeapUtils.heapifyUp(mDataList, index - 1, true);
     }
 }

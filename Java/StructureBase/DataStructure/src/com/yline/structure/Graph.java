@@ -2,6 +2,7 @@ package com.yline.structure;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -61,6 +62,15 @@ public class Graph
         return mVertexList.get(index);
     }
     
+    public int indexOf(Vertex vertex)
+    {
+        if (null == vertex)
+        {
+            return -1;
+        }
+        return mVertexList.indexOf(vertex);
+    }
+    
     private void checkValid(int index)
     {
         if (index < 0 || index >= mVertexList.size())
@@ -109,6 +119,16 @@ public class Graph
         public void addEdge(Vertex end, int weight)
         {
             mEdgeSet.add(new Edge(this, end, weight));
+        }
+        
+        public int getEdgeSize()
+        {
+            return mEdgeSet.size();
+        }
+        
+        public Iterator<Edge> iterator()
+        {
+            return mEdgeSet.iterator();
         }
         
         @Override

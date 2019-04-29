@@ -79,16 +79,8 @@ public class MinHeap<T extends Comparable<T>>
         return mDataList.get(index);
     }
     
-    /**
-     * 更新最后一个
-     * @param t
-     */
-    public void updateLast(T t)
+    public boolean isEmpty()
     {
-        // 更新最后一个数据
-        mDataList.set(mDataList.size() - 1, t);
-        
-        // 从下至上堆化
-        HeapUtils.heapifyUp(mDataList, mDataList.size() - 1, true);
+        return mDataList.size() == 1;
     }
 }
