@@ -113,7 +113,7 @@ public class SolutionA implements Solution
         boolean isEndInner = (end != -1 && newInterval[1] <= intervals[end][1]);
         
         int diff;
-        if (isStartInner && isEndInner)
+        if (isStartInner)
         {
             diff = (end - start);
         }
@@ -122,21 +122,21 @@ public class SolutionA implements Solution
             diff = (end - start - 1);
         }
         
-        int[][] result = new int[intervals.length - diff][];
+        int[][] result = new int[intervals.length - diff][2];
         
-        // 第一部分赋值
+        // 第一部分赋值（长度 = startInner ? start : start + 1）
         int firstEnd = isStartInner ? start : start + 1;
         for (int i = 0; i < firstEnd; i++)
         {
             result[i] = intervals[i];
         }
         
-        // 交合部分赋值，无论如何，肯定只有一个
+        // 交合部分赋值，(长度 = 1)
         int min = isStartInner ? intervals[start][0] : newInterval[0];
         int max = isEndInner ? intervals[end][1] : newInterval[1];
         result[firstEnd] = new int[] {min, max};
         
-        // 后续部分赋值
+        // 后续部分赋值(长度 = length - end - 1)
         for (int i = end + 1; i < intervals.length; i++)
         {
             result[i - diff] = intervals[i];
