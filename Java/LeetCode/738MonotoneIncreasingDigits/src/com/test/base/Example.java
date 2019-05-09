@@ -26,6 +26,7 @@ public class Example extends TestCase
         assertEquals(9, solution.monotoneIncreasingDigits(10));
         assertEquals(1234, solution.monotoneIncreasingDigits(1234));
         assertEquals(299, solution.monotoneIncreasingDigits(332));
+        assertEquals(899999, solution.monotoneIncreasingDigits(999998));
     }
     
     @Override

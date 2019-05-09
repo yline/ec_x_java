@@ -45,6 +45,19 @@ public class SolutionA implements Solution
         }
         else
         {
+            // 防止因为减少，而导致前面比后面大的情况
+            for (int i = index + 1; i < tempList.size(); i++)
+            {
+                if (tempList.get(i - 1) != tempList.get(i))
+                {
+                    break;
+                }
+                else
+                {
+                    index++;
+                }
+            }
+            
             int result = 0;
             for (int i = tempList.size() - 1; i > index; i--)
             {
