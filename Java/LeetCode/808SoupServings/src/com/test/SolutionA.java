@@ -3,6 +3,9 @@ package com.test;
 import com.test.base.Solution;
 
 /**
+ * 感觉这题，没劲
+ * 参考：https://www.cnblogs.com/grandyang/p/9406434.html
+ * 
  * @author YLine
  *
  * 2019年5月9日 上午8:25:07
@@ -12,108 +15,34 @@ public class SolutionA implements Solution
     @Override
     public double soupServings(int N)
     {
-        Result result = new Result();
-        dfs(N, N, result);
-        return (result.a + result.ab / 2.0) / result.total;
+        double[][] memo = new double[200][200];
+        return N >= 4800 ? 1.0 : dfs(memo, (N + 24) / 25, (N + 24) / 25);
     }
     
-    private void dfs(int valueA, int valueB, Result result)
+    private double dfs(double[][] memo, int a, int b)
     {
-        // 第一种方案
-        if (valueA > 100)
+        if (a <= 0 && b <= 0)
         {
-            if (valueB > 0)
-            {
-                dfs(valueA - 100, valueB, result);
-            }
-        }
-        else
-        {
-            if (valueB > 0)
-            {
-                result.a++;
-            }
-            else
-            {
-                result.ab++;
-            }
+            return 0.5;
         }
         
-        // 第二种方案
-        if (valueA > 75)
+        if (a <= 0)
         {
-            if (valueB > 25)
-            {
-                dfs(valueA - 75, valueB - 25, result);
-            }
-        }
-        else
-        {
-            if (valueB > 25)
-            {
-                result.a++;
-            }
-            else
-            {
-                result.ab++;
-            }
+            return 1.0;
         }
         
-        // 第三种方案
-        if (valueA > 50)
+        if (b <= 0)
         {
-            if (valueB > 50)
-            {
-                dfs(valueA - 50, valueB - 50, result);
-            }
-        }
-        else
-        {
-            if (valueB > 50)
-            {
-                result.a++;
-            }
-            else
-            {
-                result.ab++;
-            }
+            return 0;
         }
         
-        // 第四种方案
-        if (valueA > 25)
+        if (memo[a][b] > 0)
         {
-            if (valueB > 75)
-            {
-                dfs(valueA - 25, valueB - 75, result);
-            }
+            return memo[a][b];
         }
-        else
-        {
-            if (valueB > 75)
-            {
-                result.a++;
-            }
-            else
-            {
-                result.ab++;
-            }
-        }
-        result.total += 4;
-    }
-    
-    public static class Result
-    {
-        private int a; // a出现的情况个数
         
-        private int ab; // ab出现的情况的个数
-        
-        private int total; // 总个数
-        
-        public Result()
-        {
-            this.a = 0;
-            this.ab = 0;
-            this.total = 0;
-        }
+        memo[a][b] = 0.25 * (dfs(memo, a - 4, b) + dfs(memo, a - 3, b - 1)
+            + dfs(memo, a - 2, b - 2) + dfs(memo, a - 1, b - 3));
+        return memo[a][b];
     }
 }

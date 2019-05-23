@@ -23,7 +23,7 @@ public class Example extends TestCase
     
     private void assertSolution()
     {
-        solution.soupServings(50);
+        //solution.soupServings(50);
         solution.soupServings(100);
     }
     
