@@ -43,4 +43,62 @@ public class SolutionA implements Solution
         }
         return false;
     }
+    
+    public int heightChecker(int[] heights)
+    {
+        int[] temp = new int[heights.length];
+        for (int i = 0; i < temp.length; i++)
+        {
+            temp[i] = heights[i];
+        }
+        
+        Arrays.sort(temp);
+        int result = 0;
+        for (int i = 0; i < temp.length; i++)
+        {
+            if (temp[i] != heights[i])
+            {
+                result++;
+            }
+        }
+        return result;
+    }
+    
+    public int maxSatisfied(int[] customers, int[] grumpy, int X)
+    {
+        int sum = 0, max = 0;
+        for (int i = 0; i < grumpy.length; i++)
+        {
+            if (grumpy[i] == 0) // 满意
+            {
+                sum += customers[i];
+            }
+            else
+            {
+                max = Math.max(max, sumOf(customers, grumpy, X, i));
+            }
+        }
+        
+        return sum + max;
+    }
+    
+    private int sumOf(int[] customers, int[] grumpy, int X, int start)
+    {
+        int result = 0;
+        for (int i = start; i < start + X; i++)
+        {
+            // 数组越界处理
+            if (i == customers.length)
+            {
+                return result;
+            }
+            
+            if (grumpy[i] == 1)
+            {
+                result += customers[i];
+            }
+        }
+        
+        return result;
+    }
 }

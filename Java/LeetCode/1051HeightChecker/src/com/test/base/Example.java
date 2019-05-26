@@ -23,8 +23,8 @@ public class Example extends TestCase
     
     private void assertSolution()
     {
-        int result = solution.maxSatisfied(new int[] {1, 0, 1, 2, 1, 1, 7, 5}, new int[] {0, 1, 0, 1, 0, 1, 0, 1}, 3);
-        System.out.println("result = " + result);
+        assertEquals(3, solution.heightChecker(new int[] {1, 1, 4, 2, 1, 3}));
+        ;
     }
     
     @Override
