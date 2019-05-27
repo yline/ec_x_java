@@ -4,101 +4,118 @@ import java.util.Arrays;
 
 import com.test.base.Solution;
 
+/**
+ * 思路：
+ * 四个数字的计算，其实就是，两个数字计算之后，和另外两个数字计算的结果。
+ * 于是，一个递归方案就出来了
+ * 
+ * @author YLine
+ *
+ * 2019年5月27日 下午4:48:36
+ */
 public class SolutionA implements Solution
 {
     @Override
     public boolean judgePoint24(int[] nums)
     {
-        if (nums[0] + nums[1] + nums[2] + nums[3] == 24)
+        float[] tempArray = new float[nums.length];
+        for (int i = 0; i < tempArray.length; i++)
         {
-            return true;
+            tempArray[i] = nums[i];
         }
         
-        if (nums[0] * nums[1] * nums[2] * nums[3] == 24)
+        boolean[] visited = new boolean[nums.length];
+        Arrays.fill(visited, false);
+        
+        return dfs(tempArray, visited, 1);
+    }
+    
+    private boolean dfs(float[] numsArray, boolean[] visited, int index)
+    {
+        if (index == numsArray.length)
         {
-            return true;
+            float result = 0.0f;
+            for (int i = 0; i < visited.length; i++)
+            {
+                if (!visited[i])
+                {
+                    result = numsArray[i];
+                    break;
+                }
+            }
+            return (23.9 < result && result < 24.1); // 允许小数点的存在
         }
         
-        Arrays.sort(nums);
-        switch (nums[0])
+        for (int i = 0; i < numsArray.length; i++)
         {
-            case 1:
-                if (nums[1] + nums[2] + nums[3] == 24)
+            if (visited[i]) // 访问过的，直接放过
+            {
+                continue;
+            }
+            
+            // 移除
+            visited[i] = true;
+            
+            for (int j = i + 1; j < numsArray.length; j++)
+            {
+                if (visited[j]) // 访问过的，直接放过；而且，先后顺序不对，也放过
+                {
+                    continue;
+                }
+                
+                float first = numsArray[i];
+                float second = numsArray[j];
+
+                // 如果满足，则直接过
+                numsArray[j] = first + second;
+                boolean isMatch = dfs(numsArray, visited, index + 1);
+                if (isMatch)
                 {
                     return true;
                 }
                 
-                break;
-            case 2:
+                numsArray[j] = first * second;
+                isMatch = dfs(numsArray, visited, index + 1);
+                if (isMatch)
+                {
+                    return true;
+                }
                 
-                break;
-            case 3:
+                numsArray[j] = first - second;
+                isMatch = dfs(numsArray, visited, index + 1);
+                if (isMatch)
+                {
+                    return true;
+                }
                 
-                break;
-            case 4:
+                numsArray[j] = first / second;
+                isMatch = dfs(numsArray, visited, index + 1);
+                if (isMatch)
+                {
+                    return true;
+                }
                 
-                break;
-            default: // 最小值，大于等于5全部失败
-                return false;
-        }
-        return false;
-    }
-    
-    public int heightChecker(int[] heights)
-    {
-        int[] temp = new int[heights.length];
-        for (int i = 0; i < temp.length; i++)
-        {
-            temp[i] = heights[i];
-        }
-        
-        Arrays.sort(temp);
-        int result = 0;
-        for (int i = 0; i < temp.length; i++)
-        {
-            if (temp[i] != heights[i])
-            {
-                result++;
-            }
-        }
-        return result;
-    }
-    
-    public int maxSatisfied(int[] customers, int[] grumpy, int X)
-    {
-        int sum = 0, max = 0;
-        for (int i = 0; i < grumpy.length; i++)
-        {
-            if (grumpy[i] == 0) // 满意
-            {
-                sum += customers[i];
-            }
-            else
-            {
-                max = Math.max(max, sumOf(customers, grumpy, X, i));
-            }
-        }
-        
-        return sum + max;
-    }
-    
-    private int sumOf(int[] customers, int[] grumpy, int X, int start)
-    {
-        int result = 0;
-        for (int i = start; i < start + X; i++)
-        {
-            // 数组越界处理
-            if (i == customers.length)
-            {
-                return result;
+                numsArray[j] = second - first;
+                isMatch = dfs(numsArray, visited, index + 1);
+                if (isMatch)
+                {
+                    return true;
+                }
+                
+                numsArray[j] = second / first;
+                isMatch = dfs(numsArray, visited, index + 1);
+                if (isMatch)
+                {
+                    return true;
+                }
+                
+                // 数据还原
+                numsArray[j] = second;
             }
             
-            if (grumpy[i] == 1)
-            {
-                result += customers[i];
-            }
+            // 添加回来
+            visited[i] = false;
         }
-        
-        return result;
+        return false;
     }
 }
