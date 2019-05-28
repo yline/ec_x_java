@@ -23,6 +23,7 @@ public class Example extends TestCase
     
     private void assertSolution()
     {
+        
     }
     
     @Override

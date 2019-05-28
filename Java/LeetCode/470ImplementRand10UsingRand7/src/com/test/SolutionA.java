@@ -19,6 +19,12 @@ public class SolutionA extends SolBase
 {
     public int rand10()
     {
-        return -1;
+        int result = 7 * (rand7() - 1) + rand7(); // 生成，1-49的随机数
+        while (result > 40)
+        {
+            result = 7 * (rand7() - 1) + rand7();
+        }
+        
+        return result % 10 + 1;
     }
 }
