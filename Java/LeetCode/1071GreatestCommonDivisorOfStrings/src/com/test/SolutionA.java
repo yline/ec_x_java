@@ -1,6 +1,17 @@
 package com.test;
 
 /**
+ * 
+ * For strings S and T, we say "T divides S" if and only
+ * if S = T + ... + T  (T concatenated with itself 1 or more times)
+ * 
+ * S/T = 某个整数
+ * 
+ * Return the largest string X such that X divides str1 and X divides str2.
+ * 求X1、X2的共同值
+ * 
+ * 可以直接由长度，求的最大公约数，若最大公约数，不满足，则直接返回0
+ * 
  * 方案：逐个遍历
  * 
  * 时间复杂度：
@@ -12,7 +23,6 @@ package com.test;
  */
 public class SolutionA
 {
-    
     public String gcdOfStrings(String str1, String str2)
     {
         int a = str1.length();
