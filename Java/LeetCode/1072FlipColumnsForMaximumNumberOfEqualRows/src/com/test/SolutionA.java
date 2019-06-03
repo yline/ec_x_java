@@ -22,18 +22,15 @@ public class SolutionA
             firstChangeArray[i] = (matrix[i][0] == 1);
         }
 
-        int result = matrix.length;
-        for (int i = 1; i < matrix[0].length; i++)
-        {
-            result = check(matchArray, firstChangeArray, matrix, i);
-            if (result == 1)
-            {
-                return 1;
-            }
-        }
+        cacheMatchA = new boolean[matrix.length];
+        cacheMatchB = new boolean[matrix.length];
         
-        return result;
+        return dfs(matchArray, firstChangeArray, matrix, 1);
     }
+    
+    private boolean[] cacheMatchA; // 可以当做临时变量看待，之所以创建是为了避免大量的栈内存
+    
+    private boolean[] cacheMatchB; // 可以当做临时变量看待，之所以创建是为了避免大量的栈内存
     
     /**
      * 
@@ -43,7 +40,7 @@ public class SolutionA
      * @param firstArray 该行，是否进行了行变换
      * @param valueArray 该列的值
      */
-    private int check(boolean[] matchArray, boolean[] firstArray, int[][] matrix, int column)
+    private int dfs(boolean[] matchArray, boolean[] firstArray, int[][] matrix, int column)
     {
         // 前一个为true时，1的个数，和0的个数
         int pSize = 0, nSize = 0;
@@ -58,50 +55,40 @@ public class SolutionA
                     (!firstArray[i] && matrix[i][column] == 1);
                 if (isOne)
                 {
+                    // A代表，假设该列，全部由1 -> 0之后的情况
+                    cacheMatchA[i] = true;
+                    cacheMatchB[i] = false;
                     pSize++;
                 }
                 else
                 {
+                    // B代表，假设该列，全部由0 -> 0之后的满足情况
+                    cacheMatchB[i] = true;
+                    cacheMatchA[i] = false;
                     nSize++;
                 }
             }
+            else
+            {
+                cacheMatchA[i] = false;
+                cacheMatchB[i] = false;
+            }
         }
         
-        if (pSize > nSize)
+        // 已经到达最后一列了
+        if (column == matrix[0].length - 1)
         {
-            // 1的数，更多；将所有为0的值，matchArray置为false
-            for (int i = 0; i < matrix.length; i++)
-            {
-                if (matchArray[i])
-                {
-                    boolean isOne = (firstArray[i] && matrix[i][column] == 0) ||
-                        (!firstArray[i] && matrix[i][column] == 1);
-                    if (!isOne)
-                    {
-                        matchArray[i] = false;
-                    }
-                }
-            }
-            
-            return pSize;
+            return Math.max(pSize, nSize);
         }
         else
         {
-            // 0的数，更多；将所有为1的值，matchArray置为false
-            for (int i = 0; i < matrix.length; i++)
-            {
-                if (matchArray[i])
-                {
-                    boolean isOne = (firstArray[i] && matrix[i][column] == 0) ||
-                        (!firstArray[i] && matrix[i][column] == 1);
-                    if (isOne)
-                    {
-                        matchArray[i] = false;
-                    }
-                }
-            }
+            System.arraycopy(cacheMatchA, 0, matchArray, 0, cacheMatchA.length);
+            pSize = dfs(matchArray, firstArray, matrix, column + 1);
             
-            return nSize;
+            System.arraycopy(cacheMatchB, 0, matchArray, 0, cacheMatchB.length);
+            nSize = dfs(matchArray, firstArray, matrix, column + 1);
+            
+            return Math.max(pSize, nSize);
         }
     }
     
