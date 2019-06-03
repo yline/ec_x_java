@@ -29,7 +29,6 @@ public class Example extends TestCase
         assertEquals("CXTXN",
             solution.gcdOfStrings("CXTXNCXTXNCXTXNCXTXNCXTXN",
                 "CXTXNCXTXNCXTXNCXTXNCXTXNCXTXNCXTXNCXTXNCXTXNCXTXNCXTXNCXTXNCXTXN"));
-        
     }
     
     @Override
