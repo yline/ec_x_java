@@ -11,6 +11,11 @@ public class SolutionA
             return 0;
         }
         
+        if (matrix[0].length == 1)
+        {
+            return matrix.length;
+        }
+        
         // 第一行，全部满足
         boolean[] matchArray = new boolean[matrix.length];
         Arrays.fill(matchArray, true);
@@ -21,16 +26,9 @@ public class SolutionA
         {
             firstChangeArray[i] = (matrix[i][0] == 1);
         }
-
-        cacheMatchA = new boolean[matrix.length];
-        cacheMatchB = new boolean[matrix.length];
         
         return dfs(matchArray, firstChangeArray, matrix, 1);
     }
-    
-    private boolean[] cacheMatchA; // 可以当做临时变量看待，之所以创建是为了避免大量的栈内存
-    
-    private boolean[] cacheMatchB; // 可以当做临时变量看待，之所以创建是为了避免大量的栈内存
     
     /**
      * 
@@ -45,33 +43,35 @@ public class SolutionA
         // 前一个为true时，1的个数，和0的个数
         int pSize = 0, nSize = 0;
         
+        // 这里会浪费很多栈内存，不过我没其他办法了
+        boolean[] cacheArray = new boolean[matchArray.length];
+        
         // 遍历，找出1和0的较大值
         for (int i = 0; i < matrix.length; i++)
         {
             if (matchArray[i]) // 前一个为true
             {
                 // 当前值为，0但进行了行变换，则认为为1；否则为0
-                boolean isOne = (firstArray[i] && matrix[i][column] == 0) ||
-                    (!firstArray[i] && matrix[i][column] == 1);
+                boolean isOne = (firstArray[i] && matrix[i][column] == 0) || (!firstArray[i] && matrix[i][column] == 1);
                 if (isOne)
                 {
                     // A代表，假设该列，全部由1 -> 0之后的情况
-                    cacheMatchA[i] = true;
-                    cacheMatchB[i] = false;
+                    matchArray[i] = true;
+                    cacheArray[i] = false;
                     pSize++;
                 }
                 else
                 {
                     // B代表，假设该列，全部由0 -> 0之后的满足情况
-                    cacheMatchB[i] = true;
-                    cacheMatchA[i] = false;
+                    cacheArray[i] = true;
+                    matchArray[i] = false;
                     nSize++;
                 }
             }
             else
             {
-                cacheMatchA[i] = false;
-                cacheMatchB[i] = false;
+                matchArray[i] = false;
+                cacheArray[i] = false;
             }
         }
         
@@ -82,11 +82,16 @@ public class SolutionA
         }
         else
         {
-            System.arraycopy(cacheMatchA, 0, matchArray, 0, cacheMatchA.length);
-            pSize = dfs(matchArray, firstArray, matrix, column + 1);
+            if (pSize != 0)
+            {
+                pSize = dfs(matchArray, firstArray, matrix, column + 1); // 子情况，1的个数
+            }
             
-            System.arraycopy(cacheMatchB, 0, matchArray, 0, cacheMatchB.length);
-            nSize = dfs(matchArray, firstArray, matrix, column + 1);
+            if (nSize != 0)
+            {
+                System.arraycopy(cacheArray, 0, matchArray, 0, matchArray.length);
+                nSize = dfs(matchArray, firstArray, matrix, column + 1); // 子情况，0的个数
+            }
             
             return Math.max(pSize, nSize);
         }
