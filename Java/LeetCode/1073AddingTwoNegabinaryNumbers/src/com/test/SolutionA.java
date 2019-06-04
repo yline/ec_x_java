@@ -1,23 +1,26 @@
 package com.test;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.ArrayDeque;
 
 /**
  * Given two numbers arr1 and arr2 in base -2, return the result of adding them together.
  * 
  * 给两个数组，它的位数，表示（-2）^(length-1-index)，返回，两个数组的和。并且表达方式相同
  * 
- * Each number is given in array format:  as an array of 0s and 1s, 
- * from most significant bit to least significant bit.  
+ * Each number is given in array format:  as an array of 0s and 1s,
+ * from most significant bit to least significant bit.
  * 
  * 案例：
- * For example, arr = [1,1,0,1] represents the number (-2)^3 + (-2)^2 + (-2)^0 = -3.  
+ * For example, arr = [1,1,0,1] represents the number (-2)^3 + (-2)^2 + (-2)^0 = -3.
  * A number arr in array format is also guaranteed to have no leading zeros: either arr == [0] or arr[0] == 1.
  * arr = [1, 1, 0, 1]，代表 arr = (-2)^3 + (-2)^2 + (-2)^0 = -3
  * 
  * Return the result of adding arr1 and arr2 in the same format: as an array of 0s and 1s with no leading zeros.
  * 返回，arr1 + arr2的结果，并且还是用数组表示
+ * 
+ * 1，由加法进位，分析，最多的情况可以多3位，然后直接给前面加0；
+ * 2，直接对数组处理，然后两者求和
+ * 3，对结果，前面如果未0，进行处理就是结果了
  * 
  * @author YLine
  *
@@ -27,112 +30,85 @@ public class SolutionA
 {
     public int[] addNegabinary(int[] arr1, int[] arr2)
     {
-        int maxLength = 2 + (Math.max(arr1.length, arr2.length));
-        List<Integer> cacheList = new ArrayList<>(maxLength); // 避免多次扩容，减少内存损耗
+        int maxLength = Math.max(arr1.length, arr2.length) + 3;
+        ArrayDeque<Integer> queue = new ArrayDeque<>(maxLength);
         
-        // 将两个值，颠倒，可以减少工作量
-        reverse(arr1);
-        reverse(arr2);
+        int[] arrA = new int[maxLength];
+        System.arraycopy(arr1, 0, arrA, arrA.length - arr1.length, arr1.length);
         
-        // 添加求和
-        if (arr1.length >= arr2.length)
+        int[] arrB = new int[maxLength];
+        System.arraycopy(arr2, 0, arrB, arrB.length - arr2.length, arr2.length);
+        
+        add(arrA, arrB, queue);
+        
+        if (queue.isEmpty())
         {
-            add(arr1, arr2, cacheList);
+            return new int[] {0};
         }
         else
         {
-            add(arr2, arr1, cacheList);
-        }
-        
-        // 得到结果值
-        int[] resultArray = new int[cacheList.size()];
-        for (int i = 0; i < resultArray.length; i++)
-        {
-            resultArray[i] = cacheList.get(i);
-        }
-        return resultArray;
-    }
-    
-    private void reverse(int[] array)
-    {
-        int left = 0, right = array.length - 1;
-        int temp;
-        while (left < right)
-        {
-            temp = array[left];
-            array[left] = array[right];
-            array[right] = temp;
-            
-            left++;
-            right--;
+            int[] resultArray = new int[queue.size()];
+            for (int i = 0; i < resultArray.length; i++)
+            {
+                resultArray[i] = queue.poll();
+            }
+            return resultArray;
         }
     }
     
     /**
      * 将两个值，添加进去
-     * @param arrA 较长的数组
-     * @param arrB 较短的数组
+     * @param arrA 数组，长度相同；由于前面三个肯定为0，所以最后就不用考虑enterOne了
+     * @param arrB 数组，长度相同
      * @param result 结果
      */
-    private void add(int[] arrA, int[] arrB, List<Integer> result)
+    private void add(int[] arrA, int[] arrB, ArrayDeque<Integer> queue)
     {
-        int index = 0;
-        boolean isLast = false; // 之前是否有进位
-        while (index < arrB.length)
+        int index = arrB.length - 1;
+        int enterOne = 0; // 之前进位的情况
+        while (index >= 0)
         {
-            // 直接8种情况遍历就完事了
-            if (!isLast)
+            int value = arrA[index] + arrB[index] + enterOne;
+            if (value == 0)
             {
-                // 没有进位
-                if (arrA[index] == 0)
-                {
-                    if (arrB[index] == 0)
-                    {
-                        result.add(0);
-                    }
-                    else
-                    {
-                        result.add(1);
-                    }
-                }
-                else
-                {
-                    if (arrB[index] == 0)
-                    {
-                        result.add(1);
-                    }
-                    else
-                    {
-                        result.add(0);
-                        isLast = true;
-                    }
-                }
+                queue.addFirst(0);
+                enterOne = 0;
             }
-            else
+            else if (value == 1)
             {
-                if (arrA[index] == 0)
-                {
-                    if (arrB[index] == 0)
-                    {
-                        
-                    }
-                    else
-                    {
-                        
-                    }
-                }
-                else
-                {
-                    if (arrB[index] == 0)
-                    {
-                        
-                    }
-                    else
-                    {
-                        
-                    }
-                }
+                queue.addFirst(1);
+                enterOne = 0;
             }
+            else if (value == 2)
+            {
+                queue.addFirst(0);
+                enterOne = -1;
+            }
+            else if (value == -1)
+            {
+                queue.addFirst(1);
+                enterOne = 1;
+            }
+            else if (value == 3)
+            {
+                queue.addFirst(1);
+                enterOne = -1;
+            }
+            
+            index--;
+        }
+        
+        // 考虑到首位可能为0，清除首位的0; 但也可能直接导致队列大小为0
+        int value = queue.getFirst();
+        while (value == 0)
+        {
+            queue.removeFirst();
+            
+            if (queue.isEmpty())
+            {
+                break;
+            }
+            value = queue.getFirst();
         }
     }
 }
