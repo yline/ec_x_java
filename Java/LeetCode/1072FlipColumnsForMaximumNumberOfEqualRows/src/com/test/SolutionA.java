@@ -2,6 +2,23 @@ package com.test;
 
 import java.util.Arrays;
 
+/**
+ * Given a matrix consisting of 0s and 1s, we may choose any number of columns in the matrix and flip every cell in that column.  
+ * Flipping a cell changes the value of that cell from 0 to 1 or from 1 to 0.
+ * 
+ * 给一个二维矩阵，你可以进行行变换或列变换，变换方式就是0-1,1-0
+ * 
+ * Return the maximum number of rows that have all values equal after some number of flips.
+ * 求，经过行列变换之后，最多的可能结果
+ * 
+ * 方案：
+ * 1，先对第一列遍历，将所有值遍历为0【记录变换过得行，以及当前满足状态】
+ * 2，之后用递归，判断下一行去满足添加下的，“0”的个数，以及“1”的个数，然后，取最大值；
+ * 
+ * @author YLine
+ *
+ * 2019年6月4日 上午7:14:19
+ */
 public class SolutionA
 {
     public int maxEqualRowsAfterFlips(int[][] matrix)
