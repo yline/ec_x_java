@@ -23,6 +23,9 @@ public class Example extends TestCase
     
     private void assertSolution()
     {
+        assertEquals(2, solution.maxWidthRamp(new int[] {2, 1, 3}));
+        assertEquals(4, solution.maxWidthRamp(new int[] {6, 0, 8, 2, 1, 5}));
+        assertEquals(7, solution.maxWidthRamp(new int[] {9, 8, 1, 0, 1, 9, 4, 0, 4, 1}));
     }
     
     @Override
