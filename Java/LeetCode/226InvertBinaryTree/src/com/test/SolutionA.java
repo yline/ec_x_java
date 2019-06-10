@@ -4,6 +4,8 @@ import com.test.base.TreeNode;
 
 /**
  * 
+ * 将某一个二叉树。左右分支，交换
+ * 
  * @author YLine
  *
  * 2019年6月10日 下午2:58:01
