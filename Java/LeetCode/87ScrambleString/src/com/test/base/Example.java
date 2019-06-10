@@ -23,7 +23,8 @@ public class Example extends TestCase
     
     private void assertSolution()
     {
-        
+        assertEquals(true, solution.isScramble("great", "rgeat"));
+        assertEquals(false, solution.isScramble("abcde", "caebd"));
     }
     
     @Override
