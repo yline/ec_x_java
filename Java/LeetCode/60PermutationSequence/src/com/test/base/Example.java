@@ -23,7 +23,7 @@ public class Example extends TestCase
     
     private void assertSolution()
     {
-        solution.getPermutation(9, 123);
+        assertEquals("123546879", solution.getPermutation(9, 123));
         assertEquals("213", solution.getPermutation(3, 3));
     }
     

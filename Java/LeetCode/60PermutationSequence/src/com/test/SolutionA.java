@@ -1,7 +1,6 @@
 package com.test;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -34,8 +33,6 @@ public class SolutionA
             valueArray[i] = valueArray[i - 1] * (i + 1);
         }
         
-        System.out.println(Arrays.toString(valueArray));
-        
         // 结果数据
         List<Integer> cacheList = new ArrayList<>(n);
         for (int i = 1; i <= n; i++)
@@ -43,21 +40,18 @@ public class SolutionA
             cacheList.add(i);
         }
         
-        System.out.println(Arrays.toString(cacheList.toArray()));
-        
         StringBuilder sBuilder = new StringBuilder();
         // 直接去找结果
         int temp = k - 1;
-        for (int i = n; i > 0; i--)
+        for (int i = n - 2; i >= 0; i--)
         {
-            int index = temp / valueArray[i - 1];
-            
-            System.out.println("index = " + index + ", cache = " + Arrays.toString(cacheList.toArray()));
+            int index = temp / valueArray[i];
+            temp %= valueArray[i];
             
             sBuilder.append(cacheList.get(index));
             cacheList.remove(index);
-            temp %= valueArray[i - 1];
         }
+        sBuilder.append(cacheList.get(0));
         
         System.out.println(sBuilder.toString());
         
