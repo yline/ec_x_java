@@ -3,6 +3,19 @@ package com.test;
 import java.util.ArrayDeque;
 import java.util.Queue;
 
+/**
+ * 提供一个矩阵，内容为0或1，
+ * 
+ * 0，允许通过；1，不允许通过
+ * 求从左上角到右下角，总共的步数；
+ * 
+ * 1) 长 = 宽 = N
+ * 2) 左上角和右下角，可能为1，则不同
+ * 
+ * @author YLine
+ *
+ * 2019年6月17日 上午10:45:21
+ */
 public class SolutionA
 {
     public int shortestPathBinaryMatrix(int[][] grid)

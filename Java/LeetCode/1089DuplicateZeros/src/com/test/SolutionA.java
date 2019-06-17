@@ -2,6 +2,8 @@ package com.test;
 
 /**
  * 
+ * 遇到0，就重复一次
+ * 
  * @author YLine
  *
  * 2019年6月16日 上午10:15:35
