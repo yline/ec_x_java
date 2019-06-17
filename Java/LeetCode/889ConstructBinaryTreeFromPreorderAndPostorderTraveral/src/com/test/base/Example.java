@@ -1,5 +1,7 @@
 package com.test.base;
 
+import com.test.SolutionA;
+
 import junit.framework.TestCase;
 
 public class Example extends TestCase
@@ -18,7 +20,11 @@ public class Example extends TestCase
     
     private void assertSolution()
     {
-        
+        SolutionA solution = new SolutionA();
+        int[] preA = {1, 2, 4, 5, 3, 6, 7};
+        int[] postA = {4, 5, 2, 6, 7, 3, 1};
+        TreeNode rootA = solution.constructFromPrePost(preA, postA);
+        System.out.println(rootA);
     }
     
     @Override
