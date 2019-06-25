@@ -8,6 +8,8 @@ package com.test;
  * The robot is trying to reach the bottom-right corner of the grid (marked 'Finish' in the diagram below).
  * 机器人，只能往右或往下
  * 
+ * 给一个矩阵，1为障碍，0为可通行
+ * 
  * How many possible unique paths are there?
  * 请问有多少种移动到终点的可能性
  * 
