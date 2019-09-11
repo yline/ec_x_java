@@ -1,95 +1,96 @@
 package com.test;
 
 import java.util.ArrayDeque;
-import java.util.Arrays;
 
-/**
- * An undirected, connected graph of N nodes (labeled 0, 1, 2, ..., N-1) is given as graph.
- * graph.length = N, and j != i is in the list graph[i] exactly once,
- * if and only if nodes i and j are connected.
- * 
- * Return the length of the shortest path that visits every node.
- * You may start and stop at any node, you may revisit nodes multiple times, and you may reuse edges.
- * 
- * Example 1:
- * Input: [[1,2,3],[0],[0],[0]]
- * Output: 4
- * Explanation: One possible path is [1,0,2,0,3]
- * 
- * Example 2:
- * Input: [[1],[0,2,4],[1,3,4],[2],[1,2]]
- * Output: 4
- * Explanation: One possible path is [0,1,4,2,3]
- * 
- * Note:
- * 1 <= graph.length <= 12
- * 0 <= graph[i].length < graph.length
- * 
- * @author YLine
- *
- * 2019年9月10日 下午5:20:37
- */
-public class SolutionA
+import com.test.base.Solution;
+
+public class SolutionA implements Solution
 {
+    @Override
     public int shortestPathLength(int[][] graph)
     {
-        VisitNode node = new VisitNode(graph.length);
-        return 0;
+        ArrayDeque<VisitNode> nodeQueue = new ArrayDeque<>();
+        for (int i = 0; i < graph.length; i++)
+        {
+            VisitNode visitNode = new VisitNode(graph.length);
+            visitNode.addLast(i);
+            nodeQueue.add(visitNode);
+        }
+        
+        return bfs(graph, nodeQueue);
     }
     
-    private void dfs(int[][] graph, int index)
+    private int bfs(int[][] graph, ArrayDeque<VisitNode> nodeQueue)
     {
+        while (!nodeQueue.isEmpty())
+        {
+            VisitNode visitNode = nodeQueue.pollFirst();
+            
+            int[] nextArray = graph[visitNode.current];
+            for (int i = nextArray.length - 1; i >= 0; i--)
+            {
+                VisitNode newNode = (i != 0 ? visitNode.copy() : visitNode); // 节省内存
+                
+                newNode.addLast(nextArray[i]);
+                if (newNode.isEnd())
+                {
+                    return newNode.step - 1;
+                }
+                
+                nodeQueue.addLast(newNode);
+            }
+        }
         
+        return 0;
     }
     
     private static class VisitNode
     {
+        private int current; // 当前的位置
+        
+        private int step; // 节点总数
+
+        private int state; // 访问过的点的状态
+        
         private final int length;
         
-        private int oneSize; // 大于1，的个数
-        
-        private int[] visitArray;
-        
-        private ArrayDeque<Integer> queue;
+        private final int endState;
         
         private VisitNode(int length)
         {
-            this.visitArray = new int[length];
-            Arrays.fill(visitArray, 0);
-            
-            this.oneSize = 0;
             this.length = length;
-            this.queue = new ArrayDeque<>();
-        }
-        
-        private boolean addLast(int index)
-        {
-            if (visitArray[index] == 0)
-            {
-                visitArray[index] = 1;
-                oneSize++;
-            }
-            else
-            {
-                visitArray[index]++;
-            }
+            this.endState = (1 << length) - 1;
             
-            queue.addLast(index);
-            return oneSize == length;
+            this.step = 0;
         }
         
-        private void removeLast()
+        private VisitNode(int length, int endState, int state, int current, int step)
         {
-            if (!queue.isEmpty())
-            {
-                int index = queue.pollLast();
-                visitArray[index]--;
-            }
+            this.length = length;
+            this.endState = endState;
+            
+            this.state = state;
+            this.current = current;
+            
+            this.step = step;
+        }
+
+        private VisitNode copy()
+        {
+            return new VisitNode(length, endState, state, current, step);
         }
         
-        private boolean isExist(int index)
+        private void addLast(int index)
         {
-            return visitArray[index] != 0;
+            this.current = index;
+            this.step++;
+            
+            state |= (1 << index);
+        }
+        
+        private boolean isEnd()
+        {
+            return state == endState;
         }
     }
 }
