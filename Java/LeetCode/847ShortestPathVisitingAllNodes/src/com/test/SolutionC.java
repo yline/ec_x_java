@@ -4,6 +4,13 @@ import java.util.Arrays;
 
 import com.test.base.Solution;
 
+/**
+ * 动态规划的思路，但基本由BFS转换过来的
+ * 
+ * @author YLine
+ *
+ * 2019年9月12日 下午3:30:14
+ */
 public class SolutionC implements Solution
 {
     
@@ -13,9 +20,14 @@ public class SolutionC implements Solution
         int N = graph.length;
         int dist[][] = new int[1 << N][N];
         for (int[] row : dist)
+        {
             Arrays.fill(row, N * N);
+        }
+        
         for (int x = 0; x < N; ++x)
+        {
             dist[1 << x][x] = 0;
+        }
         
         for (int cover = 0; cover < 1 << N; ++cover)
         {
@@ -33,7 +45,9 @@ public class SolutionC implements Solution
                         {
                             dist[cover2][next] = d + 1;
                             if (cover == cover2)
+                            {
                                 repeat = true;
+                            }
                         }
                     }
                 }
@@ -42,7 +56,10 @@ public class SolutionC implements Solution
         
         int ans = N * N;
         for (int cand : dist[(1 << N) - 1])
+        {
             ans = Math.min(cand, ans);
+        }
+        
         return ans;
     }
     

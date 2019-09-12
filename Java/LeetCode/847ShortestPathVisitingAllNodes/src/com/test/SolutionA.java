@@ -4,27 +4,52 @@ import java.util.ArrayDeque;
 
 import com.test.base.Solution;
 
+/**
+ * 直接，每个都bfs遍历
+ * 运行超时，需要优化
+ * 
+ * 优化操作：SolutionB
+ * 
+ * @author YLine
+ *
+ * 2019年9月12日 上午10:01:57
+ */
 public class SolutionA implements Solution
 {
     @Override
     public int shortestPathLength(int[][] graph)
     {
-        ArrayDeque<VisitNode> nodeQueue = new ArrayDeque<>();
-        for (int i = 0; i < graph.length; i++)
+        if (null == graph || graph.length == 0 || graph[0].length == 0)
         {
-            VisitNode visitNode = new VisitNode(graph.length);
-            visitNode.addLast(i);
-            nodeQueue.add(visitNode);
+            return 0;
         }
         
-        return bfs(graph, nodeQueue);
+        ArrayDeque<VisitNode> nodeQueue = new ArrayDeque<>();
+        
+        int minStep = Integer.MAX_VALUE;
+        for (int i = 0; i < graph.length; i++)
+        {
+            VisitNode tempNode = new VisitNode(graph.length);
+            tempNode.addLast(i);
+            nodeQueue.add(tempNode);
+            
+            int thisStep = bfs(graph, nodeQueue, minStep);
+            nodeQueue.clear();
+            minStep = Math.min(minStep, thisStep);
+        }
+        
+        return minStep;
     }
     
-    private int bfs(int[][] graph, ArrayDeque<VisitNode> nodeQueue)
+    private int bfs(int[][] graph, ArrayDeque<VisitNode> nodeQueue, int minStep)
     {
         while (!nodeQueue.isEmpty())
         {
             VisitNode visitNode = nodeQueue.pollFirst();
+            if (visitNode.step >= minStep)
+            {
+                return Integer.MAX_VALUE;
+            }
             
             int[] nextArray = graph[visitNode.current];
             for (int i = nextArray.length - 1; i >= 0; i--)
@@ -41,7 +66,7 @@ public class SolutionA implements Solution
             }
         }
         
-        return 0;
+        return Integer.MAX_VALUE;
     }
     
     private static class VisitNode

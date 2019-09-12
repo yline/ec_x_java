@@ -52,6 +52,9 @@ public class Example extends TestCase
         int[][] graphE = {{2, 3, 5, 7}, {2, 3, 7}, {0, 1}, {0, 1}, {7}, {0}, {10},
             {9, 10, 0, 1, 4}, {9}, {7, 8}, {7, 6}};
         assertEquals(14, solution.shortestPathLength(graphE));
+        
+        int[][] graphF = {{}};
+        assertEquals(0, solution.shortestPathLength(graphF));
     }
     
     @Override
