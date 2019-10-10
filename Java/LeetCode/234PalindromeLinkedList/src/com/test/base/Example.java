@@ -1,6 +1,7 @@
 package com.test.base;
 
 import com.test.SolutionA;
+import com.test.SolutionB;
 
 import junit.framework.TestCase;
 
@@ -19,21 +20,58 @@ public class Example extends TestCase
         solution = new SolutionA();
     }
     
-    public void testSolution()
+    public void testSolutionA()
     {
-        ListNode nodeA = new ListNode(1);
-        nodeA.next = new ListNode(2);
-        assertEquals(false, solution.isPalindrome(nodeA));
+        solution = new SolutionA();
+        testSolution();
+    }
+    
+    public void testSolutionB()
+    {
+        solution = new SolutionB();
+        testSolution();
+    }
+    
+    private void testSolution()
+    {
+        /*ListNode nodeA = buildListNode(1, 2);
+        assertEquals(false, solution.isPalindrome(nodeA));*/
         
-        ListNode nodeB = new ListNode(1);
-        nodeB.next = new ListNode(2);
-        nodeB.next.next = new ListNode(2);
-        nodeB.next.next.next = new ListNode(1);
+        ListNode nodeB = buildListNode(1, 2, 2, 1);
         assertEquals(true, solution.isPalindrome(nodeB));
         
-        ListNode nodeC = new ListNode(-129);
-        nodeC.next = new ListNode(-129);
-        assertEquals(true, solution.isPalindrome(nodeB));
+        ListNode nodeC = buildListNode(-129, -129);
+        assertEquals(true, solution.isPalindrome(nodeC));
+        
+        ListNode nodeD = buildListNode(1, 2, 3, 4, 5, 6, 7);
+        assertEquals(false, solution.isPalindrome(nodeD));
+    }
+    
+    public static ListNode buildListNode(int... array)
+    {
+        ListNode result = new ListNode(-1);
+        
+        ListNode temp = result;
+        for (int i = 0; i < array.length; i++)
+        {
+            temp.next = new ListNode(array[i]);
+            temp = temp.next;
+        }
+        
+        return result.next;
+    }
+    
+    public static void print(ListNode head)
+    {
+        StringBuilder sBuilder = new StringBuilder("->");
+        ListNode temp = head;
+        while (null != temp)
+        {
+            sBuilder.append(temp.val);
+            sBuilder.append("->");
+            temp = temp.next;
+        }
+        System.out.println(sBuilder.toString());
     }
     
     @Override

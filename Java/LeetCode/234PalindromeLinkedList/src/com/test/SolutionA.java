@@ -15,9 +15,6 @@ import com.test.base.Solution;
  * 
  * 空间复杂度为n
  * 
- * 问题：
- * leetcode跑出来，结果不太对
- * 
  * @author YLine
  *
  * 2018年7月24日 下午4:33:17
@@ -34,10 +31,11 @@ public class SolutionA implements Solution
         }
         
         List<Integer> nodeArrayList = new ArrayList<>();
-        while (null != head)
+        ListNode temp = head;
+        while (null != temp)
         {
-            nodeArrayList.add(head.val);
-            head = head.next;
+            nodeArrayList.add(temp.val);
+            temp = temp.next;
         }
         
         return isArrayPalindrome(nodeArrayList);
@@ -45,16 +43,15 @@ public class SolutionA implements Solution
     
     private boolean isArrayPalindrome(List<Integer> nums)
     {
-        int length = nums.size();
-        int left = (length - 1) / 2, right = length / 2;
-        while (left >= 0)
+        int left = 0, right = nums.size() - 1;
+        while (left < right)
         {
-            if (nums.get(left) != nums.get(right))
+            if (nums.get(left).intValue() != nums.get(right).intValue())
             {
                 return false;
             }
-            left--;
-            right++;
+            left++;
+            right--;
         }
         
         return true;
