@@ -23,7 +23,11 @@ public class Example extends TestCase
     
     private void assertSolution()
     {
-        
+        int[] numA = {1, 2};
+        int[] numB = {-2, -1};
+        int[] numC = {-1, 2};
+        int[] numD = {0, 2};
+        assertEquals(2, solution.fourSumCount(numA, numB, numC, numD));
     }
     
     @Override
