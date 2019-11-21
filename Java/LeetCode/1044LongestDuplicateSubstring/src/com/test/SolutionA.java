@@ -3,23 +3,22 @@ package com.test;
 import java.util.ArrayDeque;
 import java.util.HashMap;
 
+import com.test.base.Solution;
+
 /**
- * Given a string S, consider all duplicated substrings: (contiguous) substrings of S that occur 2 or more times.
- * (The occurrences may overlap.)
- * 
- * Return any duplicated substring that has the longest possible length.
- * (If S does not have a duplicated substring, the answer is "".)
- * 
  * 1，构建Tree树
  * 2，放入数据
  * 3，Tree树遍历一次
+ * 
+ * Tree树，不适合该案例，运算超时
  * 
  * @author YLine
  *
  * 2019年11月20日 下午5:24:25
  */
-public class SolutionA
+public class SolutionA implements Solution
 {
+    @Override
     public String longestDupSubstring(String S)
     {
         TreeStruct root = new TreeStruct(null, '/', 0);
