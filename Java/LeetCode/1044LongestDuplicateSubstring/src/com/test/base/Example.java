@@ -26,8 +26,6 @@ public class Example extends TestCase
     {
         solution = new SolutionB();
         assertSolution();
-        
-        // 这个不能给A测
     }
     
     private void assertSolution()
@@ -42,7 +40,7 @@ public class Example extends TestCase
             sBuilder.append('a');
         }
         String s9999 = sBuilder.toString();
-        assertEquals(s9999.substring(0, 10000), s9999);
+        assertEquals(s9999.substring(0, 9999), solution.longestDupSubstring(s9999));
     }
     
     @Override
