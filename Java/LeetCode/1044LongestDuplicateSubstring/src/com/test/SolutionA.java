@@ -32,31 +32,31 @@ public class SolutionA
         
         // Tree树遍历
         ArrayDeque<TreeStruct> queue = new ArrayDeque<>();
-        for (TreeStruct child : root.levelMap.values())
+        for (TreeStruct childStruct : root.valueMap.values())
         {
-            if (child.isOverlap)
+            if (childStruct.isKeyOverlap)
             {
-                queue.add(child);
+                queue.add(childStruct);
             }
         }
         
         TreeStruct targetStruct = null;
         while (!queue.isEmpty())
         {
-            TreeStruct poll = queue.pollFirst();
+            TreeStruct pollStruct = queue.pollFirst();
 
             // 如果，当前的层级比之前高；则赋值
-            if (null == targetStruct || poll.level > targetStruct.level)
+            if (null == targetStruct || pollStruct.keyLevel > targetStruct.keyLevel)
             {
-                targetStruct = poll;
+                targetStruct = pollStruct;
             }
             
             // 加入所有满足条件的子
-            for (TreeStruct child : poll.levelMap.values())
+            for (TreeStruct childStruct : pollStruct.valueMap.values())
             {
-                if (child.isOverlap)
+                if (childStruct.isKeyOverlap)
                 {
-                    queue.add(child);
+                    queue.add(childStruct);
                 }
             }
         }
@@ -89,47 +89,47 @@ public class SolutionA
     }
     
     /**
-     * 它代表了一个点
+     * 它代表了一个点 + 点对应的子结构
      */
     public static class TreeStruct
     {
-        private char key;
+        private TreeStruct parent;  // 子结构的上层结构
         
-        private TreeStruct parent; // 父类
+        private char key; // 当前点，内容
         
-        private int level; // 当前的层级
+        private int keyLevel; // 当前点，所在的层级
         
-        private boolean isOverlap; // 是否重复
+        private boolean isKeyOverlap; // 当前点，是否被重复访问
         
-        private HashMap<Character, TreeStruct> levelMap; // 当前层级所有的内容
+        private HashMap<Character, TreeStruct> valueMap; // 当前子结构，所有的内容
         
-        public TreeStruct(TreeStruct parent, char key, int level)
+        public TreeStruct(TreeStruct parent, char key, int keyLevel)
         {
             this.parent = parent;
             this.key = key;
-            this.level = level;
-            this.isOverlap = false;
+            this.keyLevel = keyLevel;
+            this.isKeyOverlap = false;
         }
         
-        private TreeStruct addChild(char key)
+        private TreeStruct addChild(char childKey)
         {
-            if (null == levelMap)
+            if (null == valueMap)
             {
-                levelMap = new HashMap<>();
+            	valueMap = new HashMap<>();
             }
             
-            TreeStruct child = levelMap.get(key);
-            if (null == child)
+            TreeStruct childStruct = valueMap.get(childKey);
+            if (null == childStruct)
             {
-                child = new TreeStruct(this, key, level + 1);
-                levelMap.put(key, child);
+            	childStruct = new TreeStruct(this, childKey, keyLevel + 1);
+            	valueMap.put(childKey, childStruct);
             }
             else
             {
-                isOverlap = true;
+            	childStruct.isKeyOverlap = true;
             }
             
-            return child;
+            return childStruct;
         }
     }
 }

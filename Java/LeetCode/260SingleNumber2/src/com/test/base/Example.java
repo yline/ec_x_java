@@ -1,12 +1,13 @@
 package com.test.base;
 
 import com.test.SolutionA;
+import com.test.SolutionB;
 
 import junit.framework.TestCase;
 
 public class Example extends TestCase
 {
-    private SolutionA solution;
+    private Solution solution;
     
     @Override
     protected void setUp()
@@ -19,6 +20,12 @@ public class Example extends TestCase
     {
         solution = new SolutionA();
         assertSolution();
+    }
+    
+    public void testSolutionB()
+    {
+    	solution = new SolutionB();
+    	assertSolution();
     }
     
     private void assertSolution()
