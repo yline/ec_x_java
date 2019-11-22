@@ -3,6 +3,8 @@ package com.test.base;
 import com.test.SolutionA;
 import com.test.SolutionB;
 import com.test.SolutionC;
+import com.test.SolutionD;
+import com.test.SolutionE;
 
 import junit.framework.TestCase;
 
@@ -32,6 +34,18 @@ public class Example extends TestCase
     public void testSolutionC()
     {
         solution = new SolutionC();
+        assertSolution();
+    }
+    
+    public void testSolutionD()
+    {
+        solution = new SolutionD();
+        assertSolution();
+    }
+    
+    public void testSolutionE()
+    {
+        solution = new SolutionE();
         assertSolution();
     }
     
