@@ -6,6 +6,9 @@ import com.test.base.Solution;
 
 /**
  * 思路：类似KMP，只是自己利用内存，记录状态
+ * 
+ * 时间复杂度：O(n^2) 还是超时
+ * 
  * @author YLine
  *
  * 2019年11月21日 下午3:33:19
