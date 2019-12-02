@@ -1,13 +1,12 @@
 package com.test.base;
 
 import com.test.SolutionA;
-import com.test.SolutionB;
 
 import junit.framework.TestCase;
 
 public class Example extends TestCase
 {
-    private Solution solution;
+    private SolutionA solution;
     
     @Override
     protected void setUp()
@@ -22,21 +21,15 @@ public class Example extends TestCase
         assertSolution();
     }
     
-    public void testSolutionB()
-    {
-        solution = new SolutionB();
-        assertSolution();
-    }
-    
     private void assertSolution()
     {
-        assertEquals(1, solution.minCut("aab"));
-        assertEquals(1, solution.minCut("aaab"));
-        assertEquals(1, solution.minCut("aaaab"));
-        assertEquals(1, solution.minCut("aaaaab"));
-        assertEquals(1, solution.minCut("aaaaaabbbbbbb"));
-        
-        assertEquals(1, solution.minCut("abb"));
+        assertEquals(1, solution.smallestRepunitDivByK(1));
+        assertEquals(2, solution.smallestRepunitDivByK(11));
+        assertEquals(3, solution.smallestRepunitDivByK(3));
+        assertEquals(4, solution.smallestRepunitDivByK(101));
+        assertEquals(5, solution.smallestRepunitDivByK(41));
+        assertEquals(6, solution.smallestRepunitDivByK(8547));
+        assertEquals(7, solution.smallestRepunitDivByK(239));
     }
     
     @Override

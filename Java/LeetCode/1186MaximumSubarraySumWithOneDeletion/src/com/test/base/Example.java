@@ -1,13 +1,12 @@
 package com.test.base;
 
 import com.test.SolutionA;
-import com.test.SolutionB;
 
 import junit.framework.TestCase;
 
 public class Example extends TestCase
 {
-    private Solution solution;
+    private SolutionA solution;
     
     @Override
     protected void setUp()
@@ -22,21 +21,13 @@ public class Example extends TestCase
         assertSolution();
     }
     
-    public void testSolutionB()
-    {
-        solution = new SolutionB();
-        assertSolution();
-    }
-    
     private void assertSolution()
     {
-        assertEquals(1, solution.minCut("aab"));
-        assertEquals(1, solution.minCut("aaab"));
-        assertEquals(1, solution.minCut("aaaab"));
-        assertEquals(1, solution.minCut("aaaaab"));
-        assertEquals(1, solution.minCut("aaaaaabbbbbbb"));
+        assertEquals(4, solution.maximumSum(new int[] {1, -2, 0, 3}));
+        assertEquals(4, solution.maximumSum(new int[] {1, -2, -2, 1, 3}));
         
-        assertEquals(1, solution.minCut("abb"));
+        int[] array3 = {11, -10, -11, 8, 7, -6, 9, 4, 11, 6, 5, 0};
+        assertEquals(50, solution.maximumSum(array3));
     }
     
     @Override

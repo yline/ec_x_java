@@ -1,24 +1,17 @@
 package com.test;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
- * Given a string s, partition s such that every substring of the partition is a
- * palindrome.
- * 
- * Return the minimum cuts needed for a palindrome partitioning of s.
- * 
- * 时间复杂度： 1，构建缓存，算n 2，找出最小值，感觉复杂度全部便利了。很高；优化方案：建立一个数组缓存，取最小值
- * 
- * 超时
- * 
- * @author yline
- */
-public class SolutionA {
-	public int minCut(String s) {
+import com.test.base.Solution;
+
+public class SolutionA implements Solution
+{
+	@Override
+    public int minCut(String s) {
 		if (null == s || s.length() == 0) {
 			return 0;
 		}
@@ -27,12 +20,10 @@ public class SolutionA {
 		Map<Integer, List<Integer>> cacheMap = new HashMap<>();
 		buildCache(cacheMap, s);
 
-		int[] minArray = new int[s.length()]; // 最小的片段个数
-		for (int i = 0; i < minArray.length; i++) {
-			minArray[i] = i + 1;
-		}
+        int[] minArray = new int[s.length()]; // 从0到当前下标，片段最少个数
+        Arrays.fill(minArray, Integer.MAX_VALUE);
 
-		findResult(cacheMap, s, minArray, 0, 0);
+        findResult(cacheMap, s, minArray, 1, 0);
 		return minArray[s.length() - 1] - 1;
 	}
 
@@ -50,14 +41,6 @@ public class SolutionA {
 			return;
 		}
 
-		// 减枝
-		if (minArray[index] <= size + 1) {
-			return;
-		}
-
-		// 更新最小值
-		minArray[index] = size + 1;
-
 		List<Integer> nextList = cacheMap.get(index);
 		// 不可能出现的情况
 		if (null == nextList || nextList.isEmpty()) {
@@ -65,8 +48,18 @@ public class SolutionA {
 		}
 
 		for (int i = 0; i < nextList.size(); i++) {
-			size++;
-			findResult(cacheMap, s, minArray, size, nextList.get(i) + 1);
+            int next = nextList.get(i);
+            
+            // 减枝
+            if (minArray[next] <= size)
+            {
+                continue;
+            }
+            // 更新最小值
+            minArray[next] = size;
+            
+            size++;
+            findResult(cacheMap, s, minArray, size, next + 1);
 			size--;
 		}
 	}
