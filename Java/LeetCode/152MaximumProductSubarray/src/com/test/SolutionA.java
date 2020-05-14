@@ -1,5 +1,6 @@
 package com.test;
 
+import com.test.base.Solution;
 
 /**
  * Given an integer array nums,
@@ -25,8 +26,9 @@ Explanation: The result cannot be 2, because [-2,-1] is not a subarray.
  *
  * 2020年5月13日 下午5:55:59
  */
-public class SolutionA
+public class SolutionA implements Solution
 {
+    @Override
     public int maxProduct(int[] nums)
     {
         if (null == nums || nums.length == 0)
@@ -39,25 +41,57 @@ public class SolutionA
             return nums[0];
         }
         
-        int max = nums[0]; // 最大值
-        int temp = nums[0]; // 临时计算的值
+        int singleMax = Integer.MIN_VALUE;
+        int productMax = Integer.MIN_VALUE;
+        
+        int left = 0;
         for (int i = 0; i < nums.length; i++)
         {
+            singleMax = Math.max(singleMax, nums[i]);
             if (nums[i] == 0)
             {
-                max = Math.max(max, 0);
-                if (i + 1 < nums.length)
+                if (i > left + 1)
                 {
-                    temp = nums[i + 1];
-                    i++;
+                    productMax = Math.max(productMax, maxProduct(nums, left, i - 1));
                 }
-            }
-            else
-            {
                 
+                left = i + 1;
             }
         }
         
-        return max;
+        // 没有0存在，即结束了，也没有计算product, 则结束计算一次
+        int endIndex = nums.length - 1;
+        if (endIndex > left)
+        {
+            productMax = Math.max(productMax, maxProduct(nums, left, endIndex));
+        }
+
+        return Math.max(singleMax, productMax);
     }
+    
+    /**
+     * 1，长度大于等于 2
+     * 2，不需要计算单个的大小
+     * 3，内容中没有0，因此，只需要考虑 符号的影响
+     * 
+     * 00 用动态规划，负数负数取最小值，正数正数取最大值
+     * 
+     */
+    private int maxProduct(int[] nums, int left, int right)
+    {
+        int result = Integer.MIN_VALUE;
+        
+        int min = nums[left], max = nums[left];
+        for (int i = left + 1; i <= right; i++)
+        {
+            // 这里是有隐含条件的，乘法之后，绝对值，肯定要大于等于的
+            int temp_max = Math.max(min * nums[i], Math.max(max * nums[i], nums[i]));
+            min = Math.min(min * nums[i], Math.min(max * nums[i], nums[i]));
+            
+            max = temp_max;
+            result = Math.max(result, max);
+        }
+        return result;
+    }
+    
 }
