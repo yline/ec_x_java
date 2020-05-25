@@ -23,6 +23,8 @@ public class Example extends TestCase
     
     private void assertSolution()
     {
+        int[] numA = {1, 1, 1};
+        solution.prefixesDivBy5(numA);
     }
     
     @Override
