@@ -18,6 +18,8 @@ public class Example extends TestCase {
 	}
 
 	private void assertSolution() {
+		int[] numsA = { 2, 7, 9, 3, 1 };
+		System.out.println(solution.rob(numsA));
 	}
 
 	@Override
